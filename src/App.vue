@@ -2,6 +2,14 @@
   <router-view/>
 </template>
 
+<script>
+import {db} from "./firebase/config";
+
+export default {
+ 
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

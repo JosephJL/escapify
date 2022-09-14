@@ -1,6 +1,5 @@
 import {ref} from "vue"
 import { getAuth, signInWithEmailAndPassword ,createUserWithEmailAndPassword } from "firebase/auth";
-import {app} from "../firebase/config"
 import { updateProfile } from "firebase/auth";
 
 const error = ref(null)
