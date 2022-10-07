@@ -26,7 +26,7 @@ const routes = [
     path: "/mainPage",
     name: "MainPage",
     component: MainPage,
-    beforeEnter: requireAuth,
+    // beforeEnter: requireAuth,
   },
 ];
 
