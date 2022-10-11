@@ -1,28 +1,36 @@
 <template>
-  <div class="homecontainer">
+  <div>
+    <Navbar />
     <p>Home screen here</p>
+    <div class="container bg-light">
+      <CountryList :list="countryKeys" />
+    </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-import SignUpForm from "../components/auth/SignUpForm.vue";
-import LoginForm from "../components/auth/LoginForm.vue";
+import { watch, ref } from "vue";
+// import SignUpForm from "../components/auth/SignUpForm.vue";
+// import LoginForm from "../components/auth/LoginForm.vue";
 import { useRouter } from "vue-router";
-import MainPage from "../views/MainPage.vue";
+import Navbar from "../components/Navbar.vue";
+import countries from "countries-list";
+import CountryList from "../components/CountryList.vue";
 
 export default {
-  components: { SignUpForm, LoginForm },
+  components: { Navbar, CountryList },
 
   setup() {
-    const showLogin = ref(true);
     const router = useRouter();
 
-    const enterMain = () => {
-      router.push({ path: "/mainPage" });
-    };
+    const countryKeys = Object.values(countries.countries);
+    // const enterMain = () => {
+    //   router.push({ path: "/mainPage" });
+    // };
+    console.log(countries.countries[Object.keys(countries.countries)[0]]);
+    console.log(Object.keys(countries.countries).length);
 
-    return { showLogin, enterMain };
+    return { countryKeys };
   },
 };
 </script>
