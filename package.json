@@ -13,6 +13,7 @@
     "countries-list": "^2.6.1",
     "dotenv": "^16.0.2",
     "firebase": "^9.9.4",
+    "three": "^0.145.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"
   },
