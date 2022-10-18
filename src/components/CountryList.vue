@@ -7,9 +7,13 @@
 
     <div class="container-fluid d-flex text-center">
       <div class="horizontalScroll">
-        <div class="card col-3" v-for="country in list" :key="country">
+        <div
+          class="card col-2 bg-transparent border-success"
+          v-for="country in list"
+          :key="country"
+        >
           <img :src="image.value" class="card-img-top" alt="" />
-          <div class="card-body">
+          <div class="card-body text-white">
             <h5 class="card-title">{{ country.name }}</h5>
             <p class="card-text">
               {{ country.continent }}
