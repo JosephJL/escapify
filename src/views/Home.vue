@@ -3,8 +3,31 @@
     <Navbar />
     <div class="container-fluid">
       <div id="scene-container"></div>
-      <div>
+      <div v-if="user">
         <CountryList @scroll="handleScroll" :list="countryKeys" />
+      </div>
+
+      <div v-else>
+        <div v-if="showLogin">
+          <LoginForm
+            ><p>
+              No account yet?<span @click="showLogin = false">Sign up</span>
+              instead
+            </p></LoginForm
+          >
+        </div>
+
+        <div v-if="!showLogin">
+          <SignUpForm>
+            <p class="mt-3">
+              Already have an account?
+              <button class="btn btn-secondary" @click="showLogin = true">
+                Login
+              </button>
+              instead
+            </p> </SignUpForm
+          >>
+        </div>
       </div>
     </div>
   </div>
@@ -16,6 +39,7 @@
   width: 100%;
   height: 100vh;
   background-color: skyblue;
+  z-index: -1;
 }
 </style>
 
@@ -43,22 +67,30 @@ import {
   BackSide,
 } from "three";
 
+// ThreeJS stuff
+import { createLights } from "../composables/threeTools";
 import atmosphereVertexShader from "../assets/shaders/atmosphereVertex.glsl";
 import atmosphereFragmentShader from "../assets/shaders/atmosphereFragment.glsl";
 import fragmentShader from "../assets/shaders/fragmentShader.glsl";
 import vertexShader from "../assets/shaders/vertexShader.glsl";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-// import SignUpForm from "../components/auth/SignUpForm.vue";
-// import LoginForm from "../components/auth/LoginForm.vue";
+
+// Authentication
+import SignUpForm from "../components/auth/SignUpForm.vue";
+import LoginForm from "../components/auth/LoginForm.vue";
+import getUser from "../composables/getUser";
+
+// Routing
 import { useRouter } from "vue-router";
 import Navbar from "../components/Navbar.vue";
+
+// Country Stuff
 import countries from "countries-list";
 import CountryList from "../components/CountryList.vue";
-import { createLights } from "../composables/threeTools";
 
 export default {
-  components: { Navbar, CountryList },
+  components: { Navbar, CountryList, LoginForm, SignUpForm },
   created() {
     window.addEventListener("wheel", this.handleScroll);
   },
@@ -72,7 +104,7 @@ export default {
       //create a Scene
       this.scene = new Scene();
       //set the background color
-      this.scene.background = new Color("black");
+      this.scene.background = new Color("rgb(1, 96, 200)");
       //create a camera
       const fov = 35;
       const aspect = container.clientWidth / container.clientHeight;
@@ -138,6 +170,7 @@ export default {
         this.sphere.rotation.y += 0.001;
       });
     },
+
     handleScroll(event) {
       console.log(event.wheelDelta);
       this.sphere.rotateOnAxis(new Vector3(0, 1, 0), event.wheelDelta * 0.005);
@@ -154,14 +187,21 @@ export default {
     //Vue3 Code
     const router = useRouter();
 
+    const showLogin = ref(true);
+
+    const { user } = getUser();
+    console.log("user is ", user);
+
     const countryKeys = Object.values(countries.countries);
+
     // const enterMain = () => {
     //   router.push({ path: "/mainPage" });
     // };
+
     console.log(countries.countries[Object.keys(countries.countries)[0]]);
     console.log(Object.keys(countries.countries).length);
 
-    return { countryKeys };
+    return { countryKeys, user, showLogin };
   },
 };
 </script>

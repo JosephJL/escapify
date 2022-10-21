@@ -16,6 +16,7 @@ import { ref, toRefs } from "vue";
 import axios from "axios";
 
 export default {
+  components: {},
   props: {
     name: String,
   },
@@ -28,6 +29,7 @@ export default {
     const getCountryInfo = async () => {
       const url = "https://api.geoapify.com/v2/place-details?";
       // lat=1.2963194?lon=103.8476806&apiKey=f1ab693a1cf14c38beffbf9adfac9810
+
       const params = {
         lat: 1.2963194,
         lon: 103.8476806,
