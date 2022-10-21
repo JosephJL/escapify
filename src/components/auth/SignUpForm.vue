@@ -1,16 +1,47 @@
 <template>
-  <form @submit.prevent="handleSubmit">
-    <input
-      type="text"
-      required
-      placeholder="display name"
-      v-model="displayName"
-    />
-    <input type="email" required placeholder="email" v-model="email" />
-    <input type="password" required placeholder="password" v-model="password" />
-    <div class="error">{{ error }}</div>
-    <button>Sign Up</button>
-  </form>
+  <div class="card mx-auto text-start p-3 col-md-5 col-lg-4 my-auto">
+    <form @submit.prevent="handleSubmit">
+      <div class="mb-3">
+        <h1 class="fw-bold">Sign Up Here</h1>
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="Enter Username"
+          v-model="displayName"
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="email"
+          class="form-control"
+          required
+          placeholder="Enter Email"
+          v-model="email"
+        />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          placeholder="Enter Passcode"
+        />
+        <div class="error">
+          {{ error }}
+        </div>
+      </div>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+      </div>
+    </form>
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -31,9 +62,6 @@ export default {
         context.emit("signup");
       }
     };
-
-    //Meal Data
-    const mealData = ref([]);
 
     return { displayName, email, password, handleSubmit, error };
   },
