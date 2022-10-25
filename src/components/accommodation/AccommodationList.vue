@@ -23,7 +23,6 @@
           </tr>
         </tbody>
       </table>
-      <div v-if="imageHotel">l{{imageHotel}}</div>
     </div>
 </template>
 
