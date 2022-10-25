@@ -1,8 +1,10 @@
 <template>
-  <div class="card mx-auto text-start p-3 col-md-5 col-lg-4 my-auto">
+  <div class="card p-3 text-center">
     <form @submit.prevent="handleSubmit">
+      <slot name="close"></slot>
       <div class="mb-3">
-        <h1 class="fw-bold">Sign In</h1>
+        <span class="fs-5 fw-bold">Log In</span>
+        <hr style="margin: 15px -20px 20px" />
       </div>
       <div class="mb-3">
         <input
@@ -20,6 +22,7 @@
           id="exampleInputPassword1"
           required
           placeholder="Enter Passcode"
+          v-model="password"
         />
         <div class="error">
           {{ error }}
@@ -48,6 +51,7 @@ export default {
       await login(email.value, password.value);
       if (!error.value) {
         context.emit("login");
+        window.location.reload();
       }
     };
 
