@@ -60,7 +60,7 @@
   background-color: rgb(1, 96, 200);
 }
 .header {
-  height: 500px;
+  height: 800px;
 }
 </style>
 
@@ -132,7 +132,7 @@ export default {
       //create a Scene
       this.scene = new Scene();
       //set the background color
-      this.scene.background = new Color("rgb(1, 96, 200)");
+      this.scene.background = new Color("rgb(220, 220,220)");
       //create a camera
       const fov = 35;
       var aspect = container.clientWidth / container.clientHeight;

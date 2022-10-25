@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div class="container-fluid d-flex text-center">
+    <div class="container-fluid d-flex text-center bg-dark">
       <!-- class horizontalScroll for horizontal -->
       <div class="row">
         <template v-for="country in list[page]" :key="country">
-          <CountryCard class="col-xxl-2 col-xl-3 col-lg-4 col-md-6" :details="country" />
+          <CountryCard
+            class="col-xxl-2 col-xl-3 col-lg-4 col-md-6"
+            :details="country"
+          />
         </template>
       </div>
     </div>

@@ -1,5 +1,9 @@
 <template>
-  <div v-if="details" class="card bg-transparent border-0">
+  <div
+    @click="getCountry(details.name)"
+    v-if="details"
+    class="card bg-transparent border-0"
+  >
     <img
       v-if="imageLoading"
       :src="image"
@@ -30,6 +34,7 @@ img {
 <script>
 import { ref } from "vue";
 import axios from "axios";
+import router from "../router/index";
 
 export default {
   props: { details: Object },
@@ -72,11 +77,15 @@ export default {
       console.log("this is a JSON", countryDetails);
       image.value = getPlacePhoto(countryDetails.name.official);
     } else {
-      image.value = getPlacePhoto(countryDetails.name);
+      image.value = getPlacePhoto("GV Funan");
     }
     // console.log("country details is", countryDetails["name"]);
 
-    return { image, imageLoading, countryDetails };
+    const getCountry = (countryName) => {
+      router.push({ name: "Country", params: { name: countryName } });
+    };
+
+    return { image, imageLoading, countryDetails, getCountry };
   },
 };
 </script>
