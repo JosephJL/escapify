@@ -1,8 +1,9 @@
 <template>
-  <div class="card mx-auto text-start p-3 col-md-5 col-lg-4 my-auto">
+  <div class="card p-3 text-center">
     <form @submit.prevent="handleSubmit">
       <div class="mb-3">
-        <h1 class="fw-bold">Sign Up Here</h1>
+        <span class="fs-5 fw-bold">Sign Up</span>
+        <hr style="margin: 15px -20px 20px" />
       </div>
       <div class="mb-3">
         <input
@@ -31,7 +32,9 @@
           class="form-control"
           id="exampleInputPassword1"
           placeholder="Enter Passcode"
+          v-model="password"
         />
+        <div id="emailHelp" class="form-text">Minimum Six Characters</div>
         <div class="error">
           {{ error }}
         </div>
@@ -54,12 +57,15 @@ export default {
     const email = ref("");
     const password = ref("");
 
+    console.log("email/pw is", email, password);
+
     const { error, signup } = useSignup();
 
     const handleSubmit = async () => {
       await signup(email.value, password.value, displayName.value);
       if (!error.value) {
         context.emit("signup");
+        window.location.reload();
       }
     };
 
