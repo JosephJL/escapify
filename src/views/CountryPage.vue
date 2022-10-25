@@ -5,7 +5,7 @@
       <!-- <span>Information of prop is {{ props }}</span> -->
     </section>
     <section class="hotelSection">
-      <AccommodationList/>
+      <!-- <AccommodationList/> -->
     </section>
     <!-- <AccomodationList :hotelList="hotels.value" /> -->
   </div>

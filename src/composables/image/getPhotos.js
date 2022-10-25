@@ -10,7 +10,7 @@ const getPlacePhoto = () => {
     console.log("inside getPlacePhoto composable with placename", placeName);
     const proxyUrl = "http://blooming-reaches-84388.herokuapp.com/";
     const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${placeName}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&inputtype=textquery&fields=name,photos`;
-    await axios.get(proxyUrl + url).then((response) => {
+    await axios.get(url).then((response) => {
       console.log(response.data);
       const candidates = response.data.candidates;
       const candidate = candidates[0];
