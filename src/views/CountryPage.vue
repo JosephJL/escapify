@@ -6,7 +6,9 @@
     </section>
     <section>
       Country Information
-      <template v-for="feature in features">{{ feature }}</template>
+    </section>
+    <section class="destinations">
+      <DestinationList />
     </section>
   </div>
 </template>
@@ -14,9 +16,10 @@
 <script>
 import { ref, toRefs } from "vue";
 import axios from "axios";
+import DestinationList from "../components/destinations/DestinationList.vue"
 
 export default {
-  components: {},
+  components: {DestinationList},
   props: {
     name: String,
   },
