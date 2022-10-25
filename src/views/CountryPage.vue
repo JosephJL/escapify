@@ -18,12 +18,12 @@ import AccommodationList from "../components/accommodation/AccommodationList.vue
 
 
 export default {
+
   components:{ AccommodationList },
   props: {
     name: String,
   },
   setup(props) {
-    // console.log(props.name);
   },
 };
 </script>
