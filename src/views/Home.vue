@@ -7,17 +7,19 @@
           Travel the Globe
         </h1>
       </div>
-      <div>
-        <nav aria-label="Page navigation example">
+      <div style="background-color: rgb(141, 183, 209)">
+        <nav aria-label="Page navigation">
           <ul class="justify-content-center pagination">
             <li class="page-item">
-              <a class="page-link" @click="getCountries" href="#"> All </a>
+              <a class="page-link" @click.prevent="getCountries" href="#">
+                All
+              </a>
             </li>
             <template v-for="continent in continents" :key="continent">
               <li class="page-item">
                 <a
                   class="page-link"
-                  @click="selectContinent(continent)"
+                  @click.prevent="selectContinent(continent)"
                   href="#"
                   >{{ continent }}</a
                 >
@@ -25,28 +27,37 @@
             </template>
           </ul>
         </nav>
+        <CountryList :list="documents" :page="pageNumber" />
         <nav v-if="totalPages" aria-label="Page navigation example">
           <ul class="justify-content-center pagination">
             <li class="page-item">
-              <a class="page-link" @click="pageNumber = pageNumber + 1" href="#"
+              <a
+                class="page-link"
+                @click.prevent="pageNumber = pageNumber + 1"
+                href="#"
                 >Previous</a
               >
             </li>
             <template v-for="index in totalPages" :key="index">
               <li class="page-item">
-                <a class="page-link" @click="changePage(index)" href="#">{{
-                  index
-                }}</a>
+                <a
+                  class="page-link"
+                  @click.prevent="changePage(index)"
+                  href="#"
+                  >{{ index }}</a
+                >
               </li>
             </template>
             <li class="page-item">
-              <a class="page-link" @click="pageNumber = pageNumber + 1" href="#"
+              <a
+                class="page-link"
+                @click.prevent="pageNumber = pageNumber + 1"
+                href="#"
                 >Next</a
               >
             </li>
           </ul>
         </nav>
-        <CountryList :list="documents" :page="pageNumber" />
       </div>
     </div>
   </div>
@@ -61,9 +72,10 @@
 #scene-container {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 800px;
   z-index: -100;
 }
+
 .header {
   height: 800px;
 }
@@ -257,14 +269,7 @@ export default {
       console.log("page changed to", pageNumber.value);
     };
 
-    const continents = ref([
-      "Africa",
-      "Asia",
-      "Europe",
-      "North America",
-      "Oceania",
-      "South America",
-    ]);
+    const continents = ref(["Africa", "Americas", "Asia", "Europe", "Oceania"]);
 
     const getCountries = async () => {
       documents.value = [];
