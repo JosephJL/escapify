@@ -28,7 +28,7 @@ export default {
     const options = {
       method: "GET",
       url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
-      params: { radius: "1500", lon: "103.85", lat: "1.29" },
+      params: { radius: "15000", lon: "103.8505", lat: "1.2892" },
       headers: {
         "X-RapidAPI-Key": "7eb24a45a3msh648b8d859d3cf70p1c07a5jsn8d460e9a9032",
         "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
@@ -42,9 +42,9 @@ export default {
       .then(function (response) {
         console.log(response.data);
         destinations.value = response.data;
-        // console.log(response.data.features[1].properties.name);
-        // console.log(response.data.features[2].properties.name);
-        // console.log(response.data.features[3].properties.name);
+        console.log(response.data.features[1].properties.name);
+        console.log(response.data.features[2].properties.name);
+        console.log(response.data.features[3].properties.name);
         // xid1 = response.data.features[1].properties.xid;
         // xid2 = response.data.features[1].properties.xid;
         // xid3 = response.data.features[1].properties.xid;
@@ -72,8 +72,8 @@ export default {
     axios
       .request(options2)
       .then(function (response) {
-        console.log(response.data);
-        console.log(response.data.image);
+        // console.log(response.data);
+        // console.log(response.data.image);
         var image = response.data.image;
         var text = response.data.wikipedia_extracts.text;
         var display = document.getElementById("display");
