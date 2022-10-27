@@ -1,45 +1,83 @@
 <template>
   <div>
-    <Navbar />
-    <div class="container-fluid">
+    <div class="home container-fluid px-0">
       <div id="scene-container"></div>
-      <div v-if="user">
-        <CountryList @scroll="handleScroll" :list="countryKeys" />
+      <div class="header d-flex" style="">
+        <h1 class="text-white fs-1 fw-semibold mx-auto align-self-center">
+          Travel the Globe
+        </h1>
       </div>
-
-      <div v-else>
-        <div v-if="showLogin">
-          <LoginForm
-            ><p>
-              No account yet?<span @click="showLogin = false">Sign up</span>
-              instead
-            </p></LoginForm
-          >
-        </div>
-
-        <div v-if="!showLogin">
-          <SignUpForm>
-            <p class="mt-3">
-              Already have an account?
-              <button class="btn btn-secondary" @click="showLogin = true">
-                Login
-              </button>
-              instead
-            </p> </SignUpForm
-          >>
-        </div>
+      <div style="background-color: rgb(141, 183, 209)">
+        <nav aria-label="Page navigation">
+          <ul class="justify-content-center pagination">
+            <li class="page-item">
+              <a class="page-link" @click.prevent="getCountries" href="#">
+                All
+              </a>
+            </li>
+            <template v-for="continent in continents" :key="continent">
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  @click.prevent="selectContinent(continent)"
+                  href="#"
+                  >{{ continent }}</a
+                >
+              </li>
+            </template>
+          </ul>
+        </nav>
+        <CountryList :list="documents" :page="pageNumber" />
+        <nav v-if="totalPages" aria-label="Page navigation example">
+          <ul class="justify-content-center pagination">
+            <li class="page-item">
+              <a
+                class="page-link"
+                @click.prevent="pageNumber = pageNumber + 1"
+                href="#"
+                >Previous</a
+              >
+            </li>
+            <template v-for="index in totalPages" :key="index">
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  @click.prevent="changePage(index)"
+                  href="#"
+                  >{{ index }}</a
+                >
+              </li>
+            </template>
+            <li class="page-item">
+              <a
+                class="page-link"
+                @click.prevent="pageNumber = pageNumber + 1"
+                href="#"
+                >Next</a
+              >
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.home {
+  position: relative;
+  width: 100%;
+}
+
 #scene-container {
   position: absolute;
   width: 100%;
-  height: 100vh;
-  background-color: skyblue;
-  z-index: -1;
+  height: 800px;
+  z-index: -100;
+}
+
+.header {
+  height: 800px;
 }
 </style>
 
@@ -80,6 +118,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import SignUpForm from "../components/auth/SignUpForm.vue";
 import LoginForm from "../components/auth/LoginForm.vue";
 import getUser from "../composables/getUser";
+import Modal from "../components/auth/Modal.vue";
 
 // Routing
 import { useRouter } from "vue-router";
@@ -89,8 +128,14 @@ import Navbar from "../components/Navbar.vue";
 import countries from "countries-list";
 import CountryList from "../components/CountryList.vue";
 
+// Firebase
+import getCollection from "../composables/getCollection";
+
+// Requests
+import axios from "axios";
+
 export default {
-  components: { Navbar, CountryList, LoginForm, SignUpForm },
+  components: { Navbar, CountryList, LoginForm, SignUpForm, Modal },
   created() {
     window.addEventListener("wheel", this.handleScroll);
   },
@@ -104,10 +149,10 @@ export default {
       //create a Scene
       this.scene = new Scene();
       //set the background color
-      this.scene.background = new Color("rgb(1, 96, 200)");
+      this.scene.background = new Color("rgb(141, 183, 209)");
       //create a camera
       const fov = 35;
-      const aspect = container.clientWidth / container.clientHeight;
+      var aspect = container.clientWidth / container.clientHeight;
       const near = 0.1;
       const far = 100;
       this.camera = new PerspectiveCamera(fov, aspect, near, far);
@@ -149,15 +194,29 @@ export default {
       //create the renderer
       this.renderer = new WebGLRenderer();
       this.renderer.physicallyCorrectLights = true;
+
       //set renderer to same size as our container element
       this.renderer.setSize(container.clientWidth, container.clientHeight);
       window.addEventListener("resize", () => {
         // Set the size again if a resize occurs.
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+        // const width = window.innerWidth;
+        // const height = window.innerHeight;
+        // this.camera.aspect = width / height;
+        // this.camera.updateProjectionMatrix();
+        // renderer.setSize(width, height);
+        // const ratio = window.devicePixelRatio;
+        // this.renderer.domElement = width * ratio;
+        // this.renderer.domElement.width = height * ratio;
+        // this.renderer.domElement.style.width = `${width}px`;
+        // this.renderer.domElement.style.height = `${height}px`;
+
+        aspect = container.clientWidth / container.clientHeight;
+        this.camera.aspect = container.clientWidth / container.clientHeight;
         this.camera.updateProjectionMatrix();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(container.clientWidth, container.clientHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
       });
+
       //finally, set the pixel ratio so that our scene will look good on HiDPI displays
       this.renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -171,12 +230,12 @@ export default {
       });
     },
 
-    handleScroll(event) {
-      console.log(event.wheelDelta);
-      this.sphere.rotateOnAxis(new Vector3(0, 1, 0), event.wheelDelta * 0.005);
-      // this.camera.rotation.z =
-      //   this.camera.rotation.z + event.wheelDelta / 500.0;
-    },
+    // handleScroll(event) {
+    //   console.log(event.wheelDelta);
+    //   this.sphere.rotateOnAxis(new Vector3(0, 1, 0), event.wheelDelta * 0.005);
+    //   // this.camera.rotation.z =
+    //   //   this.camera.rotation.z + event.wheelDelta / 500.0;
+    // },
   },
 
   mounted() {
@@ -187,21 +246,79 @@ export default {
     //Vue3 Code
     const router = useRouter();
 
-    const showLogin = ref(true);
-
+    //User Auth
     const { user } = getUser();
     console.log("user is ", user);
 
-    const countryKeys = Object.values(countries.countries);
+    // testing countrykey
+    // const countryKeys = Object.values(countries.countries);
+    // console.log(countries.countries[Object.keys(countries.countries)[0]]);
+    // console.log(Object.keys(countries.countries).length);
 
-    // const enterMain = () => {
-    //   router.push({ path: "/mainPage" });
-    // };
+    // testing firebase code
+    // const { error, documents } = getCollection("countries");
+    // console.log(documents);
 
-    console.log(countries.countries[Object.keys(countries.countries)[0]]);
-    console.log(Object.keys(countries.countries).length);
+    const documents = ref([]);
+    const chunkSize = 12;
+    const totalPages = ref(0);
+    const pageNumber = ref(1);
 
-    return { countryKeys, user, showLogin };
+    const changePage = (index) => {
+      pageNumber.value = index;
+      console.log("page changed to", pageNumber.value);
+    };
+
+    const continents = ref(["Africa", "Americas", "Asia", "Europe", "Oceania"]);
+
+    const getCountries = async () => {
+      documents.value = [];
+      await axios
+        .get("https://restcountries.com/v2/all")
+        .then((response) => {
+          // console.log(response.data);
+          for (let i = 0; i < response.data.length; i += chunkSize) {
+            const chunk = response.data.slice(i, i + chunkSize);
+            documents.value.push(chunk);
+          }
+          totalPages.value = documents.value.length - 1;
+          console.log("total pages is", totalPages.value);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
+    getCountries();
+
+    const selectContinent = async (continent) => {
+      documents.value = [];
+      console.log("continent is,", continent);
+      await axios
+        .get("https://restcountries.com/v3.1/region/" + continent)
+        .then((response) => {
+          console.log(response.data);
+          for (let i = 0; i < response.data.length; i += chunkSize) {
+            const chunk = response.data.slice(i, i + chunkSize);
+            documents.value.push(chunk);
+          }
+          totalPages.value = documents.value.length - 1;
+          console.log("total pages is", totalPages.value);
+        });
+    };
+
+    console.log("document list is", documents.value);
+
+    return {
+      user,
+      documents,
+      totalPages,
+      pageNumber,
+      changePage,
+      continents,
+      selectContinent,
+      getCountries,
+    };
   },
 };
 </script>
