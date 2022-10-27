@@ -6,7 +6,7 @@
   >
     <img
       v-if="imageLoading"
-      :src="image"
+      :src="returnURl"
       class="card-img-top rounded"
       alt="image here"
     />
@@ -34,58 +34,64 @@ img {
 <script>
 import { ref } from "vue";
 import axios from "axios";
-import router from "../router/index";
+import { useRouter } from "vue-router";
+import getPlacePhoto from "../composables/image/getPhotos.js";
 
 export default {
   props: { details: Object },
   setup(props) {
-    let imageLoading = ref(false);
     let image = ref(null);
-    let photoRef = ref("");
     let countryDetails = JSON.parse(JSON.stringify(props.details));
     // console.log("details are ,", JSON.stringify(props.details));
 
-    const getPlacePhoto = async (countryName) => {
-      const proxyUrl = "http://blooming-reaches-84388.herokuapp.com/";
-      const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${countryName}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&inputtype=textquery&fields=name,photos`;
-      await axios.get(proxyUrl + url).then((response) => {
-        console.log(response.data);
-        const candidates = response.data.candidates;
-        const candidate = candidates[0];
-        photoRef.value = candidate.photos[0].photo_reference;
-      });
-      const photoUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef.value}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&maxwidth=400&maxheight=400`;
-      const imageURLQuery = await fetch(proxyUrl + photoUrl).then((response) =>
-        response.blob()
-      );
-      image.value = URL.createObjectURL(imageURLQuery);
-      // console.log(image);
-      imageLoading.value = true;
-    };
+    // const getPlacePhoto = async (countryName) => {
+    //   const proxyUrl = "http://blooming-reaches-84388.herokuapp.com/";
+    //   const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${countryName}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&inputtype=textquery&fields=name,photos`;
+    //   await axios.get(proxyUrl + url).then((response) => {
+    //     console.log(response.data);
+    //     const candidates = response.data.candidates;
+    //     const candidate = candidates[0];
+    //     photoRef.value = candidate.photos[0].photo_reference;
+    //   });
+    //   const photoUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef.value}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&maxwidth=400&maxheight=400`;
+    //   const imageURLQuery = await fetch(proxyUrl + photoUrl).then((response) =>
+    //     response.blob()
+    //   );
+    //   image.value = URL.createObjectURL(imageURLQuery);
+    //   // console.log(image);
+    //   imageLoading.value = true;
+    // };
 
-    const isJsonObject = (data) => {
-      console.log("type of data is", typeof data);
-      try {
-        JSON.parse(data);
-      } catch (e) {
-        return false;
-      }
-      return true;
-    };
+    // const isJsonObject = (data) => {
+    //   console.log("type of data is", typeof data);
+    //   try {
+    //     JSON.parse(data);
+    //   } catch (e) {
+    //     return false;
+    //   }
+    //   return true;
+    // };
+
+    const { imageLoading, returnURl, load } = getPlacePhoto();
+
+    console.log(returnURl);
 
     if (typeof countryDetails.name == "object") {
       console.log("this is a JSON", countryDetails);
-      image.value = getPlacePhoto(countryDetails.name.official);
+      load(countryDetails.name.official);
     } else {
-      image.value = getPlacePhoto("GV Funan");
+      load(countryDetails.name);
+      console.log("image is now", returnURl);
     }
     // console.log("country details is", countryDetails["name"]);
+
+    const router = useRouter();
 
     const getCountry = (countryName) => {
       router.push({ name: "Country", params: { name: countryName } });
     };
 
-    return { image, imageLoading, countryDetails, getCountry };
+    return { returnURl, imageLoading, countryDetails, getCountry };
   },
 };
 </script>

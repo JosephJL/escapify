@@ -22,7 +22,8 @@ export default {
   color: #2c3e50;
 }
 
-html,body{
+html,
+body {
   margin: 0;
   height: 100%;
 }

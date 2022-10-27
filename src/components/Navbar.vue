@@ -1,7 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
+  <nav
+    class="navbar navbar-expand-lg sticky-top"
+    style="background-color: #e3f2fd"
+  >
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Escape</a>
+      <a class="navbar-brand" href="#" @click="goHome">Escape</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -38,10 +41,16 @@
                   <span class="navbar-toggler-icon"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end mt-2">
-                  <li><a class="dropdown-item" href="#">Your Trips</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#" @click="openProfilePage"
+                      >Your Trips</a
+                    >
+                  </li>
                   <hr />
                   <li>
-                    <a class="dropdown-item" href="#" @click="handleClick"> Log out </a>
+                    <a class="dropdown-item" href="#" @click="handleClick">
+                      Log out
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -165,7 +174,24 @@ export default {
       }
     };
 
-    return { logout, error, handleClick, user, router, showLogin };
+    const openProfilePage = () => {
+      router.push({ name: "Profile" });
+    };
+
+    const goHome = () => {
+      router.push({ name: "Home" });
+    };
+
+    return {
+      logout,
+      error,
+      handleClick,
+      user,
+      router,
+      showLogin,
+      openProfilePage,
+      goHome,
+    };
   },
 };
 </script>
