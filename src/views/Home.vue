@@ -129,7 +129,7 @@ import countries from "countries-list";
 import CountryList from "../components/CountryList.vue";
 
 // Firebase
-import getCollection from "../composables/getCollection";
+import getCollection from "../composables/collection/getCollection";
 
 // Requests
 import axios from "axios";
