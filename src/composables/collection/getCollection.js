@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import db from "../../firebase/config";
+import { db } from "../../firebase/config";
 import {
   doc,
   getDocs,
@@ -15,7 +15,6 @@ const getCollection = (collectionName) => {
   const documents = ref(null);
 
   // let collectionRef = collection(db, collectionName)
-
   onSnapshot(
     collection(db, collectionName),
     (snap) => {

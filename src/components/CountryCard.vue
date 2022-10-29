@@ -10,16 +10,14 @@
       class="card-img-top rounded"
       alt="image here"
     />
-    <div v-else class="d-flex" style="height: 18rem">
+    <div v-else class="d-flex" style="height: 18rem; width: 100%">
       <div class="spinner-border mx-auto align-self-center" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
     <div class="card-body text-white">
-      <h5 class="card-title">{{ details.name }}</h5>
-      <p class="card-text">
-        {{ details.region }}
-      </p>
+      <h5 class="card-title">Country : {{ countryName }}</h5>
+      <p class="card-text">Region : {{ details.region }}</p>
     </div>
   </div>
 </template>
@@ -42,6 +40,7 @@ export default {
   setup(props) {
     let image = ref(null);
     let countryDetails = JSON.parse(JSON.stringify(props.details));
+    const countryName = ref(null);
     // console.log("details are ,", JSON.stringify(props.details));
 
     // const getPlacePhoto = async (countryName) => {
@@ -78,11 +77,15 @@ export default {
 
     if (typeof countryDetails.name == "object") {
       console.log("this is a JSON", countryDetails);
+      countryDetails.name.official;
+      countryName.value = countryDetails.name.official;
       load(countryDetails.name.official);
     } else {
+      countryName.value = countryDetails.name;
       load(countryDetails.name);
       console.log("image is now", returnURl);
     }
+
     // console.log("country details is", countryDetails["name"]);
 
     const router = useRouter();
@@ -91,7 +94,7 @@ export default {
       router.push({ name: "Country", params: { name: countryName } });
     };
 
-    return { returnURl, imageLoading, countryDetails, getCountry };
+    return { returnURl, imageLoading, getCountry, countryName };
   },
 };
 </script>

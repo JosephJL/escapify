@@ -15,6 +15,7 @@
     "firebase": "^9.9.4",
     "three": "^0.145.0",
     "vue": "^3.0.0",
+    "vue-content-loader": "^2.0.1",
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
