@@ -1,11 +1,11 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg sticky-top"
+    class="navbar navbar-expand sticky-top"
     style="background-color: #e3f2fd"
   >
     <div class="container-fluid">
       <a class="navbar-brand" href="#" @click="goHome">Escape</a>
-      <button
+      <!-- <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
@@ -15,89 +15,88 @@
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      </button> -->
+
+      <ul class="navbar-nav ms-auto mb-0">
+        <li class="nav-item">
+          <router-link
+            :to="{ name: 'Country', params: { name: 'Australia' } }"
+            class="btn btn-info"
+            >Country</router-link
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Destination</a>
+        </li>
+        <template v-if="user">
           <li class="nav-item">
-            <router-link
-              :to="{ name: 'Country', params: { name: 'Australia' } }"
-              class="btn btn-info"
-              >Country</router-link
-            >
+            <div class="dropdown">
+              <a
+                class="btn border rounded-pill"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end mt-2">
+                <li>
+                  <a class="dropdown-item" href="#" @click="openProfilePage"
+                    >Your Trips</a
+                  >
+                </li>
+                <hr />
+                <li>
+                  <a class="dropdown-item" href="#" @click="handleClick">
+                    Log out
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
+        </template>
+        <template v-else>
           <li class="nav-item">
-            <a class="nav-link" href="#">Destination</a>
+            <div class="dropdown">
+              <a
+                class="btn border rounded-pill"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end mt-2">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <hr />
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Log In
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    @click="showLogin = false"
+                  >
+                    Sign Up
+                  </button>
+                </li>
+              </ul>
+            </div>
           </li>
-          <template v-if="user">
-            <li class="nav-item">
-              <div class="dropdown">
-                <a
-                  class="btn border rounded-pill"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <span class="navbar-toggler-icon"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end mt-2">
-                  <li>
-                    <a class="dropdown-item" href="#" @click="openProfilePage"
-                      >Your Trips</a
-                    >
-                  </li>
-                  <hr />
-                  <li>
-                    <a class="dropdown-item" href="#" @click="handleClick">
-                      Log out
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </template>
-          <template v-else>
-            <li class="nav-item">
-              <div class="dropdown">
-                <a
-                  class="btn border rounded-pill"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <span class="navbar-toggler-icon"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end mt-2">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <hr />
-                  <li>
-                    <button
-                      type="button"
-                      class="dropdown-item"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                    >
-                      Log In
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      class="dropdown-item"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      @click="showLogin = false"
-                    >
-                      Sign Up
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </template>
-        </ul>
-      </div>
+        </template>
+      </ul>
     </div>
   </nav>
 
@@ -179,6 +178,7 @@ export default {
     };
 
     const goHome = () => {
+      console.log("going home");
       router.push({ name: "Home" });
     };
 

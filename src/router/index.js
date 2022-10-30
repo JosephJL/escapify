@@ -27,7 +27,7 @@ const routes = [
     path: "/Country/:name",
     name: "Country",
     component: CountryPage,
-    props: true,
+    props: route => ({details: route.query.details}),
     // beforeEnter: requireAuth,
   },
   {
