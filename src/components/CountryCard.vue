@@ -40,7 +40,6 @@ export default {
   setup(props) {
     let image = ref(null);
     let countryDetails = JSON.parse(JSON.stringify(props.details));
-    
     const countryName = ref(null);
     // console.log("details are ,", JSON.stringify(props.details));
 
