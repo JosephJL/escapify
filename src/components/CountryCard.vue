@@ -34,7 +34,7 @@ img {
 <script>
 import { ref } from "vue";
 import axios from "axios";
-import router from "../router/index";
+import { useRouter } from "vue-router";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 
 export default {
@@ -85,6 +85,8 @@ export default {
       console.log("image is now", returnURl);
     }
     // console.log("country details is", countryDetails["name"]);
+
+    const router = useRouter();
 
     const getCountry = (countryName) => {
       router.push({ name: "Country", params: { name: countryName } });

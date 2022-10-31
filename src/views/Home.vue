@@ -1,21 +1,25 @@
 <template>
   <div>
-    <div class="container-fluid px-0">
+    <div class="home container-fluid px-0">
       <div id="scene-container"></div>
-      <div class="header" style="">
-        <h1>Find your next Destination</h1>
+      <div class="header d-flex" style="">
+        <h1 class="text-white fs-1 fw-semibold mx-auto align-self-center">
+          Travel the Globe
+        </h1>
       </div>
-      <div>
-        <nav aria-label="Page navigation example">
+      <div style="background-color: rgb(141, 183, 209)">
+        <nav aria-label="Page navigation">
           <ul class="justify-content-center pagination">
             <li class="page-item">
-              <a class="page-link" @click="getCountries" href="#"> All </a>
+              <a class="page-link" @click.prevent="getCountries" href="#">
+                All
+              </a>
             </li>
             <template v-for="continent in continents" :key="continent">
               <li class="page-item">
                 <a
                   class="page-link"
-                  @click="selectContinent(continent)"
+                  @click.prevent="selectContinent(continent)"
                   href="#"
                   >{{ continent }}</a
                 >
@@ -23,42 +27,55 @@
             </template>
           </ul>
         </nav>
+        <CountryList :list="documents" :page="pageNumber" />
         <nav v-if="totalPages" aria-label="Page navigation example">
           <ul class="justify-content-center pagination">
             <li class="page-item">
-              <a class="page-link" @click="pageNumber = pageNumber + 1" href="#"
+              <a
+                class="page-link"
+                @click.prevent="pageNumber = pageNumber + 1"
+                href="#"
                 >Previous</a
               >
             </li>
             <template v-for="index in totalPages" :key="index">
               <li class="page-item">
-                <a class="page-link" @click="changePage(index)" href="#">{{
-                  index
-                }}</a>
+                <a
+                  class="page-link"
+                  @click.prevent="changePage(index)"
+                  href="#"
+                  >{{ index }}</a
+                >
               </li>
             </template>
             <li class="page-item">
-              <a class="page-link" @click="pageNumber = pageNumber + 1" href="#"
+              <a
+                class="page-link"
+                @click.prevent="pageNumber = pageNumber + 1"
+                href="#"
                 >Next</a
               >
             </li>
           </ul>
         </nav>
-        <CountryList :list="documents" :page="pageNumber" />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.home {
+  position: relative;
+  width: 100%;
+}
+
 #scene-container {
   position: absolute;
-  display: block;
   width: 100%;
-  height: 100%;
+  height: 800px;
   z-index: -100;
-  background-color: rgb(1, 96, 200);
 }
+
 .header {
   height: 800px;
 }
@@ -132,7 +149,7 @@ export default {
       //create a Scene
       this.scene = new Scene();
       //set the background color
-      this.scene.background = new Color("rgb(220, 220,220)");
+      this.scene.background = new Color("rgb(141, 183, 209)");
       //create a camera
       const fov = 35;
       var aspect = container.clientWidth / container.clientHeight;
@@ -182,6 +199,17 @@ export default {
       this.renderer.setSize(container.clientWidth, container.clientHeight);
       window.addEventListener("resize", () => {
         // Set the size again if a resize occurs.
+        // const width = window.innerWidth;
+        // const height = window.innerHeight;
+        // this.camera.aspect = width / height;
+        // this.camera.updateProjectionMatrix();
+        // renderer.setSize(width, height);
+        // const ratio = window.devicePixelRatio;
+        // this.renderer.domElement = width * ratio;
+        // this.renderer.domElement.width = height * ratio;
+        // this.renderer.domElement.style.width = `${width}px`;
+        // this.renderer.domElement.style.height = `${height}px`;
+
         aspect = container.clientWidth / container.clientHeight;
         this.camera.aspect = container.clientWidth / container.clientHeight;
         this.camera.updateProjectionMatrix();
@@ -241,14 +269,7 @@ export default {
       console.log("page changed to", pageNumber.value);
     };
 
-    const continents = ref([
-      "Africa",
-      "Asia",
-      "Europe",
-      "North America",
-      "Oceania",
-      "South America",
-    ]);
+    const continents = ref(["Africa", "Americas", "Asia", "Europe", "Oceania"]);
 
     const getCountries = async () => {
       documents.value = [];

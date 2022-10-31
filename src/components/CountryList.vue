@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="container-fluid d-flex text-center bg-dark">
+  <div class="countryList">
+    <div class="container-fluid d-flex text-center">
       <!-- class horizontalScroll for horizontal -->
       <div class="row">
         <template v-for="country in list[page]" :key="country">
@@ -15,6 +15,10 @@
 </template>
 
 <style scoped>
+.countryList {
+  height: 100%;
+}
+
 .horizontalScroll {
   display: flex;
   overflow-x: auto;
