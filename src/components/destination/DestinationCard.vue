@@ -1,13 +1,29 @@
 <template>
   <div>
-    {{ details }}
-    {{ documents }}
+    <div class="card bg-transparent border-0">
+      <img
+        v-if="imageLoading"
+        :src="returnURl"
+        class="card-img-top rounded img-fluid"
+        alt="image here"
+        style="object-fit: cover; width: 10rem; height: 10rem"
+      />
+      <div v-else class="d-flex" style="height: 10rem; width: 100%">
+        <div class="spinner-border mx-auto align-self-center" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div class="card-body text-black">
+        <p class="card-title">{{ details[1].name }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import queryHotels from "../../composables/collection/queryHotels";
 import getUser from "../../composables/getUser";
+import getPlacePhoto from "../../composables/image/getPhotos";
 
 export default {
   props: {
@@ -15,15 +31,14 @@ export default {
     id: String,
   },
   setup(props) {
-    const { documents, error, loadHotelsCollection } = queryHotels();
     const { user } = getUser();
 
     console.log("id is", props.id);
 
-    const userId = JSON.parse(JSON.stringify(user.value)).uid;
-    loadHotelsCollection(props.id, props.details[0], userId);
+    const { imageLoading, returnURl, load } = getPlacePhoto();
+    load(props.details[1].name);
 
-    return { documents };
+    return { imageLoading, returnURl, load };
   },
 };
 </script>

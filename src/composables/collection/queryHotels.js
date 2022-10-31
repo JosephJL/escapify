@@ -12,17 +12,17 @@ import {
 console.log("in query firestore is ",db)
 
 const queryHotels = () => {
-  const error = ref(null);
-  const documents = ref([]);
+  const hotelError = ref(null);
+  const hotels = ref([]);
 
-  const loadHotelsCollection = async (tripId, destinationId, userId) => {
+  const loadHotelsCollection = async(tripId, userId) => {
     console.log("in get collection");
     console.log("db is ", db);
 
     // let collectionRef = collection(db, collectionName)
 
     const q = query(
-      collection(db, "trips", tripId , "destinations", destinationId, "accomodations"),
+      collection(db, "trips", tripId, "hotels"),
       where("userId", "==", userId)
     );
 
@@ -31,11 +31,11 @@ const queryHotels = () => {
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
-      documents.value.push([doc.id,doc.data()]);
+      hotels.value.push([doc.id,doc.data()]);
     });
   };
 
-  return { documents, error, loadHotelsCollection };
+  return { hotels, hotelError, loadHotelsCollection };
 };
 
 export default queryHotels;
