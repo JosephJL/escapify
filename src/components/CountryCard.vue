@@ -3,6 +3,7 @@
     @click="getCountry(details.name)"
     v-if="details"
     class="card bg-transparent border-0"
+    style="cursor: pointer"
   >
     <img
       v-if="imageLoading"
@@ -11,7 +12,10 @@
       alt="image here"
     />
     <div v-else class="d-flex" style="height: 18rem; width: 100%">
-      <div class="spinner-border mx-auto align-self-center" role="status">
+      <div
+        class="spinner-grow text-light mx-auto align-self-center"
+        role="status"
+      >
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
@@ -86,12 +90,20 @@ export default {
       console.log("image is now", returnURl);
     }
 
-    // console.log("country details is", countryDetails["name"]);
+    console.log("country details is", JSON.stringify(props.details));
 
     const router = useRouter();
 
     const getCountry = (countryName) => {
-      router.push({ name: "Country", params: { name: countryName } });
+      router.push({
+        name: "Country",
+        params: {
+          name: countryDetails["name"],
+        },
+        query: {
+          details: JSON.stringify(props.details),
+        },
+      });
     };
 
     return { returnURl, imageLoading, getCountry, countryName };

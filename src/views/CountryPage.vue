@@ -7,9 +7,8 @@
       {{ countryDetails.latlng }}
     </section>
     <section class="hotelSection">
-      <!-- <AccommodationList/> -->
+      <AccommodationList />
     </section>
-    <!-- <AccomodationList :hotelList="hotels.value" /> -->
   </div>
 </template>
 

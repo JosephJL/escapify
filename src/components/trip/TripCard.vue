@@ -1,17 +1,20 @@
 <template>
   <div class="card border-0 container">
-    <div class="card-body bg-light row align-items-start">
-      <div class="col align-self-center">
+    <div class="card-body bg-light align-items-start">
+      <div class="align-self-center">
         <div class="card bg-transparent border-0">
           <img
             v-if="imageLoading"
             :src="returnURl"
-            class="card-img-top rounded img-fluid"
+            class="card-img-top rounded img-fluid mx-auto"
             alt="image here"
-            style="object-fit: cover"
+            style="object-fit: cover; width: 20rem; height: 18rem"
           />
           <div v-else class="d-flex" style="height: 18rem; width: 100%">
-            <div class="spinner-border mx-auto align-self-center" role="status">
+            <div
+              class="spinner-grow text-light mx-auto align-self-center"
+              role="status"
+            >
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -20,15 +23,15 @@
           </div>
         </div>
       </div>
-      <div class="col">
-        <p>Destinations Planned</p>
-
-        <DestinationList :list="documents" :id="tripId" />
-      </div>
-      <div class="col">
-        <p>Hotels Planned</p>
-
-        <HotelList :list="hotels" :id="tripId" />
+      <div class="row">
+        <div class="col-sm-12 col-lg-6">
+          <p>Destinations Planned</p>
+          <DestinationList :list="documents" :id="tripId" />
+        </div>
+        <div class="col-sm-12 col-lg-6">
+          <p>Hotels Planned</p>
+          <HotelList :list="hotels" :id="tripId" />
+        </div>
       </div>
     </div>
   </div>

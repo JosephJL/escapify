@@ -1,19 +1,24 @@
 <template>
-  <div>
-    <div class="card bg-transparent border-0">
-      <img
-        v-if="imageLoading"
-        :src="returnURl"
-        class="card-img-top rounded img-fluid"
-        alt="image here"
-        style="object-fit: cover; width: 10rem; height: 10rem"
-      />
-      <div v-else class="d-flex" style="height: 10rem; width: 100%">
-        <div class="spinner-border mx-auto align-self-center" role="status">
-          <span class="visually-hidden">Loading...</span>
+  <div class="card mb-2 container">
+    <div class="row align-items-start">
+      <div class="col">
+        <img
+          v-if="imageLoading"
+          :src="returnURl"
+          class="card-img-top rounded img-fluid"
+          alt="image here"
+          style="object-fit: cover; width: 10rem; height: 10rem"
+        />
+        <div v-else class="d-flex" style="height: 10rem; width: 100%">
+          <div
+            class="spinner-grow text-light mx-auto align-self-center"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
       </div>
-      <div class="card-body text-black">
+      <div class="col text-black">
         <p class="card-title">{{ details[1].name }}</p>
       </div>
     </div>

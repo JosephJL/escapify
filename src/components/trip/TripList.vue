@@ -2,9 +2,9 @@
   <div class="countryList">
     <div class="container-fluid d-flex text-center">
       <!-- class horizontalScroll for horizontal -->
-      <div class="row">
+      <div class="">
         <template v-for="trip in trips" :key="trip">
-          <TripCard :details="trip"/>
+          <TripCard :details="trip" />
         </template>
       </div>
     </div>

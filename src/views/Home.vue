@@ -10,7 +10,9 @@
       <div style="background-color: rgb(141, 183, 209)">
         <!-- Search bar -->
         <nav aria-label="Page navigation">
-          <div class="container-fluid col-xxl-3 col-lg-4 col-md-5 col-sm-6 col-10 mb-1">
+          <div
+            class="container-fluid col-xxl-3 col-lg-4 col-md-5 col-sm-6 col-10 mb-1"
+          >
             <form class="d-flex" role="search">
               <input
                 class="form-control me-2 rounded-4"
@@ -28,7 +30,6 @@
             </form>
           </div>
         </nav>
-        {{ filterText }}
 
         <!-- Select for different continents -->
         <nav aria-label="Page navigation">
@@ -102,12 +103,12 @@
 #scene-container {
   position: absolute;
   width: 100%;
-  height: 800px;
+  height: 600px;
   z-index: -100;
 }
 
 .header {
-  height: 800px;
+  height: 600px;
 }
 </style>
 
@@ -187,7 +188,7 @@ export default {
       const far = 100;
       this.camera = new PerspectiveCamera(fov, aspect, near, far);
       //every object is created at (0,0,0) so we need to move the camera back to view the scene
-      this.camera.position.set(0, 0, 30);
+      this.camera.position.set(0, 0, 10);
       //create geometry
       this.geometry = new SphereBufferGeometry(10, 64, 64);
       //create texture

@@ -1,8 +1,8 @@
 <template>
   <div class="countryList">
-    <div class="container-fluid d-flex text-center">
+    <div class="container-fluid text-center">
       <!-- class horizontalScroll for horizontal -->
-      <div v-if="!placeholderData" class="row">
+      <!-- <div v-if="!placeholderData" class="row">
         <template v-for="index in 12" :key="index">
           <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
             <div class="card bg-transparent border-0">
@@ -13,24 +13,26 @@
                 >
                   <span class="visually-hidden">Loading...</span>
                 </div>
-                <!-- <ContentLoader height="100%" width="100%">
-                  <rect x="1" y="234" rx="4" ry="4" width="60%" height="9" />
-                  <rect x="2" y="253" rx="3" ry="3" width="40%" height="6" />
-                  <rect
-                    x="0"
-                    y="17"
-                    rx="10"
-                    ry="10"
-                    width="100%"
-                    height="207"
-                  />
-                </ContentLoader> -->
               </div>
               <div class="card-body text-white">
                 <h5 class="card-title">Country :</h5>
                 <p class="card-text">Region :</p>
               </div>
             </div>
+          </div>
+        </template>
+      </div> -->
+      <div v-if="!placeholderData" class="row">
+        <template v-for="index in 12" :key="index">
+          <div
+            class="col-xxl-2 col-xl-3 col-lg-4 col-md-6"
+            style="height: 22rem"
+          >
+            <ContentLoader height="100%" width="100%">
+              <rect x="20%" y="82%" rx="4" ry="4" width="60%" height="10" />
+              <rect x="30%" y="87%" rx="3" ry="3" width="40%" height="10" />
+              <rect x="0" y="" rx="10" ry="10" width="100%" height="80%" />
+            </ContentLoader>
           </div>
         </template>
       </div>
