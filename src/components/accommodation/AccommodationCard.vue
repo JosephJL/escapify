@@ -1,5 +1,6 @@
 <template>
-  <div class="card bg-transparent border-0">
+  <div
+    class="card bg-transparent border-0">
     <img
       v-if="imageLoading"
       :src="returnURl"
@@ -46,8 +47,9 @@ export default {
 
     load(hotelName)
     load(hotelAddress)
-    console.log("hotel name is", hotelName);
-    console.log("hotel address is ", hotelAddress)
+    // console.log("hotel name is", hotelName);
+    // console.log("hotel address is ", hotelAddress)
+
 
     return { returnURl, imageLoading, hotelName, hotelAddress};
   },

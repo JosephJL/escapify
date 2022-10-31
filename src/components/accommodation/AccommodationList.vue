@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <!-- <h1>This is accomodation list</h1> -->
-    <h1 class="mt-3 mb-2">Top Rated Hotels in Bangkok</h1>
+  <!-- <div> -->
+  <!-- <h1>This is accomodation list</h1> -->
+  <!-- <h1 class="mt-3 mb-2">Top Rated Hotels in Bangkok</h1> -->
 
-    <!-- Table for hotels -->
-    <table class="table table-striped table-secondary table-bordered">
+  <!-- Table for hotels -->
+  <!-- <table class="table table-striped table-secondary table-bordered">
       <thead>
         <tr>
           <th scope="col">S/N</th>
           <th scope="col">Hotel Name</th>
           <th scope="col">Picture</th>
-          <th scope="col">Hotel Address</th>
-          <!-- <th scope="col">Hotel Location</th> -->
-        </tr>
+          <th scope="col">Hotel Address</th> -->
+  <!-- <th scope="col">Hotel Location</th> -->
+  <!-- </tr>
       </thead>
       <tbody>
         <tr v-for="(hotel, idx) in hotels" v-bind:key="idx">
@@ -28,10 +28,10 @@
           <td>{{ hotel[1] }}</td>
         </tr>
       </tbody>
-    </table>
-  </div>
+    </table> -->
+  <!-- </div> -->
 
-  <div class="container-fluid d-flex text-center bg-dark mt-5">
+  <div class="container-fluid d-flex text-center bg-info mt-5 border-rounded">
     <!-- class horizontalScroll for horizontal -->
     <div class="row">
       <h1 class="text-light">Top Rated Accomodations around the Area</h1>
@@ -50,25 +50,26 @@
 import { ref } from "vue";
 import axios from "axios";
 // import getPlacePhoto from "../../composables/image/getPhotos.js";
-import AccommodationCard from "./AccommodationCard.vue"
+import AccommodationCard from "./AccommodationCard.vue";
+import CountryCard from "../CountryCard.vue";
 
 export default {
-  components: { AccommodationCard },
-  props: {
-  },
+  components: { AccommodationCard, CountryCard },
+  props: { details: Object },
   setup(props) {
     const features = ref([]);
     const hotels = ref([]);
-    // let hotelPics = ref([])
+    // console.log(props)
+    // let country = props.name
 
     const getHotelInfo = async () => {
       const options = {
         method: "GET",
         url: "https://hotels4.p.rapidapi.com/locations/v3/search",
-        params: { q: "clarke quay", locale: "en_US" },
+        params: { q: "orchard road", locale: "en_US" },
         headers: {
-          "X-RapidAPI-Key":
-            "638ac48a76mshf275207fe9adab2p158478jsn11957d7c5c7f",
+          "X-RapidAPI-Key": "638ac48a76mshf275207fe9adab2p158478jsn11957d7c5c7f",
+          // "828469e3eamsh38f4c6e374a8e38p1e9b0ejsn5fec85fd05a9",
           "X-RapidAPI-Host": "hotels4.p.rapidapi.com",
         },
       };

@@ -42,6 +42,7 @@ export default {
   setup(props) {
     let image = ref(null);
     let countryDetails = JSON.parse(JSON.stringify(props.details));
+    
     // console.log("details are ,", JSON.stringify(props.details));
 
     // const getPlacePhoto = async (countryName) => {
