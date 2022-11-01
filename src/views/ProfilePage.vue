@@ -12,7 +12,7 @@
 import getCollectionById from "../composables/collection/queryCollection";
 import getUser from "../composables/getUser";
 import getPlacePhoto from "../composables/image/getPhotos";
-import TripList from "../components/trip/TripList.vue";
+import TripList from "../components/profile/trip/TripList.vue";
 
 export default {
   components: { TripList },
