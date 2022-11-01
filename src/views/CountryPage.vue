@@ -62,7 +62,7 @@
     </section>
 
     <section class="hotelSection">
-      <!-- <AccommodationList /> -->
+      <AccommodationList />
     </section>
   </div>
 
@@ -128,8 +128,8 @@ export default {
     const { imageLoading, returnURl, load } = getPlacePhoto();
 
     if (typeof countryDetails.value.name == "object") {
-      countryDetails.name.official;
-      countryName.value = countryDetails.name.official;
+      countryDetails.value.name.official;
+      countryName.value = countryDetails.value.name.official;
       load(countryName.value);
     } else {
       countryName.value = countryDetails.value.name;
