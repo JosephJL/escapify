@@ -18,17 +18,6 @@
       </button> -->
 
       <ul class="navbar-nav ms-auto mb-0">
-        <li class="nav-item">
-          <router-link
-            :to="{ name: 'Country', params: { name: 'Australia' } }"
-            class="btn btn-info"
-            >Country</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Destination</a>
-        </li>
-
         <!-- dropdown when user is logged in -->
         <template v-if="user">
           <li class="nav-item">

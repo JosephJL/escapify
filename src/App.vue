@@ -36,5 +36,8 @@ html,
 body {
   margin: 0;
   height: 100%;
+  width: 100%;
+  padding: 0px;
+  overflow-x: hidden;
 }
 </style>
