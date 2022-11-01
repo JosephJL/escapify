@@ -49,13 +49,13 @@ img {
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
-import getUser from "../../composables/getUser";
-import queryNestedCollection from "../../composables/collection/queryNestedCollection";
-import queryHotels from "../../composables/collection/queryHotels";
+import getUser from "../../../composables/getUser";
+import queryNestedCollection from "../../../composables/collection/queryNestedCollection";
+import queryHotels from "../../../composables/collection/queryHotels";
 import DestinationCard from "../destination/DestinationCard.vue";
 import DestinationList from "../destination/DestinationList.vue";
 import HotelList from "../hotel/HotelList.vue";
-import getPlacePhotos from "../../composables/image/getPhotos";
+import getPlacePhotos from "../../../composables/image/getPhotos";
 
 export default {
   components: { DestinationList, HotelList },

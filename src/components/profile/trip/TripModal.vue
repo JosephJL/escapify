@@ -17,13 +17,17 @@
             </li>
           </template>
         </ul>
+        <div>
+          Add a new trip!
+          <input type="text" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import queryCollectionById from "../../composables/collection/queryCollection";
+import queryCollectionById from "../../../composables/collection/queryCollection";
 
 export default {
   props: { currUser: Object },

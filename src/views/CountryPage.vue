@@ -31,39 +31,36 @@
           <!-- <span>Information of prop is {{ props }}</span> -->
           <p>{{ countryDetails.latlng }}</p>
           <h3>Country Information</h3>
+          {{ countryDetails }}
           <p>Capital: {{ countryDetails.capital }}</p>
           <p>Population: {{ countryDetails.population }}</p>
         </div>
       </div>
     </section>
     <section class="destinations">
-      <div>Dummy Destination Section</div>
-      <div class="card" style="width: 18rem">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8TrKiLe4AdgO-WrPpPB2HyVmZPL9BLMNn2Im2Z8Tdfw&s"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">Random Destination here!</h5>
-          <p class="card-text">
-            I just created this to try and link it to a dummy destination so I
-            can make the firebase work pls and tank youuuuu
-          </p>
-          <button @click="getDestination()" class="btn btn-info">
-            Go to Destination
-          </button>
+      <div class="row">
+        <div
+          class="col"
+          style="overflow-x: hidden; overflow-y: auto; height: 800px"
+        >
+          <DestinationList
+            @selectedFromList="getSelection"
+            :coordinates="countryDetails.latlng"
+          />
+        </div>
+        <div class="col">
+          <div>Dummy Destination Section</div>
+          {{ selectedInfo }}
+          <div v-if="getAccom">
+            {{ getAccom }}<AccommodationList :accomDetails="selectedInfo" />
+          </div>
         </div>
       </div>
     </section>
     <section>Country Information</section>
-    <section class="destinations">
-      <DestinationList />
-    </section>
+    <section class="destinations"></section>
 
-    <section class="hotelSection">
-      <!-- <AccommodationList /> -->
-    </section>
+    <section class="hotelSection"></section>
   </div>
 
   <Teleport to="body">
@@ -102,7 +99,7 @@
 import { onMounted, ref, toRefs } from "vue";
 import axios from "axios";
 import AccommodationList from "../components/accommodation/AccommodationList.vue";
-import DestinationList from "../components/destinations/DestinationList.vue";
+import DestinationList from "../components/destination/DestinationList.vue";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 import { useRouter } from "vue-router";
 
@@ -168,7 +165,21 @@ export default {
       });
     };
 
+    // selection stuff
+    const selectedInfo = ref(null);
+    const getAccom = ref(false);
+
+    const getSelection = (arg) => {
+      selectedInfo.value = arg.name;
+      console.log("ITS HEREEEEEEEE", selectedInfo.value);
+      // console.log("name is, ", typeof selectedInfo.value.name);
+      getAccom.value = true;
+    };
+
     return {
+      getAccom,
+      getSelection,
+      selectedInfo,
       getDestination,
       tripName,
       countryDetails,

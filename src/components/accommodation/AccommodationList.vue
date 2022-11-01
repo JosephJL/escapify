@@ -45,7 +45,6 @@
   </div>
 </template>
 
-
 <script>
 import { ref } from "vue";
 import axios from "axios";
@@ -54,22 +53,24 @@ import AccommodationCard from "./AccommodationCard.vue";
 
 export default {
   components: { AccommodationCard },
-  props: { details: Object },
+  props: { accomDetails: Object },
   setup(props) {
     const features = ref([]);
     const hotels = ref([]);
     // console.log(props)
     // let country = props.name
 
-    const getHotelInfo = async () => {
+    console.log("accomodations is set up", props.accomDetails);
+
+    const getHotelInfo = async (name) => {
       const options = {
         method: "GET",
         url: "https://hotels4.p.rapidapi.com/locations/v3/search",
-        params: { q: "orchard road", locale: "en_US" },
+        params: { q: name, locale: "en_US" },
         headers: {
           "X-RapidAPI-Key":
             // "638ac48a76mshf275207fe9adab2p158478jsn11957d7c5c7f",
-          "828469e3eamsh38f4c6e374a8e38p1e9b0ejsn5fec85fd05a9",
+            "828469e3eamsh38f4c6e374a8e38p1e9b0ejsn5fec85fd05a9",
           "X-RapidAPI-Host": "hotels4.p.rapidapi.com",
         },
       };
@@ -77,6 +78,7 @@ export default {
         .request(options)
         .then(function (response) {
           console.log(response.data);
+          console.log(name);
           let apiData = response.data.sr;
           for (let idx in apiData) {
             // console.log(apiData[idx])
@@ -93,7 +95,7 @@ export default {
         });
     };
 
-    getHotelInfo();
+    getHotelInfo(props.accomDetails);
     // getHotelInfo();
     // for (hotel in hotels) {
 

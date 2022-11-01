@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import getPlacePhoto from "../../composables/image/getPhotos";
+import getPlacePhoto from "../../../composables/image/getPhotos";
 
 export default {
   props: {
