@@ -9,10 +9,14 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <h2>Your current trips</h2>
-
-        <template v-for="(document, index) in documents" :key="index">
-          <p>{{ documents }}</p>
-        </template>
+        <ul class="list-group">
+          <template v-for="(document, index) in documents" :key="index">
+            <li class="list-group-item">
+              {{ document[1].tripName }} in {{ document[1].name }}
+              <button class="btn btn-primary">Add</button>
+            </li>
+          </template>
+        </ul>
       </div>
     </div>
   </div>

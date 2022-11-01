@@ -1,6 +1,6 @@
 <template>
   <div
-    @click="getCountry(details.name)"
+    @click="getCountry()"
     v-if="details"
     class="card bg-transparent border-0"
     style="cursor: pointer"
@@ -95,7 +95,7 @@ export default {
 
     const router = useRouter();
 
-    const getCountry = (countryName) => {
+    const getCountry = () => {
       router.push({
         name: "Country",
         params: {

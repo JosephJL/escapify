@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import CountryPage from "../views/CountryPage.vue";
 import ProfilePage from "../views/ProfilePage.vue";
+import DestinationPage from "../views/DestinationPage.vue";
 import { getAuth } from "firebase/auth";
 
 const requireAuth = (to, from, next) => {
@@ -30,6 +31,13 @@ const routes = [
     name: "Country",
     component: CountryPage,
     props: (route) => ({ details: route.query.details }),
+    // beforeEnter: requireAuth,
+  },
+  {
+    path: "/Destination/:name",
+    name: "Destination",
+    component: DestinationPage,
+    props: true,
     // beforeEnter: requireAuth,
   },
   {

@@ -19,6 +19,7 @@
             </div>
           </div>
           <div class="card-body text-black">
+            <p class="card-title">{{ details[1].tripName }}</p>
             <p class="card-title">{{ details[1].name }}</p>
           </div>
         </div>
