@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import queryCollectionById from "../../composables/collection/queryCollection";
+import queryCollectionById from "../../../composables/collection/queryCollection";
 
 export default {
   props: { currUser: Object },

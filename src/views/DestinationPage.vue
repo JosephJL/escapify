@@ -16,7 +16,7 @@
 
 <script>
 // Trips Management
-import TripModal from "../components/trip/TripModal.vue";
+import TripModal from "../components/profile/trip/TripModal.vue";
 import getUser from "../composables/getUser";
 
 export default {
