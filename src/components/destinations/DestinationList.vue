@@ -9,7 +9,7 @@
   <div>
     <h2>List of destinations</h2>
     <div v-for="destination in destinations" :key="destination">
-      <span>Destination is </span>
+      <span>Destination is {{destination}}</span>
     </div>
   </div>
 
@@ -28,7 +28,7 @@ export default {
     const options = {
       method: "GET",
       url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
-      params: { radius: "15000", lon: "103.8505", lat: "1.2892" },
+      params: { radius: "15000", lon: "133.7751", lat: "25.2744" },
       headers: {
         "X-RapidAPI-Key": "7eb24a45a3msh648b8d859d3cf70p1c07a5jsn8d460e9a9032",
         "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",

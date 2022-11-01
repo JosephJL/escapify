@@ -9,6 +9,7 @@
     </section>
     <section class="destinations">
       <DestinationList />
+      
     <section class="hotelSection">
       <!-- <AccommodationList/> -->
     </section>
