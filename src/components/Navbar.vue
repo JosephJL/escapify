@@ -28,6 +28,8 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Destination</a>
         </li>
+
+        <!-- dropdown when user is logged in -->
         <template v-if="user">
           <li class="nav-item">
             <div class="dropdown">
@@ -56,6 +58,8 @@
             </div>
           </li>
         </template>
+
+        <!-- dropdown when user is not logged in -->
         <template v-else>
           <li class="nav-item">
             <div class="dropdown">
@@ -77,6 +81,7 @@
                     class="dropdown-item"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
+                    @click="showLogin = true"
                   >
                     Log In
                   </button>
@@ -100,6 +105,7 @@
     </div>
   </nav>
 
+  <!-- modal component for use signup / login -->
   <Teleport to="body">
     <div
       class="modal fade"

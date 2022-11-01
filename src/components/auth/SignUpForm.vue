@@ -1,6 +1,7 @@
 <template>
   <div class="card p-3 text-center">
     <form @submit.prevent="handleSubmit">
+      <slot name="close"></slot>
       <div class="mb-3">
         <span class="fs-5 fw-bold">Sign Up</span>
         <hr style="margin: 15px -20px 20px" />
