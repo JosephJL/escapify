@@ -65,6 +65,11 @@
         </div>
       </div>
     </section>
+    <section>Country Information</section>
+    <section class="destinations">
+      <DestinationList />
+    </section>
+
     <section class="hotelSection">
       <!-- <AccommodationList /> -->
     </section>
