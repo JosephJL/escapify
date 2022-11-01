@@ -17,6 +17,10 @@
             </li>
           </template>
         </ul>
+        <div>
+          Add a new trip!
+          <input type="text" />
+        </div>
       </div>
     </div>
   </div>
