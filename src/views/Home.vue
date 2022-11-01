@@ -8,17 +8,45 @@
         </h1>
       </div>
       <div style="background-color: rgb(141, 183, 209)">
+        <!-- Search bar -->
+        <nav aria-label="Page navigation">
+          <div
+            class="container-fluid col-xxl-3 col-lg-4 col-md-5 col-sm-6 col-10 mb-1"
+          >
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2 rounded-4"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                v-model="filterText"
+              />
+              <button
+                class="btn btn-outline-primary rounded-4"
+                @click.prevent="searchCountries"
+              >
+                Search
+              </button>
+            </form>
+          </div>
+        </nav>
+
+        <!-- Select for different continents -->
         <nav aria-label="Page navigation">
           <ul class="justify-content-center pagination">
             <li class="page-item">
-              <a class="page-link" @click.prevent="getCountries" href="#">
+              <a
+                class="page-link rounded-4 me-1"
+                @click.prevent="getCountries"
+                href="#"
+              >
                 All
               </a>
             </li>
             <template v-for="continent in continents" :key="continent">
               <li class="page-item">
                 <a
-                  class="page-link"
+                  class="page-link rounded-4 me-1"
                   @click.prevent="selectContinent(continent)"
                   href="#"
                   >{{ continent }}</a
@@ -27,8 +55,11 @@
             </template>
           </ul>
         </nav>
+
         <CountryList :list="documents" :page="pageNumber" />
-        <nav v-if="totalPages" aria-label="Page navigation example">
+
+        <!-- Pagination for different countries -->
+        <nav aria-label="Page navigation example">
           <ul class="justify-content-center pagination">
             <li class="page-item">
               <a
@@ -72,12 +103,12 @@
 #scene-container {
   position: absolute;
   width: 100%;
-  height: 800px;
+  height: 600px;
   z-index: -100;
 }
 
 .header {
-  height: 800px;
+  height: 600px;
 }
 </style>
 
@@ -129,7 +160,7 @@ import countries from "countries-list";
 import CountryList from "../components/CountryList.vue";
 
 // Firebase
-import getCollection from "../composables/getCollection";
+import getCollection from "../composables/collection/getCollection";
 
 // Requests
 import axios from "axios";
@@ -157,7 +188,7 @@ export default {
       const far = 100;
       this.camera = new PerspectiveCamera(fov, aspect, near, far);
       //every object is created at (0,0,0) so we need to move the camera back to view the scene
-      this.camera.position.set(0, 0, 30);
+      this.camera.position.set(0, 0, 10);
       //create geometry
       this.geometry = new SphereBufferGeometry(10, 64, 64);
       //create texture
@@ -172,7 +203,7 @@ export default {
       //create a mesh containing geometry and material
       this.sphere = new Mesh(this.geometry, this.material);
       // this.cube.rotation.set(-0.5, -0.1, 0.8);
-      this.sphere.position.set(-2, 0, -30);
+      this.sphere.position.set(0, 0, -30);
       console.log(atmosphereFragmentShader);
       this.atmosMaterial = new ShaderMaterial({
         vertexShader: atmosphereVertexShader,
@@ -185,7 +216,7 @@ export default {
         this.atmosMaterial
       );
       this.atmosphere.scale.set(1.1, 1.1, 1.1);
-      this.atmosphere.position.set(-2, 0, -30);
+      this.atmosphere.position.set(0, 0, -30);
       this.scene.add(this.atmosphere);
       this.light = createLights();
       //move the light right up and towards us
@@ -259,10 +290,14 @@ export default {
     // const { error, documents } = getCollection("countries");
     // console.log(documents);
 
+    // Filter stuff
+    const filterText = ref("");
+
+    // Pagination stuff
     const documents = ref([]);
     const chunkSize = 12;
     const totalPages = ref(0);
-    const pageNumber = ref(1);
+    const pageNumber = ref(0);
 
     const changePage = (index) => {
       pageNumber.value = index;
@@ -307,6 +342,24 @@ export default {
         });
     };
 
+    const searchCountries = async () => {
+      documents.value = [];
+      await axios
+        .get(`https://restcountries.com/v2/name/peru`)
+        .then((response) => {
+          console.log(response.data);
+          for (let i = 0; i < response.data.length; i += chunkSize) {
+            const chunk = response.data.slice(i, i + chunkSize);
+            documents.value.push(chunk);
+          }
+          totalPages.value = documents.value.length - 1;
+          console.log("total pages is", totalPages.value);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
     console.log("document list is", documents.value);
 
     return {
@@ -318,6 +371,8 @@ export default {
       continents,
       selectContinent,
       getCountries,
+      filterText,
+      searchCountries,
     };
   },
 };
