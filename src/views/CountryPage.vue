@@ -62,7 +62,7 @@
     </section>
 
     <section class="hotelSection">
-      <AccommodationList />
+      <!-- <AccommodationList /> -->
     </section>
   </div>
 
@@ -102,6 +102,7 @@
 import { onMounted, ref, toRefs } from "vue";
 import axios from "axios";
 import AccommodationList from "../components/accommodation/AccommodationList.vue";
+import DestinationList from "../components/destinations/DestinationList.vue";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 import { useRouter } from "vue-router";
 
@@ -112,7 +113,7 @@ import getUser from "../composables/getUser";
 import useCollection from "../composables/collection/useCollection";
 
 export default {
-  components: { AccommodationList },
+  components: { AccommodationList, DestinationList },
   props: {
     details: String,
   },
