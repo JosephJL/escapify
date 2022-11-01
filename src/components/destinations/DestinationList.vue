@@ -22,9 +22,12 @@ import axios from "axios";
 import { ref } from "vue";
 
 export default {
+  
   components: {},
   props: {},
-  setup() {
+  setup(props) {
+    const destinations = ref([]);
+
     const options = {
       method: "GET",
       url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
@@ -35,13 +38,11 @@ export default {
       },
     };
 
-    let destinations = ref([]);
-
     axios
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        destinations.value = response.data;
+        destinations.value.push = response.data;
         console.log(response.data.features[1].properties.name);
         console.log(response.data.features[2].properties.name);
         console.log(response.data.features[3].properties.name);

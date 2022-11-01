@@ -112,6 +112,7 @@
 import { onMounted, ref, toRefs } from "vue";
 import axios from "axios";
 import AccommodationList from "../components/accommodation/AccommodationList.vue";
+import DestinationList from "../components/destinations/DestinationList.vue";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 import { useRouter } from "vue-router";
 
@@ -122,7 +123,7 @@ import getUser from "../composables/getUser";
 import useCollection from "../composables/collection/useCollection";
 
 export default {
-  components: { AccommodationList },
+  components: { AccommodationList, DestinationList },
   props: {
     details: String,
   },
@@ -138,8 +139,8 @@ export default {
     const { imageLoading, returnURl, load } = getPlacePhoto();
 
     if (typeof countryDetails.value.name == "object") {
-      countryDetails.name.official;
-      countryName.value = countryDetails.name.official;
+      countryDetails.value.name.official;
+      countryName.value = countryDetails.value.name.official;
       load(countryName.value);
     } else {
       countryName.value = countryDetails.value.name;

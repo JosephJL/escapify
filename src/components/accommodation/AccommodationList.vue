@@ -50,10 +50,9 @@ import { ref } from "vue";
 import axios from "axios";
 // import getPlacePhoto from "../../composables/image/getPhotos.js";
 import AccommodationCard from "./AccommodationCard.vue";
-import CountryCard from "../CountryCard.vue";
 
 export default {
-  components: { AccommodationCard, CountryCard },
+  components: { AccommodationCard },
   props: { details: Object },
   setup(props) {
     const features = ref([]);
@@ -68,8 +67,8 @@ export default {
         params: { q: "orchard road", locale: "en_US" },
         headers: {
           "X-RapidAPI-Key":
+            // "638ac48a76mshf275207fe9adab2p158478jsn11957d7c5c7f",
             "828469e3eamsh38f4c6e374a8e38p1e9b0ejsn5fec85fd05a9",
-          // "828469e3eamsh38f4c6e374a8e38p1e9b0ejsn5fec85fd05a9",
           "X-RapidAPI-Host": "hotels4.p.rapidapi.com",
         },
       };
@@ -94,6 +93,7 @@ export default {
     };
 
     getHotelInfo();
+    // getHotelInfo();
     // for (hotel in hotels) {
 
     // }
