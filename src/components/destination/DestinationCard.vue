@@ -1,5 +1,4 @@
 <template>
-            class="spinner-grow text-light mx-auto align-self-center"
   <div
     v-if="textExists"
     @click="selectDestination"
