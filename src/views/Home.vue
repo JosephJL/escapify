@@ -345,7 +345,7 @@ export default {
     const searchCountries = async () => {
       documents.value = [];
       await axios
-        .get(`https://restcountries.com/v2/name/peru`)
+        .get(`https://restcountries.com/v2/name/${filterText.value}`)
         .then((response) => {
           console.log(response.data);
           for (let i = 0; i < response.data.length; i += chunkSize) {

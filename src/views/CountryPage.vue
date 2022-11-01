@@ -31,6 +31,7 @@
           <!-- <span>Information of prop is {{ props }}</span> -->
           <p>{{ countryDetails.latlng }}</p>
           <h3>Country Information</h3>
+          {{ countryDetails }}
           <p>Capital: {{ countryDetails.capital }}</p>
           <p>Population: {{ countryDetails.population }}</p>
         </div>
@@ -71,7 +72,7 @@
     </section>
 
     <section class="hotelSection">
-      <!-- <AccommodationList /> -->
+      <AccommodationList />
     </section>
   </div>
 
