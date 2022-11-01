@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // require('dotenv').config()
 // console.log(process.env)
@@ -25,11 +26,12 @@ const firebaseConfig = {
   projectId: "foodapp-2ef25",
   storageBucket: "foodapp-2ef25.appspot.com",
   messagingSenderId: "82856466053",
-  appId: "1:82856466053:web:6a8a2d4aad486a6a643bec",
+  appId: "1:82856466053:web:6a8a2d4aad486a6a643bec"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-console.log("db is", db)
+const storage = getStorage(app);
 
-export default db ;
+
+export {db,storage} ;

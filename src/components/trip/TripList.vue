@@ -1,0 +1,41 @@
+<template>
+  <div class="countryList">
+    <div class="container-fluid d-flex text-center">
+      <!-- class horizontalScroll for horizontal -->
+      <div class="">
+        <template v-for="trip in trips" :key="trip">
+          <TripCard :details="trip" />
+        </template>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.countryList {
+  height: 100%;
+}
+
+.horizontalScroll {
+  display: flex;
+  overflow-x: auto;
+}
+</style>
+
+<script>
+import TripCard from "../trip/TripCard.vue";
+import axios from "axios";
+
+export default {
+  components: { TripCard },
+  props: {
+    trips: Object,
+  },
+  setup(props) {
+    var tripList = props.trips;
+    console.log("triplist is,", tripList);
+
+    return {};
+  },
+};
+</script>
