@@ -39,7 +39,7 @@ export default {
         radius: "15000",
         lon: props.coordinates["1"],
         lat: props.coordinates["0"],
-        limit: 50,
+        limit: 500,
       },
       headers: {
         "X-RapidAPI-Key": "7eb24a45a3msh648b8d859d3cf70p1c07a5jsn8d460e9a9032",
@@ -51,7 +51,7 @@ export default {
       .request(options)
       .then((response) => {
         console.log("response data is here", response.data);
-        destinations.value = response.data.features.slice(0, 10);
+        destinations.value = response.data.features.slice(0, 50);
         console.log(destinations.value);
         // console.log(response.data.features[1].properties.name);
         // console.log(response.data.features[2].properties.name);

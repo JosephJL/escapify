@@ -95,7 +95,7 @@ export default {
         });
     };
 
-    getHotelInfo(props.accomDetails);
+    getHotelInfo(props.accomDetails.name);
     // getHotelInfo();
     // for (hotel in hotels) {
 

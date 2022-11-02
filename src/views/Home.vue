@@ -32,8 +32,8 @@
         </nav>
 
         <!-- Select for different continents -->
-        <nav aria-label="Page navigation">
-          <ul class="justify-content-center pagination">
+        <div class="container-fluid justify-content-center d-flex">
+          <ul class="pagination flex-wrap">
             <li class="page-item">
               <a
                 class="page-link rounded-4 me-1"
@@ -54,13 +54,13 @@
               </li>
             </template>
           </ul>
-        </nav>
+        </div>
 
         <CountryList :list="documents" :page="pageNumber" />
 
         <!-- Pagination for different countries -->
-        <nav aria-label="Page navigation example">
-          <ul class="justify-content-center pagination">
+        <div class="container-fluid justify-content-center d-flex">
+          <ul class="justify-content-center pagination flex-wrap">
             <li class="page-item">
               <a
                 class="page-link"
@@ -88,7 +88,7 @@
               >
             </li>
           </ul>
-        </nav>
+        </div>
       </div>
     </div>
   </div>
