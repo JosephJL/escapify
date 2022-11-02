@@ -28,10 +28,11 @@
             Add to Your Trips
           </button>
           <h1>{{ countryName }}</h1>
-          <!-- <span>Information of prop is {{ props }}</span> -->
-          <p>{{ countryDetails.latlng }}</p>
-          <h3>Country Information</h3>
           {{ countryDetails }}
+          <!-- <span>Information of prop is {{ props }}</span> -->
+          <!-- <p>{{ countryDetails.latlng }}</p> -->
+          <!-- <h3>Country Information</h3> -->
+          <!-- {{ countryDetails }} -->
           <p>Capital: {{ countryDetails.capital }}</p>
           <p>Population: {{ countryDetails.population }}</p>
         </div>
@@ -40,15 +41,15 @@
     <section class="destinations">
       <div class="row">
         <div
-          class="col"
-          style="overflow-x: hidden; overflow-y: auto; height: 800px"
+          class="col-md-4 order-md-first col-12 order-last overflow-auto"
+          style="height: 800px"
         >
           <DestinationList
             @selectedFromList="getSelection"
             :coordinates="countryDetails.latlng"
           />
         </div>
-        <div class="col">
+        <div class="col-md-8">
           <div>Dummy Destination Section</div>
           {{ selectedInfo }}
           {{ selectedInfo }}
