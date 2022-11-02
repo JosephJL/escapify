@@ -51,6 +51,7 @@
         <div class="col">
           <div>Dummy Destination Section</div>
           {{ selectedInfo }}
+          {{ selectedInfo }}
           <div v-if="getAccom">
             {{ getAccom }}<AccommodationList :accomDetails="selectedInfo" />
           </div>
@@ -170,7 +171,7 @@ export default {
     const getAccom = ref(false);
 
     const getSelection = (arg) => {
-      selectedInfo.value = arg.name;
+      selectedInfo.value = arg;
       console.log("ITS HEREEEEEEEE", selectedInfo.value);
       // console.log("name is, ", typeof selectedInfo.value.name);
       getAccom.value = true;

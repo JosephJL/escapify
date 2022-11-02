@@ -3,18 +3,18 @@
     v-if="textExists"
     @click="selectDestination"
     class="card"
-    style="width: 12rem"
+    style="width: 100%"
     :style="isClicked ? { 'background-color': '#e6e6e6' } : null"
   >
     <img
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8TrKiLe4AdgO-WrPpPB2HyVmZPL9BLMNn2Im2Z8Tdfw&s"
       class="card-img-top"
       alt="..."
-      style="width: 10rem; height: 10rem"
     />
     <div class="card-body">
-      textExists is {{ textExists }}
-      <h5 class="card-title">Name:{{ details }}</h5>
+      <!-- textExists is {{ textExists }} -->
+      {{ details }}
+      <h5 class="card-title">Name:{{ details.properties.name }}</h5>
       <p class="card-text">Details is {{ text }}</p>
       <button @click="selectDestination" class="btn btn-info">
         Go to Destination
