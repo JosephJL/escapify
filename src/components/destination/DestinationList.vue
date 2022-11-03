@@ -9,14 +9,31 @@
   <div>
     <h2>List of destinations</h2>
     <p>Destination is {{ destinations.length }}</p>
-    <div v-for="(destination, index) in destinations" :key="index">
-      <DestinationCard @selected="getSelection" :details="destination" />
+    <div
+      id="destinationList"
+      class="overflow-auto"
+      style="height: 800px; width: 100%"
+    >
+      <div v-for="(destination, index) in destinations" :key="index">
+        <DestinationCard @selected="getSelection" :details="destination" />
+      </div>
     </div>
   </div>
 
   <img id="display" src="" alt="" />
   <div id="info"></div>
 </template>
+
+<style scoped>
+@media (max-width: 767px) {
+  #destinationList {
+    display: flex;
+    overflow-y: auto;
+    white-space: nowrap;
+    height: 100%;
+  }
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -43,7 +60,7 @@ export default {
         limit: 500,
       },
       headers: {
-        "X-RapidAPI-Key": "7eb24a45a3msh648b8d859d3cf70p1c07a5jsn8d460e9a9032",
+        "X-RapidAPI-Key": "828469e3eamsh38f4c6e374a8e38p1e9b0ejsn5fec85fd05a9",
         "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
       },
     };

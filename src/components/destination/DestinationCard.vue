@@ -1,31 +1,45 @@
 <template>
-  <div
-    v-if="info"
-    @click="selectDestination"
-    class="card"
-    style="width: 100%"
-    :style="isClicked ? { 'background-color': '#e6e6e6' } : null"
-  >
-    <img
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8TrKiLe4AdgO-WrPpPB2HyVmZPL9BLMNn2Im2Z8Tdfw&s"
-      class="card-img-top"
-      alt="..."
-    />
-    <div class="card-body">
-      <!-- textExists is {{ textExists }} -->
-      {{ details }}
-      <h5 class="card-title">Name:{{ details.properties.name }}</h5>
-      <p class="card-text">Details is {{ info }}</p>
-      <button @click="selectDestination" class="btn btn-info">
-        Go to Destination
-      </button>
+  <div class="container-fluid">
+    <div
+      v-if="info"
+      @click="selectDestination"
+      class="card"
+      style="height: 100%"
+      :style="isClicked ? { 'background-color': '#e6e6e6' } : null"
+    >
+      <img
+        v-if="imageLoading"
+        :src="returnURl"
+        class="card-img-top rounded"
+        alt="image here"
+        style="height: 100%; object-fit: cover"
+      />
+      <div v-else class="d-flex" style="height: 10rem; width: 100%">
+        <div
+          class="spinner-grow text-light mx-auto align-self-center"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- textExists is {{ textExists }} -->
+        <!-- {{ details }} -->
+        <h5 class="card-title">Name:{{ details.properties.name }}</h5>
+        <!-- <p class="card-text">Details is {{ info }}</p> -->
+        <button @click="selectDestination" class="btn btn-info">
+          Go to Destination
+        </button>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 import { ref } from "vue";
 import getDestinationInfo from "../../composables/destination/getDestinationInfo";
+import getPlacePhoto from "../../composables/image/getPhotos";
 
 export default {
   props: { details: Object },
@@ -80,7 +94,10 @@ export default {
       });
     };
 
-    return { selectDestination, info, isClicked };
+    const { imageLoading, returnURl, load } = getPlacePhoto();
+    load(props.details.properties.name);
+
+    return { selectDestination, info, isClicked, imageLoading, returnURl };
   },
 };
 </script>
