@@ -40,10 +40,7 @@
     </section>
     <section class="destinations">
       <div class="row">
-        <div
-          class="col-md-4 order-md-first col-12 order-last overflow-auto"
-          style="height: 800px"
-        >
+        <div class="col-md-4 order-md-first col-12 order-last order-md-first">
           <DestinationList
             @selectedFromList="getSelection"
             :coordinates="countryDetails.latlng"
@@ -96,6 +93,10 @@
     </div>
   </Teleport>
 </template>
+
+<style scoped>
+
+</style>
 
 <script>
 import { onMounted, ref, toRefs } from "vue";

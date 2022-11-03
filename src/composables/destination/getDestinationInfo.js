@@ -11,7 +11,7 @@ const getDestinationInfo = () => {
           url: `https://opentripmap-places-v1.p.rapidapi.com/en/places/xid/${placeId}`,
           headers: {
             "X-RapidAPI-Key":
-              "480d26927amsh4735a5991d23945p1077e5jsnd9d743e8977c",
+            "828469e3eamsh38f4c6e374a8e38p1e9b0ejsn5fec85fd05a9",
             "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
           },
         };
