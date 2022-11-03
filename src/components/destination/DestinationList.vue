@@ -9,11 +9,7 @@
   <div>
     <h2>List of destinations</h2>
     <p>Destination is {{ destinations.length }}</p>
-    <div
-      id="destinationList"
-      class="overflow-auto"
-      style="height: 800px; width: 100%"
-    >
+    <div id="destinationList" class="overflow-auto">
       <div v-for="(destination, index) in destinations" :key="index">
         <DestinationCard @selected="getSelection" :details="destination" />
       </div>
@@ -25,12 +21,17 @@
 </template>
 
 <style scoped>
+@media (min-width: 767px) {
+  #destinationList {
+    height: 800px;
+  }
+}
 @media (max-width: 767px) {
   #destinationList {
     display: flex;
     overflow-y: auto;
     white-space: nowrap;
-    height: 100%;
+    height: 200px;
   }
 }
 </style>
