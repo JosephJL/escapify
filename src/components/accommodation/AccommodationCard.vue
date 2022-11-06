@@ -15,8 +15,10 @@
     <div class="card-body text-white">
       <h5 class="card-title">{{ hotelName }}</h5>
       <p class="card-text">
-        Address: {{hotelAddress}}
+        Address: {{hotelAddress}} <br>
+        Rating: {{hotelStars}}
       </p>
+
     </div>
   </div>
 </template>
@@ -41,9 +43,10 @@ export default {
     // console.log(hotel)
     // console.log(props)
     // let image = ref(null);
-    console.log(props.details[0])
+    // console.log(props.details[0])
     let hotelName = JSON.parse(JSON.stringify(props.details[0]));
     let hotelAddress = JSON.parse(JSON.stringify(props.details[1]));
+    let hotelStars = JSON.parse(JSON.stringify(props.details[2]));
     const { imageLoading, returnURl, load } = getPlacePhoto();
 
     load(hotelName)
@@ -52,7 +55,7 @@ export default {
     // console.log("hotel address is ", hotelAddress)
 
 
-    return { returnURl, imageLoading, hotelName, hotelAddress};
+    return { returnURl, imageLoading, hotelName, hotelAddress, hotelStars};
   },
 };
 </script>

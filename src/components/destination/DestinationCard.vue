@@ -57,7 +57,9 @@ export default {
       isClicked.value = true;
       context.emit("selected", {
         name: props.details.properties.name,
-        text: info.value,
+        // text: info.value,
+        lon: props.details.geometry.coordinates[0],
+        lat: props.details.geometry.coordinates[1]
       });
     };
 
