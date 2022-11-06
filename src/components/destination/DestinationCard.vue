@@ -94,8 +94,9 @@ export default {
 
     // const { imageLoading, returnURl, load } = getPlacePhoto();
     // load(props.details.properties.name);
+    const imageLoading = ref(false);
 
-    return { selectDestination, info, isClicked, };
+    return { selectDestination, info, isClicked, imageLoading };
   },
 };
 </script>
