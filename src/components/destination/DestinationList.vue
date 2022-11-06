@@ -1,5 +1,4 @@
 <template>
-  <h1>THIS IS DESTINATIONS</h1>
   <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 
   <!-- <body> -->
@@ -7,10 +6,10 @@
   <div id="dest2">Destination 2:</div>
   <div id="dest3">Destination 3:</div> -->
   <div>
-    <h2>List of destinations</h2>
-    <p>Destination is {{ destinations.length }}</p>
+    <h2>Check it out!</h2>
+    <!-- <p>Destination is</p> -->
     <div id="destinationList" class="overflow-auto">
-      <div v-for="(destination, index) in destinations" :key="index">
+      <div v-for="(destination, index) in list[page]" :key="index">
         <DestinationCard @selected="getSelection" :details="destination" />
       </div>
     </div>
@@ -43,39 +42,11 @@ import DestinationCard from "../destination/DestinationCard.vue";
 
 export default {
   components: { DestinationCard },
-  props: { coordinates: Object },
+  props: { list: Object, page: Number },
   emits: ["selectedFromList"],
   setup(props, context) {
-    const destinations = ref([]);
-
-    console.log("coordinates is", props.coordinates);
-
-    const options = {
-      method: "GET",
-      url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
-      params: {
-        radius: "15000",
-        lon: props.coordinates["1"],
-        lat: props.coordinates["0"],
-        limit: 500,
-      },
-      headers: {
-        "X-RapidAPI-Key": "42e5228046msh886bb3b8f9a3386p188235jsnbb3a9adaa7af",
-        "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
-      },
-    };
-
-    axios
-      .request(options)
-      .then((response) => {
-        console.log("response data is here", response.data);
-        destinations.value = response.data.features;
-        console.log(destinations.value);
-
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    console.log("props list is", props.list);
+    console.log("current page in country list is", props.page);
 
     const getSelection = (arg) => {
       console.log("selection is made!!!!!!!");
@@ -88,7 +59,7 @@ export default {
       });
     };
 
-    return { destinations, getSelection };
+    return { getSelection };
   },
 };
 </script>
