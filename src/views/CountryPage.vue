@@ -44,6 +44,7 @@
           <DestinationList
             @selectedFromList="getSelection"
             :coordinates="countryDetails.latlng"
+            :size="countryDetails.area"
           />
         </div>
         <div class="col-md-8">
@@ -94,9 +95,7 @@
   </Teleport>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
 
 <script>
 import { onMounted, ref, toRefs } from "vue";
@@ -156,18 +155,6 @@ export default {
 
     const router = useRouter();
 
-    const getDestination = () => {
-      router.push({
-        name: "Destination",
-        params: {
-          name: "Snoopy Museum",
-        },
-        // query: {
-        //   details: JSON.stringify(props.details),
-        // },
-      });
-    };
-
     // selection stuff
     const selectedInfo = ref(null);
     const getAccom = ref(false);
@@ -183,7 +170,6 @@ export default {
       getAccom,
       getSelection,
       selectedInfo,
-      getDestination,
       tripName,
       countryDetails,
       countryName,
