@@ -80,11 +80,13 @@ export default {
     const getSelection = (arg) => {
       console.log("selection is made!!!!!!!");
       console.log(arg.name);
-      console.log(arg.text);
+      console.log(arg.lat);
+      console.log(arg.lon)
 
       context.emit("selectedFromList", {
         name: arg.name,
-        text: arg.text,
+        lat: arg.lat,
+        lon: arg.lon
       });
     };
 

@@ -50,7 +50,7 @@ import { ref } from "vue";
 import axios from "axios";
 // import getPlacePhoto from "../../composables/image/getPhotos.js";
 import AccommodationCard from "./AccommodationCard.vue";
-
+  
 export default {
   components: { AccommodationCard },
   props: { accomDetails: Object },
@@ -61,37 +61,64 @@ export default {
     // let country = props.name
 
     console.log("accomodations is set up", props.accomDetails);
+    const lat = props.accomDetails.lat
+    const lon = props.accomDetails.lon
+    // console.log(lat)
+    // console.log(lon)
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + '-' + dd;
+    // console.log(today)
 
     const getHotelInfo = async (name) => {
       const options = {
-        method: "GET",
-        url: "https://hotels4.p.rapidapi.com/locations/v3/search",
-        params: { q: name, locale: "en_US" },
-        headers: {
-          "X-RapidAPI-Key":
-            // "638ac48a76mshf275207fe9adab2p158478jsn11957d7c5c7f",
-            "42e5228046msh886bb3b8f9a3386p188235jsnbb3a9adaa7af",
-          "X-RapidAPI-Host": "hotels4.p.rapidapi.com",
+        method: 'GET',
+        url: 'https://hotels-com-provider.p.rapidapi.com/v1/hotels/nearby',
+        params: {
+          latitude: lat,
+          currency: 'USD',
+          longitude: lon,
+          checkout_date: '2022-12-27',
+          sort_order: 'STAR_RATING_HIGHEST_FIRST',
+          checkin_date: '2022-12-26',
+          adults_number: '1',
+          locale: 'en_US'
         },
+        headers: {
+          'X-RapidAPI-Key': '16ee8e4bfbmsh5e491b63623df36p1a152fjsn83b106a1dc4b',
+          'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
+        }
       };
       await axios
         .request(options)
         .then(function (response) {
           console.log(response.data);
           console.log(name);
-          let apiData = response.data.sr;
-          for (let idx in apiData) {
-            // console.log(apiData[idx])
-            let result = apiData[idx];
-            if (result.type == "HOTEL") {
-              let hotelName = result.regionNames.primaryDisplayName;
-              let hotelAddress = result.hotelAddress.street;
-              hotels.value.push([hotelName, hotelAddress]);
-            }
+          let hotelsReturned = response.data.searchResults.results
+          for (let hotel of hotelsReturned) {
+            let hotelName = hotel.name
+            let hotelAddress = hotel.address.streetAddress
+            let hotelStars = hotel.guestReviews.rating
+            let thumbnail = hotel.optimizedThumbUrls.srpDesktop
+            console.log(thumbnail)
+            hotels.value.push([hotelName, hotelAddress, hotelStars, thumbnail])
           }
+          // let apiData = response.data.sr;
+          // for (let idx in apiData) {
+            // console.log(apiData[idx])
+            // let result = apiData[idx];
+            // if (result.type == "HOTEL") {
+              // let hotelName = result.regionNames.primaryDisplayName;
+              // let hotelAddress = result.hotelAddress.street;
+              // hotels.value.push([hotelName, hotelAddress]);
+            // }
+          // }
         })
         .catch(function (error) {
-          console.error(error);
+          console.log(error.response.data.detail[0]);
         });
     };
 
