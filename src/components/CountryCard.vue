@@ -46,35 +46,6 @@ export default {
     let countryDetails = JSON.parse(JSON.stringify(props.details));
 
     const countryName = ref(null);
-    // console.log("details are ,", JSON.stringify(props.details));
-
-    // const getPlacePhoto = async (countryName) => {
-    //   const proxyUrl = "http://blooming-reaches-84388.herokuapp.com/";
-    //   const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${countryName}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&inputtype=textquery&fields=name,photos`;
-    //   await axios.get(proxyUrl + url).then((response) => {
-    //     console.log(response.data);
-    //     const candidates = response.data.candidates;
-    //     const candidate = candidates[0];
-    //     photoRef.value = candidate.photos[0].photo_reference;
-    //   });
-    //   const photoUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef.value}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&maxwidth=400&maxheight=400`;
-    //   const imageURLQuery = await fetch(proxyUrl + photoUrl).then((response) =>
-    //     response.blob()
-    //   );
-    //   image.value = URL.createObjectURL(imageURLQuery);
-    //   // console.log(image);
-    //   imageLoading.value = true;
-    // };
-
-    // const isJsonObject = (data) => {
-    //   console.log("type of data is", typeof data);
-    //   try {
-    //     JSON.parse(data);
-    //   } catch (e) {
-    //     return false;
-    //   }
-    //   return true;
-    // };
 
     const { imageLoading, returnURl, load } = getPlacePhoto();
 
