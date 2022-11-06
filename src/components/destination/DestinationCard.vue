@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="info"
     @click="selectDestination"
     class="card"
     style="height: 100%"
@@ -21,21 +20,26 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
+
     <div class="card-body">
       <!-- textExists is {{ textExists }} -->
       <!-- {{ details }} -->
       <h5 class="card-title">Name:{{ details.properties.name }}</h5>
-      {{ details.properties }}
+      <p v-if="info">{{ info }}</p>
+      <template v-for="kind of details.properties.kinds.split(',')" :key="kind">
+        <span class="bg-warning rounded-5 m-2">
+          {{ kind }}
+        </span>
+      </template>
       <!-- <p class="card-text">Details is {{ info }}</p> -->
-      <button @click="selectDestination" class="btn btn-info">
+      <!-- <button @click="selectDestination" class="btn btn-info">
         Go to Destination
-      </button>
+      </button> -->
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import { ref } from "vue";
 import getDestinationInfo from "../../composables/destination/getDestinationInfo";
 import getPlacePhoto from "../../composables/image/getPhotos";
@@ -44,9 +48,8 @@ export default {
   props: { details: Object },
   emits: ["selected"],
   setup(props, context) {
-    // const { loadText, error, info } = getDestinationInfo();
-    const info = ref("hello this is some text");
-    // loadText(props.details.properties.xid);
+    const { loadText, error, info } = getDestinationInfo();
+    loadText(props.details.properties.xid);
 
     const isClicked = ref(false);
 
@@ -60,11 +63,10 @@ export default {
       });
     };
 
-    // const { imageLoading, returnURl, load } = getPlacePhoto();
-    // load(props.details.properties.name);
-    const imageLoading = ref(false);
+    const { imageLoading, returnURl, load } = getPlacePhoto();
+    load(props.details.properties.name);
 
-    return { selectDestination, info, isClicked, imageLoading };
+    return { selectDestination, info, isClicked, imageLoading, returnURl };
   },
 };
 </script>

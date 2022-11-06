@@ -43,13 +43,12 @@
         <div class="col-md-4 order-md-first col-12 order-last order-md-first">
           <DestinationList
             @selectedFromList="getSelection"
-            :coordinates="countryDetails.latlng"
-            :size="countryDetails.area"
+            :list="countryDestinations"
+            :page="pageNumber"
           />
         </div>
         <div class="col-md-8">
           <div>Dummy Destination Section</div>
-          {{ selectedInfo }}
           {{ selectedInfo }}
           <div v-if="getAccom">
             {{ getAccom }}<AccommodationList :accomDetails="selectedInfo" />
@@ -102,6 +101,7 @@ import { onMounted, ref, toRefs } from "vue";
 import axios from "axios";
 import AccommodationList from "../components/accommodation/AccommodationList.vue";
 import DestinationList from "../components/destination/DestinationList.vue";
+import getDestination from "../composables/destination/getDestination.js";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 import { useRouter } from "vue-router";
 
@@ -136,7 +136,21 @@ export default {
       load(countryDetails.value.capital);
     }
 
+    console.log(countryDetails.value.latlng["0"]);
+
     const { addDocument, error } = useCollection();
+
+    //destination pagination
+    const pageNumber = ref(0);
+
+    //get country destinations
+    const { loadCountryDestination, countryError, countryDestinations } =
+      getDestination();
+    loadCountryDestination(
+      countryDetails.value.latlng["0"],
+      countryDetails.value.latlng["1"],
+      countryDetails.value.area
+    );
 
     //adding a new trip
     const tripName = ref("");
@@ -171,6 +185,8 @@ export default {
       getSelection,
       selectedInfo,
       tripName,
+      pageNumber,
+      countryDestinations,
       countryDetails,
       countryName,
       user,
