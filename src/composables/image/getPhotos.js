@@ -28,12 +28,14 @@ const getPlacePhoto = () => {
       proxyUrl +
       `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef.value}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&maxwidth=1000&maxheight=1000`;
 
-    const imageURLQuery = await axios
+    if (photoRef.value != "undefined"){
+      const imageURLQuery = await axios
       .get(photoUrl, { responseType: "blob" })
       .then((response) => response.data);
     // console.log("queried image is ", imageURLQuery);
     returnURl.value = URL.createObjectURL(imageURLQuery);
     imageLoading.value = true;
+    }
   };
 
   return { imageLoading, returnURl, load };
