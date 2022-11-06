@@ -21,11 +21,12 @@
   </div>
 </template>
   
-  <style scoped>
+<style scoped>
 img {
   object-fit: cover;
   height: 18rem;
 }
+
 </style>
   
   <script>

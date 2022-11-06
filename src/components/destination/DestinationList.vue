@@ -47,7 +47,6 @@ export default {
   emits: ["selectedFromList"],
   setup(props, context) {
     const destinations = ref([]);
-    const displayDestinations = ref([]);
 
     console.log("coordinates is", props.coordinates);
 
@@ -73,20 +72,6 @@ export default {
         destinations.value = response.data.features;
         console.log(destinations.value);
 
-        displayDestinations.value = destinations.value.slice(0, 10);
-        // console.log(response.data.features[1].properties.name);
-        // console.log(response.data.features[2].properties.name);
-        // console.log(response.data.features[3].properties.name);
-        // xid1 = response.data.features[1].properties.xid;
-        // xid2 = response.data.features[1].properties.xid;
-        // xid3 = response.data.features[1].properties.xid;
-
-        // var dest1 = document.getElementById("dest1");
-        // var dest2 = document.getElementById("dest2");
-        // var dest3 = document.getElementById("dest3");
-        // dest1.innerText += response.data.features[1].properties.name;
-        // dest2.innerText += response.data.features[2].properties.name;
-        // dest3.innerText += response.data.features[3].properties.name;
       })
       .catch((error) => {
         console.log(error.message);
@@ -103,7 +88,7 @@ export default {
       });
     };
 
-    return { destinations, getSelection, displayDestinations };
+    return { destinations, getSelection };
   },
 };
 </script>

@@ -281,15 +281,6 @@ export default {
     const { user } = getUser();
     console.log("user is ", user);
 
-    // testing countrykey
-    // const countryKeys = Object.values(countries.countries);
-    // console.log(countries.countries[Object.keys(countries.countries)[0]]);
-    // console.log(Object.keys(countries.countries).length);
-
-    // testing firebase code
-    // const { error, documents } = getCollection("countries");
-    // console.log(documents);
-
     // Filter stuff
     const filterText = ref("");
 
