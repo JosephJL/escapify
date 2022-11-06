@@ -46,90 +46,103 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import axios from "axios";
 // import getPlacePhoto from "../../composables/image/getPhotos.js";
 import AccommodationCard from "./AccommodationCard.vue";
-  
+import getAccomodation from "../../composables/accommodation/getAccomodation.js";
+
 export default {
   components: { AccommodationCard },
   props: { accomDetails: Object },
   setup(props) {
     const features = ref([]);
-    const hotels = ref([]);
+    // const hotels = ref([]);
     // console.log(props)
     // let country = props.name
 
     console.log("accomodations is set up", props.accomDetails);
-    const lat = props.accomDetails.lat
-    const lon = props.accomDetails.lon
+    const lat = props.accomDetails.lat;
+    const lon = props.accomDetails.lon;
     // console.log(lat)
     // console.log(lon)
 
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + '-' + dd;
+    today = yyyy + "-" + mm + "-" + dd;
     // console.log(today)
 
-    const getHotelInfo = async (name) => {
-      const options = {
-        method: 'GET',
-        url: 'https://hotels-com-provider.p.rapidapi.com/v1/hotels/nearby',
-        params: {
-          latitude: lat,
-          currency: 'USD',
-          longitude: lon,
-          checkout_date: '2022-12-27',
-          sort_order: 'STAR_RATING_HIGHEST_FIRST',
-          checkin_date: '2022-12-26',
-          adults_number: '1',
-          locale: 'en_US'
-        },
-        headers: {
-          'X-RapidAPI-Key': '16ee8e4bfbmsh5e491b63623df36p1a152fjsn83b106a1dc4b',
-          'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
-        }
-      };
-      await axios
-        .request(options)
-        .then(function (response) {
-          console.log(response.data);
-          console.log(name);
-          let hotelsReturned = response.data.searchResults.results
-          for (let hotel of hotelsReturned) {
-            let hotelName = hotel.name
-            let hotelAddress = hotel.address.streetAddress
-            let hotelStars = hotel.guestReviews.rating
-            let thumbnail = hotel.optimizedThumbUrls.srpDesktop
-            console.log(thumbnail)
-            hotels.value.push([hotelName, hotelAddress, hotelStars, thumbnail])
-          }
-          // let apiData = response.data.sr;
-          // for (let idx in apiData) {
-            // console.log(apiData[idx])
-            // let result = apiData[idx];
-            // if (result.type == "HOTEL") {
-              // let hotelName = result.regionNames.primaryDisplayName;
-              // let hotelAddress = result.hotelAddress.street;
-              // hotels.value.push([hotelName, hotelAddress]);
-            // }
-          // }
-        })
-        .catch(function (error) {
-          console.log(error.response.data.detail[0]);
-        });
-    };
+    watch(
+      () => props.accomDetails,
+      () => {
+        console.log("LIST IS CHANGINGGGG");
+        hotels.value = [];
+        console.log("new accomdetails is ", props.accomDetails);
+        getHotelInfo(props.accomDetails.name, lat, lon);
+      }
+    );
 
-    getHotelInfo(props.accomDetails.name);
+    // const getHotelInfo = async (name) => {
+    //   const options = {
+    //     method: "GET",
+    //     url: "https://hotels-com-provider.p.rapidapi.com/v1/hotels/nearby",
+    //     params: {
+    //       latitude: lat,
+    //       currency: "USD",
+    //       longitude: lon,
+    //       checkout_date: "2022-12-27",
+    //       sort_order: "STAR_RATING_HIGHEST_FIRST",
+    //       checkin_date: "2022-12-26",
+    //       adults_number: "1",
+    //       locale: "en_US",
+    //     },
+    //     headers: {
+    //       "X-RapidAPI-Key":
+    //         "16ee8e4bfbmsh5e491b63623df36p1a152fjsn83b106a1dc4b",
+    //       "X-RapidAPI-Host": "hotels-com-provider.p.rapidapi.com",
+    //     },
+    //   };
+    //   await axios
+    //     .request(options)
+    //     .then(function (response) {
+    //       console.log(response.data);
+    //       console.log(name);
+    //       let hotelsReturned = response.data.searchResults.results;
+    //       for (let hotel of hotelsReturned) {
+    //         let hotelName = hotel.name;
+    //         let hotelAddress = hotel.address.streetAddress;
+    //         let hotelStars = hotel.guestReviews.rating;
+    //         let thumbnail = hotel.optimizedThumbUrls.srpDesktop;
+    //         console.log(thumbnail);
+    //         hotels.value.push([hotelName, hotelAddress, hotelStars, thumbnail]);
+    //       }
+    //       // let apiData = response.data.sr;
+    //       // for (let idx in apiData) {
+    //       // console.log(apiData[idx])
+    //       // let result = apiData[idx];
+    //       // if (result.type == "HOTEL") {
+    //       // let hotelName = result.regionNames.primaryDisplayName;
+    //       // let hotelAddress = result.hotelAddress.street;
+    //       // hotels.value.push([hotelName, hotelAddress]);
+    //       // }
+    //       // }
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error.response.data.detail[0]);
+    //     });
+    // };
+    const { getHotelInfo, hotels } = getAccomodation();
+
+    getHotelInfo(props.accomDetails.name, lat, lon);
     // getHotelInfo();
     // for (hotel in hotels) {
 
     // }
     // getHotelPics();
 
-    return { features, hotels };
+    return { hotels };
   },
 };
 </script>

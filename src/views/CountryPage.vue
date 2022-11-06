@@ -19,6 +19,23 @@
           </div>
         </div>
         <div>
+          <h1>{{ countryName }}</h1>
+          <hr />
+          <!-- <span>Information of prop is {{ props }}</span> -->
+          <!-- <p>{{ countryDetails.latlng }}</p> -->
+          <!-- <h3>Country Information</h3> -->
+          <!-- {{ countryDetails }} -->
+          <p>Capital: {{ countryDetails.capital }}</p>
+          <hr />
+          <p>Population: {{ countryDetails.population }}</p>
+          <hr />
+          <p>Translations: {{ countryDetails.translations }}</p>
+          <hr />
+          <p>Currencies: {{ countryDetails.currencies }}</p>
+          <hr />
+          <p>Area: {{ countryDetails.area }}</p>
+          <hr />
+          <p>LatLong : {{ countryDetails.latlng }}</p>
           <button
             v-if="user"
             data-bs-toggle="modal"
@@ -27,14 +44,6 @@
           >
             Add to Your Trips
           </button>
-          <h1>{{ countryName }}</h1>
-          {{ countryDetails }}
-          <!-- <span>Information of prop is {{ props }}</span> -->
-          <!-- <p>{{ countryDetails.latlng }}</p> -->
-          <!-- <h3>Country Information</h3> -->
-          <!-- {{ countryDetails }} -->
-          <p>Capital: {{ countryDetails.capital }}</p>
-          <p>Population: {{ countryDetails.population }}</p>
         </div>
       </div>
     </section>
@@ -144,8 +153,13 @@ export default {
     const pageNumber = ref(0);
 
     //get country destinations
-    const { loadCountryDestination, countryError, countryDestinations } =
-      getDestination();
+    const {
+      loadCountryDestination,
+      countryError,
+      countryDestinations,
+      firstDestination,
+    } = getDestination();
+
     loadCountryDestination(
       countryDetails.value.latlng["0"],
       countryDetails.value.latlng["1"],
@@ -174,11 +188,14 @@ export default {
     const getAccom = ref(false);
 
     const getSelection = (arg) => {
+      getAccom.value = false;
       selectedInfo.value = arg;
       console.log("ITS HEREEEEEEEE", selectedInfo.value);
       // console.log("name is, ", typeof selectedInfo.value.name);
       getAccom.value = true;
     };
+
+    // accomodation information
 
     return {
       getAccom,
@@ -193,6 +210,7 @@ export default {
       imageLoading,
       returnURl,
       addNewTrip,
+      firstDestination,
     };
   },
 };
