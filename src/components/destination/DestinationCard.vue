@@ -2,9 +2,20 @@
   <div
     @click="selectDestination"
     class="card"
-    style="height: 100%"
+    style="height: 100%; width: 100%"
     :style="isClicked ? { 'background-color': '#e6e6e6' } : null"
   >
+    <div class="float-end">
+      <button
+        v-if="user"
+        data-bs-toggle="modal"
+        data-bs-target="#TripModal"
+        type="button"
+        class="btn btn-info float-end"
+      >
+        Add to Trip
+      </button>
+    </div>
     <img
       v-if="imageLoading"
       :src="returnURl"
@@ -43,11 +54,15 @@
 import { ref } from "vue";
 import getDestinationInfo from "../../composables/destination/getDestinationInfo";
 import getPlacePhoto from "../../composables/image/getPhotos";
+import getUser from "../../composables/getUser";
 
 export default {
   props: { details: Object },
   emits: ["selected"],
   setup(props, context) {
+    const { user } = getUser();
+    console.log("destination user is", user);
+
     const { loadText, error, info } = getDestinationInfo();
     loadText(props.details.properties.xid);
 
@@ -59,14 +74,21 @@ export default {
         name: props.details.properties.name,
         // text: info.value,
         lon: props.details.geometry.coordinates[0],
-        lat: props.details.geometry.coordinates[1]
+        lat: props.details.geometry.coordinates[1],
       });
     };
 
     const { imageLoading, returnURl, load } = getPlacePhoto();
     load(props.details.properties.name);
 
-    return { selectDestination, info, isClicked, imageLoading, returnURl };
+    return {
+      selectDestination,
+      info,
+      isClicked,
+      imageLoading,
+      returnURl,
+      user,
+    };
   },
 };
 </script>
