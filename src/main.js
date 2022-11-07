@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+
 let app;
 
 const auth = getAuth();

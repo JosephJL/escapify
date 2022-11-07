@@ -28,7 +28,7 @@
             Add to Your Trips
           </button>
           <h1>{{ countryName }}</h1>
-          {{ countryDetails }}
+          <!-- {{ countryDetails }} -->
           <!-- <span>Information of prop is {{ props }}</span> -->
           <!-- <p>{{ countryDetails.latlng }}</p> -->
           <!-- <h3>Country Information</h3> -->
@@ -38,6 +38,9 @@
         </div>
       </div>
     </section>
+
+    <!-- datepicker -->
+
     <section class="destinations">
       <div class="row">
         <div class="col-md-4 order-md-first col-12 order-last order-md-first">
