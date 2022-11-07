@@ -47,6 +47,7 @@
         </div>
       </div>
     </section>
+    <section></section>
     <section class="destinations">
       <div class="row">
         <div class="col-md-4 order-md-first col-12 order-md-first">
@@ -59,7 +60,7 @@
             :countryDetails="countryPacket"
           />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 col-12">
           <!-- {{ selectedInfo }} -->
           <h2 class="bg-info">Hotels / Accomodation</h2>
           <div v-if="getAccom">
@@ -146,6 +147,7 @@
 </style>
 
 <script>
+import { Loader } from "@googlemaps/js-api-loader";
 import { onMounted, ref, toRefs } from "vue";
 import axios from "axios";
 import AccommodationList from "../components/accommodation/AccommodationList.vue";

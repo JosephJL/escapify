@@ -9,10 +9,18 @@
           alt="image here"
           style="height: 10rem; object-fit: cover"
         />
-        <div v-else class="d-flex" style="height: 18rem">
-          <div class="spinner-border mx-auto align-self-center" role="status">
+        <div v-else class="d-flex" style="height: 10rem; width: 100%">
+          <div
+            class="spinner-grow text-light mx-auto align-self-center"
+            role="status"
+          >
             <span class="visually-hidden">Loading...</span>
           </div>
+          <!-- <img
+          src="https://img.icons8.com/ios/50/null/beach.png"
+          class="card-img-top rounded"
+          alt="image here"
+        /> -->
         </div>
       </div>
       <div class="col">

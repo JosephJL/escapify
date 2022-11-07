@@ -12,21 +12,21 @@
         style="height: 10rem; object-fit: cover"
       />
       <div v-else class="d-flex" style="height: 10rem; width: 100%">
-        <!-- <div
+        <div
           class="spinner-grow text-light mx-auto align-self-center"
           role="status"
         >
           <span class="visually-hidden">Loading...</span>
-        </div> -->
-        <img
+        </div>
+        <!-- <img
           src="https://img.icons8.com/ios/50/null/beach.png"
           class="card-img-top rounded"
           alt="image here"
-        />
+        /> -->
       </div>
       <h5 class="card-title">Name:{{ details.properties.name }}</h5>
       <p id="infoSection" v-if="info">{{ info }}</p>
-      <!-- {{ details }} -->
+      {{ details }}
       <template v-for="kind of details.properties.kinds.split(',')" :key="kind">
         <span class="bg-warning rounded-5 m-2">
           {{ kind }}

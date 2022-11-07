@@ -24,7 +24,7 @@ const getDestination = () => {
           limit: 500,
         },
         headers: {
-          "X-RapidAPI-Key": "42e5228046msh886bb3b8f9a3386p188235jsnbb3a9adaa7af",
+          "X-RapidAPI-Key": "ebb63e55dbmsh3ad80d937f149c5p1a8017jsn5f78631fdcc1",
           "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
         },
       };

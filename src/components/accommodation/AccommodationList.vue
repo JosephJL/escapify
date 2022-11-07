@@ -60,14 +60,12 @@ export default {
   props: { accomDetails: Object, countryDetails: Object },
   emits: ["modalInfo"],
   setup(props, context) {
-    const features = ref([]);
+ 
     // const hotels = ref([]);
     // console.log(props)
     // let country = props.name
-
     console.log("accomodations is set up", props.accomDetails);
-    const lat = props.accomDetails.lat;
-    const lon = props.accomDetails.lon;
+
     // console.log(lat)
     // console.log(lon)
 
@@ -84,13 +82,13 @@ export default {
         console.log("LIST IS CHANGINGGGG");
         hotels.value = [];
         console.log("new accomdetails is ", props.accomDetails);
-        getHotelInfo(props.accomDetails.name, lat, lon);
+        getHotelInfo(props.accomDetails.name, props.accomDetails.lat, props.accomDetails.lon);
       }
     );
 
     const { getHotelInfo, hotels } = getAccomodation();
 
-    getHotelInfo(props.accomDetails.name, lat, lon);
+    getHotelInfo(props.accomDetails.name, props.accomDetails.lat, props.accomDetails.lon);
 
     const getModalInfo = (arg) => {
       console.log("da modal info here!!", arg);
