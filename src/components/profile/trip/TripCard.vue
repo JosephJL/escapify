@@ -80,16 +80,16 @@ export default {
     const { user } = getUser();
     const { documents, error, loadNestedCollection } = queryNestedCollection();
 
-    const userId = JSON.parse(JSON.stringify(user.value)).uid;
+    const userId = user.value.uid;
     loadNestedCollection("trips", "destinations", tripId.value, userId);
 
     const { hotels, hotelError, loadHotelsCollection } = queryHotels();
 
     loadHotelsCollection(tripId.value, userId);
 
-    const getCountry = (countryName) => {
-      router.push({ name: "Country", params: { name: countryName } });
-    };
+    // const getCountry = (countryName) => {
+    //   router.push({ name: "Country", params: { name: countryName } });
+    // };
 
     const { imageLoading, returnURl, load } = getPlacePhotos();
     load(props.details[1].name);
