@@ -32,6 +32,7 @@ const queryNestedCollectionById = () => {
       // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
       documents.value.push([doc.id,doc.data()]);
+      console.log("documents are",documents.value)
     });
   };
 

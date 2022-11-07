@@ -55,6 +55,7 @@
             @selectedFromList="getSelection"
             :list="countryDestinations"
             :page="pageNumber"
+            :countryDetails="countryPacket"
           />
         </div>
         <div class="col-md-8">
@@ -64,17 +65,13 @@
             <!-- {{getAccom}} -->
             <AccommodationList :accomDetails="selectedInfo" />
           </div>
-          <div v-else>
+          <div v-if="firstDestination">
             <!-- {{ firstDestination }} -->
             <AccommodationList :accomDetails="firstDestination" />
           </div>
         </div>
       </div>
     </section>
-    <section>Country Information</section>
-    <section class="destinations"></section>
-
-    <section class="hotelSection"></section>
   </div>
 
   <Teleport to="body">
@@ -173,8 +170,19 @@ export default {
       countryName.value = countryDetails.value.name;
       load(countryDetails.value.capital);
     }
-
     console.log(countryDetails.value.latlng["0"]);
+
+    // countrypacket for destinationcard
+    const countryPacket = ref({
+      capital: countryDetails.value.capital,
+      countryName: countryName.value,
+      latlng: [
+        countryDetails.value.latlng["0"],
+        countryDetails.value.latlng["1"],
+      ],
+    });
+
+    console.log("BEGIN COUNTRYPACKET HERE", countryPacket.value);
 
     const { addDocument, error } = useCollection();
 
@@ -206,7 +214,7 @@ export default {
         userId: user.value.uid,
       });
       if (error.value == null) {
-        alert("Country added to trips!");
+        alert(`You're one step closer to ${countryName.value}!`);
       } else alert(error.value);
     };
 
@@ -227,6 +235,7 @@ export default {
     // accomodation information
 
     return {
+      countryPacket,
       getAccom,
       getSelection,
       selectedInfo,

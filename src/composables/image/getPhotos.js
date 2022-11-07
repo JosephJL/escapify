@@ -23,16 +23,16 @@ const getPlacePhoto = () => {
     await axios(config).then((response) => {
       // console.log("response is",response.data);
       const candidates = response.data.candidates;
-      console.log("results are ",response.data.candidates,"for placename ",placeName)
+      // console.log("results are ",response.data.candidates,"for placename ",placeName)
       const candidate = candidates[0];
-      console.log("candidate photos are,", candidate.photos,"for placename ",placeName);
+      // console.log("candidate photos are,", candidate.photos,"for placename ",placeName);
       if (typeof(candidate.photos) != "undefined"){
         photoRef.value = candidate.photos[0].photo_reference;
       }else{
          //random digit for placeholder
         let random = Math.floor(Math.random() * 4);
         returnURl.value = images[random];
-        console.log("THERES NO PIC SO HERES SUM PLACEHOLDAR",returnURl.value,"random value was",random)
+        // console.log("THERES NO PIC SO HERES SUM PLACEHOLDAR",returnURl.value,"random value was",random)
       }
     });
 

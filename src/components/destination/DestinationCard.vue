@@ -41,12 +41,15 @@
           data-bs-target="#TripModal"
           type="button"
           class="btn btn-outline-success"
+          @click="toggleModal"
         >
           Add to Trip
         </button>
       </div>
     </div>
   </div>
+
+  <TripModal :currDestination="details" :countryDetails="countryPacket" />
 </template>
 
 <style scoped>
@@ -70,13 +73,15 @@ import { ref } from "vue";
 import getDestinationInfo from "../../composables/destination/getDestinationInfo";
 import getPlacePhoto from "../../composables/image/getPhotos";
 import getUser from "../../composables/getUser";
+import TripModal from "../../components/profile/trip/TripModal.vue";
 
 export default {
-  props: { details: Object },
+  components: { TripModal },
+  props: { details: Object, countryPacket: Object },
   emits: ["selected"],
   setup(props, context) {
     const { user } = getUser();
-    console.log("destination user is", user);
+    // console.log("destination user is", user);
 
     const { loadText, error, info } = getDestinationInfo();
     loadText(props.details.properties.xid);
