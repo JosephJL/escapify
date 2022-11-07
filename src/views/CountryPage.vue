@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid bg-white">
     <section>
       <div class="card card-body container-fluid bg-light border-0">
         <!-- <h1>Country Name here {{ name }}</h1> -->
@@ -29,13 +29,13 @@
           <hr />
           <p>Population: {{ countryDetails.population }}</p>
           <hr />
-          <p>Translations: {{ countryDetails.translations }}</p>
+          <!-- <p>Translations: {{ countryDetails.translations }}</p> -->
           <hr />
           <p>Currencies: {{ countryDetails.currencies }}</p>
           <hr />
           <p>Area: {{ countryDetails.area }}</p>
           <hr />
-          <p>LatLong : {{ countryDetails.latlng }}</p>
+          <!-- <p>LatLong : {{ countryDetails.latlng }}</p> -->
           <button
             v-if="user"
             data-bs-toggle="modal"
@@ -44,13 +44,24 @@
           >
             Create Trip
           </button>
+          <hr>
         </div>
       </div>
     </section>
+
+    <!-- datepicker -->
+    <section>
+      <div>
+        Check-in Date: <DatePicker :readonly="true" format="MMM/D/YYYY" width="300px" name="date" value="help"></DatePicker>
+        Check-out Date: <DatePicker :readonly="true" format="MMM/D/YYYY" width="300px" name="date" value="me pls"></DatePicker>
+      </div>
+      <hr>
+    </section>
+
     <section class="destinations">
       <div class="row">
         <div class="col-md-4 order-md-first col-12 order-md-first">
-          <h2 class="bg-warning">Destinations</h2>
+          <h2 class="">Destinations</h2>
           <DestinationList
             @selectedFromList="getSelection"
             @modalInfo="updateDestInfo"
@@ -61,23 +72,23 @@
         </div>
         <div class="col-md-8">
           <!-- {{ selectedInfo }} -->
-          <h2 class="bg-info">Hotels / Accomodation</h2>
-          <div v-if="getAccom">
+          <h2 class="bg-white">Hotels and Accomodation</h2>
+          <span v-if="getAccom">
             <!-- {{getAccom}} -->
             <AccommodationList
               @modalInfo="updateAccomInfo"
               :accomDetails="selectedInfo"
               :countryDetails="countryPacket"
             />
-          </div>
-          <div v-else>
+          </span>
+          <span v-else>
             <!-- {{ firstDestination }} -->
             <AccommodationList
               @modalInfo="updateAccomInfo"
               :accomDetails="firstDestination"
               :countryDetails="countryPacket"
             />
-          </div>
+          </span>
         </div>
       </div>
     </section>
@@ -154,6 +165,7 @@ import getDestination from "../composables/destination/getDestination.js";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 import { useRouter } from "vue-router";
 import TripModal from "../components/profile/trip/TripModal.vue";
+import DatePicker from "../components/datepicker/DatePicker.vue"
 
 // Current user
 import getUser from "../composables/getUser";
@@ -162,7 +174,7 @@ import getUser from "../composables/getUser";
 import useCollection from "../composables/collection/useCollection";
 
 export default {
-  components: { AccommodationList, DestinationList, TripModal },
+  components: { AccommodationList, DestinationList, TripModal, DatePicker},
   props: {
     details: String,
   },

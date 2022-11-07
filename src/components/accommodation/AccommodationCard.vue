@@ -26,7 +26,7 @@
           data-bs-toggle="modal"
           data-bs-target="#TripModal"
           type="button"
-          class="btn btn-outline-success"
+          class="btn btn-success"
           @click.prevent="toggleModal"
         >
           Add to Trip
@@ -34,6 +34,7 @@
       </div>
     </div>
   </div>
+  <hr style="border-bottom: 0px">
 </template>
 
 <style scoped>
