@@ -21,10 +21,10 @@ const getDestinationInfo = () => {
           .then(function (response) {
             // console.log(response.data.image);
             // var image = response.data.image;
-            console.log(
-              "Check if wikipedia exists",
-              typeof(response.data.wikipedia_extracts) != 'undefined'
-            );
+            // console.log(
+            //   "Check if wikipedia exists",
+            //   typeof(response.data.wikipedia_extracts) != 'undefined'
+            // );
             if (typeof(response.data.wikipedia_extracts) != 'undefined') {
             //   info.value = [response.data.wikipedia_extracts.text,""];
             info.value = response.data.wikipedia_extracts.text

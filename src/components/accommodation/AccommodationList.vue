@@ -12,7 +12,12 @@
 
     <div class="list-group overflow-auto">
       <template v-for="hotel in hotels" :key="hotel">
-        <AccommodationCard class="list-group-item" :details="hotel" />
+        <AccommodationCard
+          class="list-group-item"
+          :details="hotel"
+          :countryPacket="countryDetails"
+          @modalInfo="getModalInfo"
+        />
       </template>
     </div>
   </div>
@@ -52,8 +57,9 @@ import getAccomodation from "../../composables/accommodation/getAccomodation.js"
 
 export default {
   components: { AccommodationCard },
-  props: { accomDetails: Object },
-  setup(props) {
+  props: { accomDetails: Object, countryDetails: Object },
+  emits: ["modalInfo"],
+  setup(props, context) {
     const features = ref([]);
     // const hotels = ref([]);
     // console.log(props)
@@ -86,7 +92,12 @@ export default {
 
     getHotelInfo(props.accomDetails.name, lat, lon);
 
-    return { hotels };
+    const getModalInfo = (arg) => {
+      console.log("da modal info here!!", arg);
+      context.emit("modalInfo", arg);
+    };
+
+    return { hotels, getModalInfo };
   },
 };
 </script>

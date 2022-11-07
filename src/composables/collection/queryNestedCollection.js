@@ -20,20 +20,28 @@ const queryNestedCollectionById = () => {
     console.log("db is ", db);
 
     // let collectionRef = collection(db, collectionName)
-
     const q = query(
       collection(db, collectionName, tripId , nestedCollectionName),
-      where("userId", "==", userId)
+      // where("userId", "==", userId)
     );
+    // const querySnapshot = await getDocs(q);
 
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-      documents.value.push([doc.id,doc.data()]);
-      console.log("documents are",documents.value)
+    onSnapshot(q, (querySnapshot) => {
+      const destinations = [];
+      documents.value = [];
+      querySnapshot.forEach((doc) => {
+          destinations.push(doc.data());
+          documents.value.push([doc.id,doc.data()]);
+      });
+      console.log("Current documents: ", destinations.join(", "));
     });
+
+    // querySnapshot.forEach((doc) => {
+    //   // doc.data() is never undefined for query doc snapshots
+    //   // console.log(doc.id, " => ", doc.data());
+    //   documents.value.push([doc.id,doc.data()]);
+    //   console.log("documents are",documents.value)
+    // });
   };
 
   return { documents, error, loadNestedCollection };
