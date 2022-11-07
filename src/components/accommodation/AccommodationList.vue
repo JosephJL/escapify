@@ -10,7 +10,12 @@
       </template>
     </div> -->
 
-    <div class="list-group overflow-auto">
+    <div class="list-group overflow-auto bg-info">
+      <div style="position:sticky;">
+        <h4>Selected Destination: </h4>
+        <h5>{{destinationName}}</h5>
+      </div>
+      <hr>
       <template v-for="hotel in hotels" :key="hotel">
         <AccommodationCard
           class="list-group-item"
@@ -65,7 +70,10 @@ export default {
     // console.log(props)
     // let country = props.name
     console.log("accomodations is set up", props.accomDetails);
-
+    const destinationName = props.accomDetails.name;
+    // console.log("HELLO NAME IS ", name)
+    const lat = props.accomDetails.lat;
+    const lon = props.accomDetails.lon;
     // console.log(lat)
     // console.log(lon)
 
@@ -82,20 +90,20 @@ export default {
         console.log("LIST IS CHANGINGGGG");
         hotels.value = [];
         console.log("new accomdetails is ", props.accomDetails);
-        getHotelInfo(props.accomDetails.name, props.accomDetails.lat, props.accomDetails.lon);
+        getHotelInfo(destinationName, lat, lon);
       }
     );
 
     const { getHotelInfo, hotels } = getAccomodation();
 
-    getHotelInfo(props.accomDetails.name, props.accomDetails.lat, props.accomDetails.lon);
+    getHotelInfo(destinationName, lat, lon);
 
     const getModalInfo = (arg) => {
       console.log("da modal info here!!", arg);
       context.emit("modalInfo", arg);
     };
 
-    return { hotels, getModalInfo };
+    return { hotels, getModalInfo, destinationName };
   },
 };
 </script>

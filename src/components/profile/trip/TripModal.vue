@@ -28,7 +28,7 @@
                 type="text"
                 class="form-control"
                 v-model="tripName"
-                placeholder="Add new trip here!"
+                placeholder="Create a new trip!"
                 aria-describedby="button-addon2"
               />
               <button

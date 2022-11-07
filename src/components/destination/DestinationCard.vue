@@ -24,14 +24,17 @@
           alt="image here"
         /> -->
       </div>
-      <h5 class="card-title">Name:{{ details.properties.name }}</h5>
+      <h5 class="card-title"> <strong>Name: </strong>{{ details.properties.name }}</h5>
       <p id="infoSection" v-if="info">{{ info }}</p>
-      {{ details }}
-      <template v-for="kind of details.properties.kinds.split(',')" :key="kind">
-        <span class="bg-warning rounded-5 m-2">
+      <!-- {{ details }} -->
+      <div>
+        <strong>Tags:</strong> <template v-for="kind of details.properties.kinds.split(',')" :key="kind">
+        <span class="badge badge-pill badge-warning bg-warning m-1">
           {{ kind }}
         </span>
       </template>
+      </div>
+     
       <div class="">
         <button
           type="button"
@@ -53,6 +56,7 @@
       </div>
     </div>
   </div>
+  <hr>
 </template>
 
 <style scoped>
