@@ -40,16 +40,17 @@
             v-if="user"
             data-bs-toggle="modal"
             data-bs-target="#TripForm"
-            class="btn btn-info float-end"
+            class="btn btn-info"
           >
-            Add to Your Trips
+            Create Trip
           </button>
         </div>
       </div>
     </section>
     <section class="destinations">
       <div class="row">
-        <div class="col-md-4 order-md-first col-12 order-last order-md-first">
+        <div class="col-md-4 order-md-first col-12 order-md-first">
+          <h2 class="bg-warning">Destinations</h2>
           <DestinationList
             @selectedFromList="getSelection"
             :list="countryDestinations"
@@ -57,9 +58,15 @@
           />
         </div>
         <div class="col-md-8">
-          {{ selectedInfo }}
+          <!-- {{ selectedInfo }} -->
+          <h2 class="bg-info">Hotels / Accomodation</h2>
           <div v-if="getAccom">
-            {{ getAccom }}<AccommodationList :accomDetails="selectedInfo" />
+            <!-- {{getAccom}} -->
+            <AccommodationList :accomDetails="selectedInfo" />
+          </div>
+          <div v-else>
+            <!-- {{ firstDestination }} -->
+            <AccommodationList :accomDetails="firstDestination" />
           </div>
         </div>
       </div>
@@ -80,29 +87,52 @@
     >
       <div class="modal-dialog">
         <div class="modal-content card card-body">
-          <h2>Name your new trip!</h2>
-          <input
-            type="text"
-            v-model="tripName"
-            class="form-control"
-            id="newTrip"
-            style="cursor: pointer"
-          />
-          {{ tripName }}
-          <button
-            @click="addNewTrip"
-            data-bs-dismiss="modal"
-            class="btn btn-primary"
+          <h2>Lets Get Started!</h2>
+          <div class="input-group mt-2">
+            <input
+              type="text"
+              class="form-control"
+              v-model="tripName"
+              placeholder="Enter Trip Name Here!"
+              aria-describedby="button-addon2"
+            />
+            <button
+              @click="addNewTrip"
+              data-bs-dismiss="modal"
+              class="btn btn-outline-secondary"
+              type="button"
+              id="button-addon2"
+            >
+              Done
+            </button>
+          </div>
+          <label class="form-text"
+            >Can't wait to see where you're going next!</label
           >
-            Submit
-          </button>
         </div>
       </div>
     </div>
   </Teleport>
 </template>
 
-<style scoped></style>
+<style scoped>
+.modal {
+  text-align: center;
+  padding: 0 !important;
+}
+.modal:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+</style>
 
 <script>
 import { onMounted, ref, toRefs } from "vue";
@@ -133,8 +163,8 @@ export default {
     const countryDetails = ref(JSON.parse(props.details));
     const countryName = ref(null);
 
+    // load main image
     const { imageLoading, returnURl, load } = getPlacePhoto();
-
     if (typeof countryDetails.value.name == "object") {
       countryDetails.value.name.official;
       countryName.value = countryDetails.value.name.official;

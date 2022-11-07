@@ -6,17 +6,13 @@
   <div id="dest2">Destination 2:</div>
   <div id="dest3">Destination 3:</div> -->
   <div>
-    <h2>Check it out!</h2>
     <!-- <p>Destination is</p> -->
-    <div id="destinationList" class="overflow-auto">
+    <div id="destinationList" class="overflow-auto mt-5">
       <div v-for="(destination, index) in list[page]" :key="index">
         <DestinationCard @selected="getSelection" :details="destination" />
       </div>
     </div>
   </div>
-
-  <img id="display" src="" alt="" />
-  <div id="info"></div>
 </template>
 
 <style scoped>
