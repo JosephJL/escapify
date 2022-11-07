@@ -56,8 +56,10 @@
           <h2 class="bg-warning">Destinations</h2>
           <DestinationList
             @selectedFromList="getSelection"
+            @modalInfo="updateDestInfo"
             :list="countryDestinations"
             :page="pageNumber"
+            :countryDetails="countryPacket"
           />
         </div>
         <div class="col-md-8">
@@ -65,19 +67,23 @@
           <h2 class="bg-info">Hotels / Accomodation</h2>
           <div v-if="getAccom">
             <!-- {{getAccom}} -->
-            <AccommodationList :accomDetails="selectedInfo" />
+            <AccommodationList
+              @modalInfo="updateAccomInfo"
+              :accomDetails="selectedInfo"
+              :countryDetails="countryPacket"
+            />
           </div>
           <div v-else>
             <!-- {{ firstDestination }} -->
-            <AccommodationList :accomDetails="firstDestination" />
+            <AccommodationList
+              @modalInfo="updateAccomInfo"
+              :accomDetails="firstDestination"
+              :countryDetails="countryPacket"
+            />
           </div>
         </div>
       </div>
     </section>
-    <section>Country Information</section>
-    <section class="destinations"></section>
-
-    <section class="hotelSection"></section>
   </div>
 
   <Teleport to="body">
@@ -116,6 +122,11 @@
       </div>
     </div>
   </Teleport>
+  <TripModal
+    :currDestination="modalInfo"
+    :countryDetails="countryPacket"
+    :type="typeLocation"
+  />
 </template>
 
 <style scoped>
@@ -145,6 +156,7 @@ import DestinationList from "../components/destination/DestinationList.vue";
 import getDestination from "../composables/destination/getDestination.js";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 import { useRouter } from "vue-router";
+import TripModal from "../components/profile/trip/TripModal.vue";
 
 // Current user
 import getUser from "../composables/getUser";
@@ -153,7 +165,7 @@ import getUser from "../composables/getUser";
 import useCollection from "../composables/collection/useCollection";
 
 export default {
-  components: { AccommodationList, DestinationList },
+  components: { AccommodationList, DestinationList, TripModal },
   props: {
     details: String,
   },
@@ -174,10 +186,21 @@ export default {
       load(countryName.value);
     } else {
       countryName.value = countryDetails.value.name;
-      load(countryDetails.value.capital);
+      load(countryDetails.value.name);
     }
-
     console.log(countryDetails.value.latlng["0"]);
+
+    // countrypacket for destinationcard
+    const countryPacket = ref({
+      capital: countryDetails.value.capital,
+      countryName: countryName.value,
+      latlng: [
+        countryDetails.value.latlng["0"],
+        countryDetails.value.latlng["1"],
+      ],
+    });
+
+    console.log("BEGIN COUNTRYPACKET HERE", countryPacket.value);
 
     const { addDocument, error } = useCollection();
 
@@ -209,7 +232,7 @@ export default {
         userId: user.value.uid,
       });
       if (error.value == null) {
-        alert("Country added to trips!");
+        alert(`You're one step closer to ${countryName.value}!`);
       } else alert(error.value);
     };
 
@@ -227,9 +250,27 @@ export default {
       getAccom.value = true;
     };
 
-    // accomodation information
+    const modalInfo = ref(null);
+    const typeLocation = ref(null);
+    // modal info
+    const updateDestInfo = (arg) => {
+      // console.log("received at country", arg);
+      modalInfo.value = arg;
+      typeLocation.value = "destinations";
+    };
+
+    const updateAccomInfo = (arg) => {
+      // console.log("received at country", arg);
+      modalInfo.value = arg;
+      typeLocation.value = "hotels";
+    };
 
     return {
+      updateAccomInfo,
+      typeLocation,
+      modalInfo,
+      updateDestInfo,
+      countryPacket,
       getAccom,
       getSelection,
       selectedInfo,

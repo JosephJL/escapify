@@ -61,15 +61,13 @@ export default {
   components: { TripList, TripBadge },
   setup() {
     const { user } = getUser();
-    console.log("user is ,", JSON.parse(JSON.stringify(user.value)).uid);
+    console.log("user is ,", user.value.uid);
     const userId = JSON.parse(JSON.stringify(user.value)).uid;
     const { documents, error, loadCollection } = getCollectionById();
     loadCollection("trips", userId);
 
-    console.log("documents is", documents);
-    const menu = ref(null);
-
     //scroll functionality for current trips
+    const menu = ref(null);
     onMounted(() => {
       menu.value.focus();
       console.log("menu is ", menu);

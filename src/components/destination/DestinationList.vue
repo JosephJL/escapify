@@ -9,7 +9,12 @@
     <!-- <p>Destination is</p> -->
     <div id="destinationList" class="overflow-auto mt-5">
       <div v-for="(destination, index) in list[page]" :key="index">
-        <DestinationCard @selected="getSelection" :details="destination" />
+        <DestinationCard
+          @selected="getSelection"
+          @modalInfo="getModalInfo"
+          :details="destination"
+          :countryPacket="countryDetails"
+        />
       </div>
     </div>
   </div>
@@ -50,8 +55,8 @@ import DestinationCard from "../destination/DestinationCard.vue";
 
 export default {
   components: { DestinationCard },
-  props: { list: Object, page: Number },
-  emits: ["selectedFromList"],
+  props: { list: Object, page: Number, countryDetails: Object },
+  emits: ["selectedFromList", "modalInfo"],
   setup(props, context) {
     console.log("props list is", props.list);
     console.log("current page in country list is", props.page);
@@ -69,7 +74,18 @@ export default {
       });
     };
 
-    return { getSelection };
+    const getModalInfo = (arg) => {
+      // console.log("da modal info here!!");
+      console.log(arg.name);
+      console.log(arg.lat);
+      console.log(arg.lon);
+      console.log(arg.kinds);
+      console.log(arg.xid);
+
+      context.emit("modalInfo", arg);
+    };
+
+    return { getSelection, getModalInfo };
   },
 };
 </script>

@@ -12,12 +12,17 @@
         style="height: 10rem; object-fit: cover"
       />
       <div v-else class="d-flex" style="height: 10rem; width: 100%">
-        <div
+        <!-- <div
           class="spinner-grow text-light mx-auto align-self-center"
           role="status"
         >
           <span class="visually-hidden">Loading...</span>
-        </div>
+        </div> -->
+        <img
+          src="https://img.icons8.com/ios/50/null/beach.png"
+          class="card-img-top rounded"
+          alt="image here"
+        />
       </div>
       <h5 class="card-title">Name:{{ details.properties.name }}</h5>
       <p id="infoSection" v-if="info">{{ info }}</p>
@@ -31,9 +36,9 @@
         <button
           type="button"
           class="btn btn-outline-primary mx-2"
-          @click="selectDestination"
+          @click.prevent="selectDestination"
         >
-          Info
+          Nearby Hotels
         </button>
         <button
           v-if="user"
@@ -41,6 +46,7 @@
           data-bs-target="#TripModal"
           type="button"
           class="btn btn-outline-success"
+          @click.prevent="toggleModal"
         >
           Add to Trip
         </button>
@@ -70,13 +76,15 @@ import { ref } from "vue";
 import getDestinationInfo from "../../composables/destination/getDestinationInfo";
 import getPlacePhoto from "../../composables/image/getPhotos";
 import getUser from "../../composables/getUser";
+import TripModal from "../../components/profile/trip/TripModal.vue";
 
 export default {
-  props: { details: Object },
-  emits: ["selected"],
+  components: { TripModal },
+  props: { details: Object, countryPacket: Object },
+  emits: ["selected", "modalInfo"],
   setup(props, context) {
     const { user } = getUser();
-    console.log("destination user is", user);
+    // console.log("destination user is", user);
 
     const { loadText, error, info } = getDestinationInfo();
     loadText(props.details.properties.xid);
@@ -88,15 +96,30 @@ export default {
       context.emit("selected", {
         name: props.details.properties.name,
         // text: info.value,
-        lon: props.details.geometry.coordinates[0],
-        lat: props.details.geometry.coordinates[1],
+        lon: props.details.geometry.coordinates["0"],
+        lat: props.details.geometry.coordinates["1"],
       });
     };
 
     const { imageLoading, returnURl, load } = getPlacePhoto();
     load(props.details.properties.name);
 
+    const typeLocation = ref("destinations");
+
+    const toggleModal = () => {
+      // console.log("toggled!!");
+      context.emit("modalInfo", {
+        name: props.details.properties.name,
+        lon: props.details.geometry.coordinates["0"],
+        lat: props.details.geometry.coordinates["1"],
+        xid: props.details.properties.xid,
+        kinds: props.details.properties.kinds,
+      });
+    };
+
     return {
+      toggleModal,
+      typeLocation,
       selectDestination,
       info,
       isClicked,
