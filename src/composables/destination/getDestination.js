@@ -49,7 +49,7 @@ const getDestination = () => {
           console.log("total pages is", totalPages.value);
           console.log("countryDestinationData", countryDestinations.value)
           console.log("zerodude is ",countryDestinations.value[0])
-          firstDestination.value = countryDestinations.value[0]
+          firstDestination.value = {name: countryDestinations.value[0][0].properties.name,lat:countryDestinations.value[0][0].geometry.coordinates["1"],lon:countryDestinations.value[0][0].geometry.coordinates["0"]}
         })
         .catch((error) => {
           console.log(error.message);

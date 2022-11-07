@@ -1,37 +1,32 @@
 <template>
   <div id="destinationCard" class="card border-0" style="height: 100%">
     <!-- :style="isClicked ? { 'background-color': '#e6e6e6' } : null" -->
-    <img
-      v-if="imageLoading"
-      :src="returnURl"
-      id="destinationImage"
-      class="card-img-top rounded"
-      alt="image here"
-      style="height: 10rem; object-fit: cover"
-    />
-    <div v-else class="d-flex" style="height: 100%; width: 100%">
-      <div
-        class="spinner-grow text-light mx-auto align-self-center"
-        role="status"
-      >
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
 
     <div class="card-body" style="white-space: initial">
-      <!-- textExists is {{ textExists }} -->
-      <!-- {{ details }} -->
+      <img
+        v-if="imageLoading"
+        :src="returnURl"
+        id="destinationImage"
+        class="card-img-top rounded"
+        alt="image here"
+        style="height: 10rem; object-fit: cover"
+      />
+      <div v-else class="d-flex" style="height: 10rem; width: 100%">
+        <div
+          class="spinner-grow text-light mx-auto align-self-center"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
       <h5 class="card-title">Name:{{ details.properties.name }}</h5>
       <p id="infoSection" v-if="info">{{ info }}</p>
+      <!-- {{ details }} -->
       <template v-for="kind of details.properties.kinds.split(',')" :key="kind">
         <span class="bg-warning rounded-5 m-2">
           {{ kind }}
         </span>
       </template>
-      <!-- <p class="card-text">Details is {{ info }}</p> -->
-      <!-- <button @click="selectDestination" class="btn btn-info">
-        Go to Destination
-      </button> -->
       <div class="">
         <button
           type="button"
