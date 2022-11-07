@@ -7,6 +7,7 @@ const getDestination = () => {
     const countryDestinations = ref([])
     const countryError = ref(null)
     const totalPages = ref(null)
+    const firstDestination = ref(null)
 
     const loadCountryDestination = async(lat,long,area)=>{
     if(area < 1600){
@@ -48,13 +49,14 @@ const getDestination = () => {
           console.log("total pages is", totalPages.value);
           console.log("countryDestinationData", countryDestinations.value)
           console.log("zerodude is ",countryDestinations.value[0])
+          firstDestination.value = {name: countryDestinations.value[0][0].properties.name,lat:countryDestinations.value[0][0].geometry.coordinates["1"],lon:countryDestinations.value[0][0].geometry.coordinates["0"]}
         })
         .catch((error) => {
           console.log(error.message);
         });
     }
 
-        return {loadCountryDestination, countryError, countryDestinations}
+        return {loadCountryDestination, countryError, countryDestinations , firstDestination }
 }
 
 export default getDestination

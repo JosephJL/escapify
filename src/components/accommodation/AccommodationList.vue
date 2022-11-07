@@ -1,135 +1,92 @@
 <template>
-  <!-- <div> -->
-  <!-- <h1>This is accomodation list</h1> -->
-  <!-- <h1 class="mt-3 mb-2">Top Rated Hotels in Bangkok</h1> -->
-
-  <!-- Table for hotels -->
-  <!-- <table class="table table-striped table-secondary table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">S/N</th>
-          <th scope="col">Hotel Name</th>
-          <th scope="col">Picture</th>
-          <th scope="col">Hotel Address</th> -->
-  <!-- <th scope="col">Hotel Location</th> -->
-  <!-- </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(hotel, idx) in hotels" v-bind:key="idx">
-          <td>{{ idx + 1 }}</td>
-          <td>{{ hotel[0] }}</td>
-          <td>
-            <img
-              src="www.https://images.unsplash.com/photo-1595433707802-6b2626ef1c91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80"
-              class="card-img-top rounded"
-              alt="image here"
-            />
-          </td>
-          <td>{{ hotel[1] }}</td>
-        </tr>
-      </tbody>
-    </table> -->
-  <!-- </div> -->
-
-  <div class="container-fluid d-flex text-center bg-info mt-5 border-rounded">
+  <div
+    id="accommodationList"
+    class="container-fluid d-flex text-center bg-light mt-5 border-rounded"
+  >
     <!-- class horizontalScroll for horizontal -->
-    <div class="row">
-      <h1 class="text-light">Top Rated Accomodations around the Area</h1>
+    <!-- <div class="row">
       <template v-for="hotel in hotels" :key="hotel">
-        <AccommodationCard
-          class="col-xxl-2 col-xl-3 col-lg-4 col-md-6"
-          :details="hotel"
-        />
+        <AccommodationCard class="col" :details="hotel" />
+      </template>
+    </div> -->
+
+    <div class="list-group overflow-auto">
+      <template v-for="hotel in hotels" :key="hotel">
+        <AccommodationCard class="list-group-item" :details="hotel" />
       </template>
     </div>
   </div>
 </template>
 
+<style scoped>
+@media (min-width: 767px) {
+  #accommodationList {
+    height: 800px;
+  }
+}
+@media (max-width: 767px) {
+  #accommodationList {
+    height: 400px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
+}
+</style>
+
 <script>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import axios from "axios";
 // import getPlacePhoto from "../../composables/image/getPhotos.js";
 import AccommodationCard from "./AccommodationCard.vue";
-  
+import getAccomodation from "../../composables/accommodation/getAccomodation.js";
+
 export default {
   components: { AccommodationCard },
   props: { accomDetails: Object },
   setup(props) {
     const features = ref([]);
-    const hotels = ref([]);
+    // const hotels = ref([]);
     // console.log(props)
     // let country = props.name
 
     console.log("accomodations is set up", props.accomDetails);
-    const lat = props.accomDetails.lat
-    const lon = props.accomDetails.lon
+    const lat = props.accomDetails.lat;
+    const lon = props.accomDetails.lon;
     // console.log(lat)
     // console.log(lon)
 
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + '-' + dd;
+    today = yyyy + "-" + mm + "-" + dd;
     // console.log(today)
 
-    const getHotelInfo = async (name) => {
-      const options = {
-        method: 'GET',
-        url: 'https://hotels-com-provider.p.rapidapi.com/v1/hotels/nearby',
-        params: {
-          latitude: lat,
-          currency: 'USD',
-          longitude: lon,
-          checkout_date: '2022-12-27',
-          sort_order: 'STAR_RATING_HIGHEST_FIRST',
-          checkin_date: '2022-12-26',
-          adults_number: '1',
-          locale: 'en_US'
-        },
-        headers: {
-          'X-RapidAPI-Key': '16ee8e4bfbmsh5e491b63623df36p1a152fjsn83b106a1dc4b',
-          'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
-        }
-      };
-      await axios
-        .request(options)
-        .then(function (response) {
-          console.log(response.data);
-          console.log(name);
-          let hotelsReturned = response.data.searchResults.results
-          for (let hotel of hotelsReturned) {
-            let hotelName = hotel.name
-            let hotelAddress = hotel.address.streetAddress
-            let hotelStars = hotel.guestReviews.rating
-            let thumbnail = hotel.optimizedThumbUrls.srpDesktop
-            console.log(thumbnail)
-            hotels.value.push([hotelName, hotelAddress, hotelStars, thumbnail])
-          }
-          // let apiData = response.data.sr;
-          // for (let idx in apiData) {
-            // console.log(apiData[idx])
-            // let result = apiData[idx];
-            // if (result.type == "HOTEL") {
-              // let hotelName = result.regionNames.primaryDisplayName;
-              // let hotelAddress = result.hotelAddress.street;
-              // hotels.value.push([hotelName, hotelAddress]);
-            // }
-          // }
-        })
-        .catch(function (error) {
-          console.log(error.response.data.detail[0]);
-        });
-    };
+    watch(
+      () => props.accomDetails,
+      () => {
+        console.log("LIST IS CHANGINGGGG");
+        hotels.value = [];
+        console.log("new accomdetails is ", props.accomDetails);
+        getHotelInfo(props.accomDetails.name, lat, lon);
+      }
+    );
 
-    getHotelInfo(props.accomDetails.name);
-    // getHotelInfo();
-    // for (hotel in hotels) {
+    const { getHotelInfo, hotels } = getAccomodation();
 
-    // }
-    // getHotelPics();
+    getHotelInfo(props.accomDetails.name, lat, lon);
 
-    return { features, hotels };
+    return { hotels };
   },
 };
 </script>

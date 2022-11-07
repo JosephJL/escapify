@@ -1,6 +1,10 @@
 import axios from "axios";
 import { ref } from "vue";
 
+const images = ["https://firebasestorage.googleapis.com/v0/b/foodapp-2ef25.appspot.com/o/placeholder1.jpg?alt=media&token=015e9f13-1c32-41d8-8f7c-507e2fce563d","https://firebasestorage.googleapis.com/v0/b/foodapp-2ef25.appspot.com/o/placeholder2.jpg?alt=media&token=87d6fb5c-d4bf-4d2f-91a9-654450a080a1",
+"https://firebasestorage.googleapis.com/v0/b/foodapp-2ef25.appspot.com/o/placeholder3.jpg?alt=media&token=0f649ae0-e618-44a1-985e-f7e901f3e779","https://firebasestorage.googleapis.com/v0/b/foodapp-2ef25.appspot.com/o/placeholder4.jpg?alt=media&token=41eece76-c482-43ce-9e0a-c882f8fd5219"
+]
+ 
 const getPlacePhoto = () => {
   const photoRef = ref(null);
   const returnURl = ref(null);
@@ -19,22 +23,34 @@ const getPlacePhoto = () => {
     await axios(config).then((response) => {
       // console.log("response is",response.data);
       const candidates = response.data.candidates;
+      console.log("results are ",response.data.candidates,"for placename ",placeName)
       const candidate = candidates[0];
-      console.log("candidate photos are,", candidate.photos);
-      photoRef.value = candidate.photos[0].photo_reference;
+      console.log("candidate photos are,", candidate.photos,"for placename ",placeName);
+      if (typeof(candidate.photos) != "undefined"){
+        photoRef.value = candidate.photos[0].photo_reference;
+      }else{
+         //random digit for placeholder
+        let random = Math.floor(Math.random() * 4);
+        returnURl.value = images[random];
+        console.log("THERES NO PIC SO HERES SUM PLACEHOLDAR",returnURl.value,"random value was",random)
+      }
     });
 
     const photoUrl =
       proxyUrl +
       `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef.value}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&maxwidth=1000&maxheight=1000`;
 
-    if (photoRef.value != "undefined"){
+    if (photoRef.value != null){
       const imageURLQuery = await axios
       .get(photoUrl, { responseType: "blob" })
       .then((response) => response.data);
     // console.log("queried image is ", imageURLQuery);
     returnURl.value = URL.createObjectURL(imageURLQuery);
     imageLoading.value = true;
+    }else{
+      setTimeout(()=>{
+        imageLoading.value = true;
+      },1500)
     }
   };
 
