@@ -30,8 +30,20 @@
     display: flex;
     overflow-y: auto;
     white-space: nowrap;
-    height: 200px;
+    height: 100%;
   }
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
 }
 </style>
 
@@ -52,12 +64,12 @@ export default {
       console.log("selection is made!!!!!!!");
       console.log(arg.name);
       console.log(arg.lat);
-      console.log(arg.lon)
+      console.log(arg.lon);
 
       context.emit("selectedFromList", {
         name: arg.name,
         lat: arg.lat,
-        lon: arg.lon
+        lon: arg.lon,
       });
     };
 

@@ -40,10 +40,10 @@ export default {
 
     console.log("id is", props.id);
 
-    // const { imageLoading, returnURl, load } = getPlacePhoto();
-    // load(props.details[1].name);
+    const { imageLoading, returnURl, load } = getPlacePhoto();
+    load(props.details[1].name);
 
-    return { imageLoading, returnURl, load };
+    return { imageLoading, returnURl };
   },
 };
 </script>
