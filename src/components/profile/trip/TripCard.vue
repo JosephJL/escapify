@@ -1,6 +1,7 @@
 <template>
-  <div class="card border-0 container">
+  <div class="card border-0 container-fluid">
     <div class="card-body bg-light align-items-start">
+      <!-- Trip Name -->
       <div class="align-self-center">
         <div class="card bg-transparent border-0">
           <img
@@ -24,12 +25,17 @@
           </div>
         </div>
       </div>
+
+      <!-- Destination/Hotels Section -->
       <div class="row">
-        <div class="col-sm-12 col-lg-6">
+        <div class="">
           <p>Destinations Planned</p>
           <DestinationList :list="documents" :id="tripId" />
         </div>
-        <div class="col-sm-12 col-lg-6">
+      </div>
+
+      <div class="row">
+        <div class="">
           <p>Hotels Planned</p>
           <HotelList :list="hotels" :id="tripId" />
         </div>
@@ -42,6 +48,13 @@
 img {
   object-fit: cover;
   height: 18rem;
+}
+
+#listScroll {
+  display: flex;
+  overflow-y: auto;
+  white-space: nowrap;
+  cursor: grab;
 }
 </style>
 

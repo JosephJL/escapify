@@ -57,7 +57,6 @@
           />
         </div>
         <div class="col-md-8">
-          <div>Dummy Destination Section</div>
           {{ selectedInfo }}
           <div v-if="getAccom">
             {{ getAccom }}<AccommodationList :accomDetails="selectedInfo" />

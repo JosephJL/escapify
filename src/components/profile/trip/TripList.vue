@@ -1,6 +1,6 @@
 <template>
   <div class="countryList">
-    <div class="container-fluid d-flex text-center">
+    <div class="container-fluid text-center">
       <!-- class horizontalScroll for horizontal -->
       <div class="">
         <template v-for="trip in trips" :key="trip">

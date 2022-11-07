@@ -14,6 +14,16 @@ export default {
     list: Object,
     id: String,
   },
-  setup() {},
+  setup() {
+    // watch(
+    //   () => props.list,
+    //   () => {
+    //     console.log("LIST IS CHANGINGGGG");
+    //     hotels.value = [];
+    //     console.log("new accomdetails is ", props.accomDetails);
+    //     getHotelInfo(props.accomDetails.name, lat, lon);
+    //   }
+    // );
+  },
 };
 </script>
