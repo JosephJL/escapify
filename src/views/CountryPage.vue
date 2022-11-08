@@ -2,7 +2,7 @@
   <div class="countrypage">
     <div
       class="card card-body bg-transparent container-fluid border-0"
-      style="background-color: "
+      style="background-color: #094067"
     >
       <!-- <h1>Country Name here {{ name }}</h1> -->
       <img

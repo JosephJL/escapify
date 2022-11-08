@@ -174,7 +174,7 @@ export default {
         console.log("entering add HOtel");
         addHotel(trip[0], destinationInfo.value);
         if (nestedError == null) {
-          alert(`Destination added to trip name:${trip[1].tripName}`);
+          alert(`Hotel added to trip name:${trip[1].tripName}`);
         } else alert(nestedError);
       }
     };
