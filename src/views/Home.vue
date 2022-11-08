@@ -4,7 +4,7 @@
       <div id="scene-container"></div>
       <div class="header d-flex" style="">
         <h1 class="text-white fs-1 fw-semibold mx-auto align-self-center">
-          Travel the Globe
+          Travel the World
         </h1>
       </div>
       <div style="background-image: linear-gradient(#094067, darkturquoise);">

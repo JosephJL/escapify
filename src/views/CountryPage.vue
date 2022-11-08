@@ -31,8 +31,8 @@
       >
         <div class="card card-body">
           <h1>
-            <span class="me-3">{{ countryName
-            }}</span><img
+            <span class="me-3">{{ countryName }}</span
+            ><img
               :src="countryDetails.flags.svg"
               alt=""
               class="float-end"
@@ -105,9 +105,7 @@
         </div>
         <div class="col-md-8 col-12">
           <!-- {{ selectedInfo }} -->
-          <h2 class="mt-3">Hotels and Accomodation
-
-          </h2>
+          <h2 class="mt-3">Hotels and Accomodation</h2>
           <span v-if="getAccom">
             <!-- {{getAccom}} -->
             <AccommodationList

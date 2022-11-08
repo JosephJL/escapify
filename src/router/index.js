@@ -3,6 +3,8 @@ import Home from "../views/Home.vue";
 import CountryPage from "../views/CountryPage.vue";
 import ProfilePage from "../views/ProfilePage.vue";
 import DestinationPage from "../views/DestinationPage.vue";
+import CommunityPage from "../views/CommunityPage";
+
 import { getAuth } from "firebase/auth";
 
 const requireAuth = (to, from, next) => {
@@ -29,7 +31,7 @@ const routes = [
   {
     path: "/Country/:name",
     name: "Country",
-    component: CountryPage,
+    component: CommunityPage,
     props: (route) => ({ details: route.query.details }),
     // beforeEnter: requireAuth,
   },
@@ -37,6 +39,13 @@ const routes = [
     path: "/Destination/:name",
     name: "Destination",
     component: DestinationPage,
+    props: true,
+    // beforeEnter: requireAuth,
+  },
+  {
+    path: "/Community",
+    name: "Community",
+    component: CommunityPage,
     props: true,
     // beforeEnter: requireAuth,
   },
