@@ -2,7 +2,7 @@
   <div
     id="destinationCard"
     class="card border-0"
-    style="height: 100%; background-color: #faae2b"
+    style="height: 100%; background-color: #b8c1ec"
   >
     <!-- :style="isClicked ? { 'background-color': '#e6e6e6' } : null" -->
 
@@ -51,7 +51,7 @@
       <div class="">
         <button
           type="button"
-          class="btn btn-outline-primary mx-2"
+          class="btn btn-primary mx-2"
           @click.prevent="selectDestination"
         >
           Nearby Hotels
@@ -61,7 +61,8 @@
           data-bs-toggle="modal"
           data-bs-target="#TripModal"
           type="button"
-          class="btn btn-outline-success"
+          class="btn btn-success"
+          style="color: white"
           @click.prevent="toggleModal"
         >
           Add to Trip
@@ -69,7 +70,6 @@
       </div>
     </div>
   </div>
-  <hr />
 </template>
 
 <style scoped>

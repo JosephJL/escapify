@@ -1,11 +1,11 @@
 <template>
   <div v-if="destroy" class="card border-0 container-fluid">
-    <div class="card-body rounded-3" style="background-color: #ffa8ba">
+    <div class="card-body rounded-3" style="background-color: #094067;">
       <!-- Trip Name -->
       <div class="">
         <div class="card bg-transparent border-0">
           <button
-            class="btn btn-outline-danger align-self-end"
+            class="btn btn-danger align-self-end"
             @click.prevent="removeItem"
           >
             Remove Trip
@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="col">
-              <div class="card-body text-black">
+              <div class="card-body text-light">
                 <span><strong class="fs-3">Trip Name: </strong></span>
                 <p class="card-title fs-4">{{ details[1].tripName }}</p>
                 <span><strong class="fs-5">Location: </strong></span>
@@ -43,15 +43,19 @@
 
       <!-- Destination/Hotels Section -->
       <div class="row">
-        <div class="">
-          <p>Destinations Planned</p>
+        <div class="text-light">
+          <p><strong class="fs-5">
+            Destinations Planned:
+          </strong></p>
           <DestinationList :list="documents" :id="tripId" />
         </div>
       </div>
 
       <div class="row">
-        <div class="">
-          <p>Hotels Planned</p>
+        <div class="text-light">
+          <p>
+            <strong class="fs-5">Hotels Planned: </strong>
+          </p>
           <HotelList :list="hotels" :id="tripId" />
         </div>
       </div>

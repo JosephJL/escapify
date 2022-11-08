@@ -8,7 +8,7 @@
   <div>
     <!-- <p>Destination is</p> -->
     <div id="destinationList" class="overflow-auto mt-5 mb-5" style="">
-      <div v-for="(destination, index) in list[page]" :key="index">
+      <div class="mb-2" v-for="(destination, index) in list[page]" :key="index">
         <DestinationCard
           @selected="getSelection"
           @modalInfo="getModalInfo"

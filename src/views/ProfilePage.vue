@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="p-3">
-      <p class="float-end bg-light">Welcome back {{ user.displayName }}</p>
+      <h5 class="float-end">Welcome Back {{ user.displayName }}!</h5>
     </div>
     <div class="mt-4 p-5 rounded">
       <h1 style="color: #00473e">Your Trips</h1>
@@ -10,7 +10,7 @@
     <div class="container-fluid">
       <div
         id="tripList"
-        style="background-color: #faae2b"
+        style="background-color: #b8c1ec"
         class="rounded-3 p-4 fw-bold"
         v-on:mousemove="mouseMoveHandler"
         v-on:mouseup="mouseUpHandler"
