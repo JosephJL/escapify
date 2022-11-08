@@ -30,7 +30,7 @@ const getAccomodation = () => {
           locale: 'en_US'
         },
         headers: {
-          'X-RapidAPI-Key': '16ee8e4bfbmsh5e491b63623df36p1a152fjsn83b106a1dc4b',
+          'X-RapidAPI-Key': 'ebb63e55dbmsh3ad80d937f149c5p1a8017jsn5f78631fdcc1',
           'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
         }
       };

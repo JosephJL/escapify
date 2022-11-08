@@ -1,16 +1,17 @@
 <template>
   <div class="container-fluid">
-    <div>
-      <p class="float-end">Welcome back {{ user.displayName }}</p>
+    <div class="p-3">
+      <p class="float-end bg-light">Welcome back {{ user.displayName }}</p>
     </div>
     <div class="mt-4 p-5 rounded">
-      <h1>Your Trips</h1>
-      <p>Craft out your next adventure</p>
+      <h1 style="color: #00473e">Your Trips</h1>
+      <p style="color: #00473e">Craft out your next adventure</p>
     </div>
     <div class="container-fluid">
       <div
         id="tripList"
-        class=""
+        style="background-color: #faae2b"
+        class="rounded-3 p-4 fw-bold"
         v-on:mousemove="mouseMoveHandler"
         v-on:mouseup="mouseUpHandler"
         v-on:mousedown="mouseDownHandler"

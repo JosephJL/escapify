@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.15.1",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.2",
     "core-js": "^3.6.5",

@@ -1,4 +1,4 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc ,deleteDoc ,doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { ref } from "vue";
 
@@ -16,6 +16,17 @@ const useNestedCollection = () => {
     }
   };
 
+  const delHotel = async (tripId,hotelId) => {
+    console.log("reached del destination!, data received is ",tripId,hotelId)
+    error.value = null;
+    try {
+      await deleteDoc(doc(db, "trips",tripId,"hotels",hotelId));
+    } catch (err) {
+      console.log(err.message);
+      error.value = err.message;
+    }
+  }
+
   const addHotel = async (tripId, hotelInfo) => {
     error.value = null;
     try {
@@ -26,7 +37,18 @@ const useNestedCollection = () => {
     }
   };
 
-  return { addHotel, addDestination, error };
+  const delDestination = async (tripId,destId) => {
+    console.log("reached del destination!, data received is ",tripId,destId)
+    error.value = null;
+    try {
+      await deleteDoc(doc(db, "trips",tripId,"destinations",destId));
+    } catch (err) {
+      console.log(err.message);
+      error.value = err.message;
+    }
+  }
+
+  return { addHotel, addDestination, error , delDestination, delHotel };
 };
 
 export default useNestedCollection;

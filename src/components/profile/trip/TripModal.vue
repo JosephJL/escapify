@@ -12,7 +12,7 @@
         <ul class="list-group">
           <template v-for="(document, index) in documents" :key="index">
             <li class="list-group-item border-0">
-              {{ document[1].tripName }} in {{ document[1].name }}
+              <span>{{ document[1].tripName }} in {{ document[1].name }}</span>
               <button
                 @click.prevent="handleDestination(document)"
                 class="btn btn-primary float-end"

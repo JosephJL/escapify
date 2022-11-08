@@ -23,11 +23,18 @@ const getPlacePhoto = () => {
     await axios(config).then((response) => {
       // console.log("response is",response.data);
       const candidates = response.data.candidates;
+      // console.log("candidates are",candidates.length)
       // console.log("results are ",response.data.candidates,"for placename ",placeName)
-      const candidate = candidates[0];
       // console.log("candidate photos are,", candidate.photos,"for placename ",placeName);
-      if (typeof(candidate.photos) != "undefined"){
-        photoRef.value = candidate.photos[0].photo_reference;
+      if (candidates.length != 0){
+        const candidate = candidates[0];
+        console.log("candidate is",candidate)
+        if ("photos" in candidate){
+          photoRef.value = candidate.photos[0].photo_reference;
+        }else{
+          let random = Math.floor(Math.random() * 4);
+          returnURl.value = images[random];
+        }
       }else{
          //random digit for placeholder
         let random = Math.floor(Math.random() * 4);

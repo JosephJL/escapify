@@ -1,67 +1,82 @@
 <template>
-  <div class="container-fluid bg-white">
-    <section>
-      <div class="card card-body container-fluid bg-light border-0">
-        <!-- <h1>Country Name here {{ name }}</h1> -->
-        <img
-          v-if="imageLoading"
-          :src="returnURl"
-          class="card-img-top rounded"
-          alt="image here"
-          style="object-fit: cover; height: 400px"
-        />
-        <div v-else class="d-flex" style="height: 18rem; width: 100%">
-          <div
-            class="spinner-grow text-light mx-auto align-self-center"
-            role="status"
-          >
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-        <div>
-          <h1>{{ countryName }}</h1>
-          <hr />
-          <!-- <span>Information of prop is {{ props }}</span> -->
-          <!-- <p>{{ countryDetails.latlng }}</p> -->
-          <!-- <h3>Country Information</h3> -->
-          <!-- {{ countryDetails }} -->
-          <p>Capital: {{ countryDetails.capital }}</p>
-          <hr />
-          <p>Population: {{ countryDetails.population }}</p>
-          <hr />
-          <!-- <p>Translations: {{ countryDetails.translations }}</p> -->
-          <hr />
-          <p>Currencies: {{ countryDetails.currencies }}</p>
-          <hr />
-          <p>Area: {{ countryDetails.area }}</p>
-          <hr />
-          <!-- <p>LatLong : {{ countryDetails.latlng }}</p> -->
-          <button
-            v-if="user"
-            data-bs-toggle="modal"
-            data-bs-target="#TripForm"
-            class="btn btn-info"
-          >
-            Create Trip
-          </button>
-          <hr>
+  <div class="countrypage">
+    <div
+      class="card card-body bg-transparent container-fluid border-0"
+      style="background-color: "
+    >
+      <!-- <h1>Country Name here {{ name }}</h1> -->
+      <img
+        v-if="imageLoading"
+        :src="returnURl"
+        class="card-img-top rounded"
+        alt="image here"
+        style="object-fit: cover; height: 400px"
+      />
+      <div v-else class="d-flex" style="height: 18rem; width: 100%">
+        <div
+          class="spinner-grow text-light mx-auto align-self-center"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-    </section>
+      <div>
+        <h1>{{ countryName }}</h1>
+        <hr />
+        <!-- <span>Information of prop is {{ props }}</span> -->
+        <!-- <p>{{ countryDetails.latlng }}</p> -->
+        <!-- <h3>Country Information</h3> -->
+        <!-- {{ countryDetails }} -->
+        <p>Capital: {{ countryDetails.capital }}</p>
+        <hr />
+        <p>Population: {{ countryDetails.population }}</p>
+        <hr />
+        <!-- <p>Translations: {{ countryDetails.translations }}</p> -->
+        <!-- <hr />
+          <p>Currencies: {{ countryDetails.currencies }}</p> -->
+        <!-- <hr /> -->
+        <p>Area: {{ countryDetails.area }}</p>
+        <hr />
+        <!-- <p>LatLong : {{ countryDetails.latlng }}</p> -->
+        <button
+          v-if="user"
+          data-bs-toggle="modal"
+          data-bs-target="#TripForm"
+          class="btn btn-info"
+        >
+          Create Trip
+        </button>
+        <hr />
+      </div>
+    </div>
 
     <!-- datepicker -->
-    <section>
+    <!-- <section>
       <div>
-        Check-in Date: <DatePicker :readonly="true" format="MMM/D/YYYY" width="300px" name="date" value="help"></DatePicker>
-        Check-out Date: <DatePicker :readonly="true" format="MMM/D/YYYY" width="300px" name="date" value="me pls"></DatePicker>
+        Check-in Date:
+        <DatePicker
+          :readonly="true"
+          format="MMM/D/YYYY"
+          width="300px"
+          name="date"
+          value="help"
+        ></DatePicker>
+        Check-out Date:
+        <DatePicker
+          :readonly="true"
+          format="MMM/D/YYYY"
+          width="300px"
+          name="date"
+          value="me pls"
+        ></DatePicker>
       </div>
-      <hr>
-    </section>
+      <hr />
+    </section> -->
 
     <section class="destinations">
       <div class="row">
         <div class="col-md-4 order-md-first col-12 order-md-first">
-          <h2 class="">Destinations</h2>
+          <h2>Destinations</h2>
           <DestinationList
             @selectedFromList="getSelection"
             @modalInfo="updateDestInfo"
@@ -70,7 +85,7 @@
             :countryDetails="countryPacket"
           />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 col-12">
           <!-- {{ selectedInfo }} -->
           <h2 class="bg-white">Hotels and Accomodation</h2>
           <span v-if="getAccom">
@@ -154,9 +169,14 @@
   text-align: left;
   vertical-align: middle;
 }
+
+/* .countrypage {
+  background-color: ;
+} */
 </style>
 
 <script>
+import { Loader } from "@googlemaps/js-api-loader";
 import { onMounted, ref, toRefs } from "vue";
 import axios from "axios";
 import AccommodationList from "../components/accommodation/AccommodationList.vue";
@@ -165,7 +185,7 @@ import getDestination from "../composables/destination/getDestination.js";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 import { useRouter } from "vue-router";
 import TripModal from "../components/profile/trip/TripModal.vue";
-import DatePicker from "../components/datepicker/DatePicker.vue"
+import DatePicker from "../components/datepicker/DatePicker.vue";
 
 // Current user
 import getUser from "../composables/getUser";
@@ -174,7 +194,7 @@ import getUser from "../composables/getUser";
 import useCollection from "../composables/collection/useCollection";
 
 export default {
-  components: { AccommodationList, DestinationList, TripModal, DatePicker},
+  components: { AccommodationList, DestinationList, TripModal, DatePicker },
   props: {
     details: String,
   },

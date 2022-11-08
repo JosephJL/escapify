@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <div class="home container-fluid px-0">
+  <div class="home">
+    <div class="container-fluid px-0">
       <div id="scene-container"></div>
       <div class="header d-flex" style="">
         <h1 class="text-white fs-1 fw-semibold mx-auto align-self-center">
           Travel the Globe
         </h1>
       </div>
-      <div style="background-color: rgb(141, 183, 209)">
+      <div style="background-color: #094067">
         <!-- Search bar -->
         <nav aria-label="Page navigation">
           <div
@@ -22,7 +22,7 @@
                 v-model="filterText"
               />
               <button
-                class="btn btn-outline-primary rounded-4"
+                class="btn btn-light rounded-4"
                 @click.prevent="searchCountries"
               >
                 Search
@@ -105,6 +105,9 @@
   width: 100%;
   height: 600px;
   z-index: -100;
+  outline: none;
+  margin: 0;
+  padding: 0;
 }
 
 .header {
@@ -180,7 +183,7 @@ export default {
       //create a Scene
       this.scene = new Scene();
       //set the background color
-      this.scene.background = new Color("rgb(141, 183, 209)");
+      this.scene.background = new Color("#094067");
       //create a camera
       const fov = 35;
       var aspect = container.clientWidth / container.clientHeight;

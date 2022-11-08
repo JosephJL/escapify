@@ -1,11 +1,20 @@
 <template>
-  <div class="container-fluid" style="background: lightblue">
-    <div>These are your destinations</div>
-    <template v-for="document in list" :key="document">
+  <div id="destinationList" class="container-fluid" style="">
+    <div v-for="document in list" :key="document">
       <DestinationCard :details="document" :id="id" />
-    </template>
+    </div>
   </div>
 </template>
+
+<style scoped>
+#destinationList {
+  display: flex;
+  overflow-y: auto;
+  white-space: nowrap;
+  height: 100%;
+}
+</style>
+
 <script>
 import DestinationCard from "../destination/DestinationCard.vue";
 export default {
@@ -14,16 +23,6 @@ export default {
     list: Object,
     id: String,
   },
-  setup() {
-    // watch(
-    //   () => props.list,
-    //   () => {
-    //     console.log("LIST IS CHANGINGGGG");
-    //     hotels.value = [];
-    //     console.log("new accomdetails is ", props.accomDetails);
-    //     getHotelInfo(props.accomDetails.name, lat, lon);
-    //   }
-    // );
-  },
+  setup() {},
 };
 </script>
