@@ -1,11 +1,19 @@
 <template>
-  <div class="container-fluid" style="background: lightpink">
-    <div>These are your Hotels</div>
-    <template v-for="document in list" :key="document">
+  <div id="destinationList" class="container-fluid" style="">
+    <div v-for="document in list" :key="document">
       <HotelCard :details="document" :id="id" />
-    </template>
+    </div>
   </div>
 </template>
+
+<style scoped>
+#destinationList {
+  display: flex;
+  overflow-y: auto;
+  white-space: nowrap;
+  height: 100%;
+}
+</style>
 
 <script>
 import HotelCard from "../hotel/HotelCard.vue";

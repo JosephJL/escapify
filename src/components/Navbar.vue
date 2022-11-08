@@ -1,8 +1,9 @@
 <template>
   <nav
     class="navbar navbar-expand sticky-top"
-    style="background-color: #e3f2fd"
+    style="background-color: #fffffe"
   >
+    <!-- old color #e3f2fd  -->
     <div class="container-fluid">
       <a class="navbar-brand" href="#" @click="goHome">Escape</a>
       <!-- <button

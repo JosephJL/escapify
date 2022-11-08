@@ -1,5 +1,9 @@
 <template>
-  <div id="destinationCard" class="card border-0" style="height: 100%">
+  <div
+    id="destinationCard"
+    class="card border-0"
+    style="height: 100%; background-color: #faae2b"
+  >
     <!-- :style="isClicked ? { 'background-color': '#e6e6e6' } : null" -->
 
     <div class="card-body" style="white-space: initial">
@@ -24,17 +28,26 @@
           alt="image here"
         /> -->
       </div>
-      <h5 class="card-title"> <strong>Name: </strong>{{ details.properties.name }}</h5>
+      <h5 class="card-title">
+        <strong>Name: </strong>{{ details.properties.name }}
+      </h5>
       <p id="infoSection" v-if="info">{{ info }}</p>
       <!-- {{ details }} -->
       <div>
-        <strong>Tags:</strong> <template v-for="kind of details.properties.kinds.split(',')" :key="kind">
-        <span class="badge badge-pill badge-warning bg-warning m-1">
-          {{ kind }}
-        </span>
-      </template>
+        <strong>Tags:</strong>
+        <template
+          v-for="kind of details.properties.kinds.split(',')"
+          :key="kind"
+        >
+          <span
+            class="badge badge-pill badge-warning m-1"
+            style="background-color: #fa5246"
+          >
+            {{ kind }}
+          </span>
+        </template>
       </div>
-     
+
       <div class="">
         <button
           type="button"
@@ -56,7 +69,7 @@
       </div>
     </div>
   </div>
-  <hr>
+  <hr />
 </template>
 
 <style scoped>

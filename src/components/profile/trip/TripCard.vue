@@ -1,27 +1,42 @@
 <template>
-  <div class="card border-0 container-fluid">
-    <div class="card-body bg-light align-items-start">
+  <div v-if="destroy" class="card border-0 container-fluid">
+    <div class="card-body rounded-3" style="background-color: #ffa8ba">
       <!-- Trip Name -->
-      <div class="align-self-center">
+      <div class="">
         <div class="card bg-transparent border-0">
-          <img
-            v-if="imageLoading"
-            :src="returnURl"
-            class="card-img-top rounded img-fluid mx-auto"
-            alt="image here"
-            style="object-fit: cover; width: 20rem; height: 18rem"
-          />
-          <div v-else class="d-flex" style="height: 18rem; width: 100%">
-            <div
-              class="spinner-grow text-light mx-auto align-self-center"
-              role="status"
-            >
-              <span class="visually-hidden">Loading...</span>
+          <button
+            class="btn btn-outline-danger align-self-end"
+            @click.prevent="removeItem"
+          >
+            Remove Trip
+          </button>
+
+          <div class="row">
+            <div class="col-md-6 mt-2">
+              <img
+                v-if="imageLoading"
+                :src="returnURl"
+                class="card-img-top rounded img-fluid"
+                alt="image here"
+                style="object-fit: cover; width: 20rem; height: 18rem"
+              />
+              <div v-else class="d-flex" style="height: 18rem; width: 100%">
+                <div
+                  class="spinner-grow text-light mx-auto align-self-center"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="card-body text-black">
-            <p class="card-title">{{ details[1].tripName }}</p>
-            <p class="card-title">{{ details[1].name }}</p>
+            <div class="col">
+              <div class="card-body text-black">
+                <span><strong class="fs-3">Trip Name: </strong></span>
+                <p class="card-title fs-4">{{ details[1].tripName }}</p>
+                <span><strong class="fs-5">Location: </strong></span>
+                <p class="card-title">{{ details[1].name }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -69,6 +84,7 @@ import DestinationCard from "../destination/DestinationCard.vue";
 import DestinationList from "../destination/DestinationList.vue";
 import HotelList from "../hotel/HotelList.vue";
 import getPlacePhotos from "../../../composables/image/getPhotos";
+import useCollection from "../../../composables/collection/useCollection";
 
 export default {
   components: { DestinationList, HotelList },
@@ -94,7 +110,30 @@ export default {
     const { imageLoading, returnURl, load } = getPlacePhotos();
     load(props.details[1].name);
 
-    return { imageLoading, returnURl, documents, hotels, tripId };
+    const { addDocument, collectionError, delDocument } = useCollection();
+
+    const destroy = ref(true);
+
+    const removeItem = () => {
+      console.log("remove remove!");
+      delDocument(tripId.value);
+      if (collectionError) {
+        alert(collectionError);
+      } else {
+        alert("deleted!");
+        destroy.value = false;
+      }
+    };
+
+    return {
+      imageLoading,
+      returnURl,
+      documents,
+      hotels,
+      tripId,
+      removeItem,
+      destroy,
+    };
   },
 };
 </script>

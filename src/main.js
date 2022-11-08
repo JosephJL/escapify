@@ -4,7 +4,6 @@ import router from "./router";
 import "./assets/main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
-import "bootstrap";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 let app;

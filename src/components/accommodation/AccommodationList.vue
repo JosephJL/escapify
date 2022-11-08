@@ -1,7 +1,7 @@
 <template>
   <div
     id="accommodationList"
-    class="container-fluid d-flex text-center bg-light mt-5 border-rounded"
+    class="container d-flex text-center mt-5 border-rounded"
   >
     <!-- class horizontalScroll for horizontal -->
     <!-- <div class="row">
@@ -9,13 +9,30 @@
         <AccommodationCard class="col" :details="hotel" />
       </template>
     </div> -->
-
-    <div class="list-group overflow-auto bg-info">
-      <div style="position:sticky;">
-        <h4>Selected Destination: </h4>
-        <h5>{{destinationName}}</h5>
+    <div class="list-group overflow-auto" style="background-color: #ffa8ba">
+      <div style="position: sticky">
+        <h4>Selected Destination:</h4>
+        <h5>{{ destinationName }}</h5>
+        <div style="z-index: 5">
+          Check-in Date:
+          <DatePicker
+            :readonly="true"
+            format="MMM/D/YYYY"
+            width="300px"
+            name="date"
+            value="help"
+          ></DatePicker>
+          Check-out Date:
+          <DatePicker
+            :readonly="true"
+            format="MMM/D/YYYY"
+            width="300px"
+            name="date"
+            value="me pls"
+          ></DatePicker>
+        </div>
       </div>
-      <hr>
+      <hr />
       <template v-for="hotel in hotels" :key="hotel">
         <AccommodationCard
           class="list-group-item"
@@ -59,13 +76,13 @@ import axios from "axios";
 // import getPlacePhoto from "../../composables/image/getPhotos.js";
 import AccommodationCard from "./AccommodationCard.vue";
 import getAccomodation from "../../composables/accommodation/getAccomodation.js";
+import DatePicker from "../../components/datepicker/DatePicker.vue";
 
 export default {
-  components: { AccommodationCard },
+  components: { AccommodationCard, DatePicker },
   props: { accomDetails: Object, countryDetails: Object },
   emits: ["modalInfo"],
   setup(props, context) {
- 
     // const hotels = ref([]);
     // console.log(props)
     // let country = props.name

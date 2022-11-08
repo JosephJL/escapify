@@ -1,7 +1,10 @@
 <template>
-  <div class="card mb-2 container">
-    <div class="row align-items-start">
-      <div class="col">
+  <div
+    id="destinationCard"
+    class="card card-body mx-2 bg-white border-0 container"
+  >
+    <div class="row" style="width: 100%">
+      <div class="col-6">
         <img
           v-if="imageLoading"
           :src="returnURl"
@@ -18,17 +21,32 @@
           </div>
         </div>
       </div>
-      <div class="col text-black">
+      <div
+        class="col-6 text-black text-center align-self-center"
+        style="white-space: initial"
+      >
         <p class="card-title">{{ details[1].name }}</p>
+        <button
+          class="btn btn-outline-danger align-self-end"
+          @click.prevent="removeItem"
+        >
+          Remove
+        </button>
       </div>
     </div>
   </div>
 </template>
 
+<style scoped>
+#destinationCard {
+  width: 20rem;
+}
+</style>
+
 <script>
-import queryHotels from "../../../composables/collection/queryHotels";
 import getUser from "../../../composables/getUser";
 import getPlacePhoto from "../../../composables/image/getPhotos";
+import useNestedCollection from "../../../composables/collection/useNestedCollection";
 
 export default {
   props: {
@@ -43,7 +61,20 @@ export default {
     const { imageLoading, returnURl, load } = getPlacePhoto();
     load(props.details[1].name);
 
-    return { imageLoading, returnURl };
+    const { addHotel, addDestination, error, delDestination } =
+      useNestedCollection();
+
+    const removeItem = () => {
+      console.log("remove remove!");
+      delDestination(props.id, props.details[0]);
+      if (error) {
+        alert(error);
+      } else {
+        alert("deleted!");
+      }
+    };
+
+    return { imageLoading, returnURl, removeItem };
   },
 };
 </script>
