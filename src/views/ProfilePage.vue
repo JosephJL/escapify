@@ -72,7 +72,6 @@ export default {
     onMounted(() => {
       menu.value.focus();
       console.log("menu is ", menu);
-
       menu.value.scrollLeft = 150;
       menu.value.scrollTop = 100;
     });

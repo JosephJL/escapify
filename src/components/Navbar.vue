@@ -5,7 +5,7 @@
   >
     <!-- old color #e3f2fd  -->
     <div class="container-fluid">
-      <a class="navbar-brand" href="#" @click="goHome">Escape</a>
+      <a class="navbar-brand" href="#" @click.prevent="goHome">Escape</a>
       <!-- <button
         class="navbar-toggler"
         type="button"
@@ -20,6 +20,12 @@
 
       <ul class="navbar-nav ms-auto mb-0">
         <!-- dropdown when user is logged in -->
+        <a class="navbar-brand" href="#" @click.prevent="goHome"
+          ><span style="font-size: 16px">Explore</span></a
+        >
+        <a class="navbar-brand" href="#" @click.prevent="openCommunityPage"
+          ><span style="font-size: 16px">Community</span></a
+        >
         <template v-if="user">
           <li class="nav-item">
             <div class="dropdown">
@@ -34,13 +40,20 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end mt-2">
                 <li>
-                  <a class="dropdown-item" href="#" @click="openProfilePage"
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    @click.prevent="openProfilePage"
                     >Your Trips</a
                   >
                 </li>
                 <hr />
                 <li>
-                  <a class="dropdown-item" href="#" @click="handleClick">
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    @click.prevent="handleClick"
+                  >
                     Log out
                   </a>
                 </li>
@@ -173,12 +186,18 @@ export default {
       router.push({ name: "Profile" });
     };
 
+    const openCommunityPage = () => {
+      console.log("going community");
+      router.push({ name: "Community" });
+    };
+
     const goHome = () => {
       console.log("going home");
       router.push({ name: "Home" });
     };
 
     return {
+      openCommunityPage,
       logout,
       error,
       handleClick,
