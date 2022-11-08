@@ -1,7 +1,7 @@
 <template>
   <nav
     class="navbar navbar-expand sticky-top"
-    style="background-color: #fffffe"
+    style="background-color: #DFE9F5"
   >
     <!-- old color #e3f2fd  -->
     <div class="container-fluid">
