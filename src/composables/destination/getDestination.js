@@ -59,7 +59,7 @@ const getDestination = () => {
       .catch((error) => {
         console.log(error.message);
       });
-  };
+  
 
   axios
     .request(options)
@@ -90,6 +90,7 @@ const getDestination = () => {
     .catch((error) => {
       console.log(error.message);
     });
+  }
 
   return {
     loadCountryDestination,
