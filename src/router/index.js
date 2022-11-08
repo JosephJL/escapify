@@ -31,7 +31,7 @@ const routes = [
   {
     path: "/Country/:name",
     name: "Country",
-    component: CommunityPage,
+    component: CountryPage,
     props: (route) => ({ details: route.query.details }),
     // beforeEnter: requireAuth,
   },
