@@ -1,11 +1,16 @@
 <template>
   <div class="countrypage">
     <div
-      class="card card-body bg-transparent container-fluid border-0"
-      style="background-color: #094067"
+      class="countryimage card card-body container-fluid border-0"
+      :style="{ backgroundImage: 'url(' + returnURl + ')' }"
+      style="
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      "
     >
       <!-- <h1>Country Name here {{ name }}</h1> -->
-      <img
+      <!-- <img
         v-if="imageLoading"
         :src="returnURl"
         class="card-img-top rounded"
@@ -19,34 +24,47 @@
         >
           <span class="visually-hidden">Loading...</span>
         </div>
-      </div>
-      <div>
-        <h1>{{ countryName }}</h1>
-        <hr />
-        <!-- <span>Information of prop is {{ props }}</span> -->
-        <!-- <p>{{ countryDetails.latlng }}</p> -->
-        <!-- <h3>Country Information</h3> -->
-        <!-- {{ countryDetails }} -->
-        <p>Capital: {{ countryDetails.capital }}</p>
-        <hr />
-        <p>Population: {{ countryDetails.population }}</p>
-        <hr />
-        <!-- <p>Translations: {{ countryDetails.translations }}</p> -->
-        <!-- <hr />
-          <p>Currencies: {{ countryDetails.currencies }}</p> -->
-        <!-- <hr /> -->
-        <p>Area: {{ countryDetails.area }}</p>
-        <hr />
-        <!-- <p>LatLong : {{ countryDetails.latlng }}</p> -->
-        <button
-          v-if="user"
-          data-bs-toggle="modal"
-          data-bs-target="#TripForm"
-          class="btn btn-info"
-        >
-          Create Trip
-        </button>
-        <hr />
+      </div> -->
+      <div
+        class="justify-content-center align-self-center"
+        style="margin-top: 8rem; opacity: 0.9"
+      >
+        <div class="card card-body">
+          <h1>
+            <span class="me-3">{{ countryName }}</span
+            ><img
+              :src="countryDetails.flags.svg"
+              alt=""
+              class="float-end"
+              style="width: 3rem"
+            />
+          </h1>
+          <hr />
+          <!-- <span>Information of prop is {{ props }}</span> -->
+          <!-- <p>{{ countryDetails.latlng }}</p> -->
+          <!-- <h3>Country Information</h3> -->
+          <!-- {{ countryDetails }} -->
+          <p>Capital: {{ countryDetails.capital }}</p>
+          <hr />
+          <p>Population: {{ countryDetails.population }}</p>
+          <hr />
+          <!-- {{ countryDetails }} -->
+          <!-- <p>Translations: {{ countryDetails.translations }}</p> -->
+          <!-- <hr />
+              <p>Currencies: {{ countryDetails.currencies }}</p> -->
+          <!-- <hr /> -->
+          <!-- <p>Area: {{ countryDetails.area }}</p>
+            <hr /> -->
+          <!-- <p>LatLong : {{ countryDetails.latlng }}</p> -->
+          <button
+            v-if="user"
+            data-bs-toggle="modal"
+            data-bs-target="#TripForm"
+            class="btn btn-info"
+          >
+            Create Trip
+          </button>
+        </div>
       </div>
     </div>
 
@@ -76,7 +94,7 @@
     <section class="destinations">
       <div class="row">
         <div class="col-md-4 order-md-first col-12 order-md-first">
-          <h2>Destinations</h2>
+          <h2 class="mt-3">Destinations</h2>
           <DestinationList
             @selectedFromList="getSelection"
             @modalInfo="updateDestInfo"
@@ -87,7 +105,7 @@
         </div>
         <div class="col-md-8 col-12">
           <!-- {{ selectedInfo }} -->
-          <h2 class="bg-white">Hotels and Accomodation</h2>
+          <h2 class="mt-3">Hotels and Accomodation</h2>
           <span v-if="getAccom">
             <!-- {{getAccom}} -->
             <AccommodationList
@@ -170,9 +188,9 @@
   vertical-align: middle;
 }
 
-/* .countrypage {
-  background-color: ;
-} */
+.countryimage {
+  height: 600px;
+}
 </style>
 
 <script>

@@ -61,12 +61,42 @@ const getDestination = () => {
       });
   };
 
-  return {
-    loadCountryDestination,
-    countryError,
-    countryDestinations,
-    firstDestination,
-  };
+  axios
+    .request(options)
+    .then((response) => {
+      const tempArray = [];
+      for (let i = 0; i < response.data.features.length; i++) {
+        let index = response.data.features[String(i)];
+        // console.log("index is", response.data.features[String(i)])
+        if (index.properties.name != "") {
+          tempArray.push(index);
+        }
+      }
+      console.log("chunksize is ", chunkSize);
+      for (let j = 0; j < tempArray.length; j += chunkSize) {
+        const chunk = tempArray.slice(j, j + chunkSize);
+        countryDestinations.value.push(chunk);
+      }
+      totalPages.value = countryDestinations.value.length - 1;
+      console.log("total pages is", totalPages.value);
+      console.log("countryDestinationData", countryDestinations.value);
+      console.log("zerodude is ", countryDestinations.value[0]);
+      firstDestination.value = {
+        name: countryDestinations.value[0][0].properties.name,
+        lat: countryDestinations.value[0][0].geometry.coordinates["1"],
+        lon: countryDestinations.value[0][0].geometry.coordinates["0"],
+      };
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+return {
+  loadCountryDestination,
+  countryError,
+  countryDestinations,
+  firstDestination,
 };
 
 export default getDestination;

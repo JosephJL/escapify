@@ -7,7 +7,7 @@
           Travel the World
         </h1>
       </div>
-      <div style="background-color: #094067">
+      <div style="background-image: linear-gradient(#094067, darkturquoise);">
         <!-- Search bar -->
         <nav aria-label="Page navigation">
           <div

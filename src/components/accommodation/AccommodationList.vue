@@ -1,7 +1,7 @@
 <template>
   <div
-    id="accommodationList"
-    class="container d-flex text-center mt-5 border-rounded"
+    class="container text-center mt-5 rounded-2"
+    style="height: 800px; background-color: #094067"
   >
     <!-- class horizontalScroll for horizontal -->
     <!-- <div class="row">
@@ -9,9 +9,13 @@
         <AccommodationCard class="col" :details="hotel" />
       </template>
     </div> -->
-    <div class="list-group overflow-auto" style="background-color: #ffa8ba">
-      <div style="position: sticky">
-        <h4>Selected Destination:</h4>
+    <div
+      id="accommodationList"
+      class="list-group d-flex overflow-auto text-light"
+      style=""
+    >
+      <div>
+        <h4 class="mt-2">Selected Destination:</h4>
         <h5>{{ destinationName }}</h5>
         <div style="z-index: 5">
           Check-in Date:
@@ -87,7 +91,7 @@ export default {
     // console.log(props)
     // let country = props.name
     console.log("accomodations is set up", props.accomDetails);
-    const destinationName = props.accomDetails.name;
+    const destinationName = ref(props.accomDetails.name);
     // console.log("HELLO NAME IS ", name)
     const lat = props.accomDetails.lat;
     const lon = props.accomDetails.lon;
@@ -106,6 +110,7 @@ export default {
       () => {
         console.log("LIST IS CHANGINGGGG");
         hotels.value = [];
+        destinationName.value = props.accomDetails.name;
         console.log("new accomdetails is ", props.accomDetails);
         getHotelInfo(destinationName, lat, lon);
       }
