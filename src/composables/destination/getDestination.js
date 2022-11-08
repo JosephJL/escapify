@@ -90,13 +90,13 @@ const getDestination = () => {
     .catch((error) => {
       console.log(error.message);
     });
-};
 
-return {
-  loadCountryDestination,
-  countryError,
-  countryDestinations,
-  firstDestination,
+  return {
+    loadCountryDestination,
+    countryError,
+    countryDestinations,
+    firstDestination,
+  };
 };
 
 export default getDestination;
