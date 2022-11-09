@@ -14,6 +14,7 @@ console.log("in query firestore is ", db);
 const queryCollectionById = () => {
   const error = ref(null);
   const documents = ref([]);
+  const comments = ref([]);
 
   const loadCollection = async (collectionName, userId) => {
     // console.log("in get collection");
@@ -43,9 +44,7 @@ const queryCollectionById = () => {
     // console.log("in get collection");
     // console.log("db is ", db);
     // let collectionRef = collection(db, collectionName)
-    const q = query(collection(db, "trips"),
-    where("shareStatus", "==", true)
-    );
+    const q = query(collection(db, "trips"), where("shareStatus", "==", true));
 
     // const querySnapshot = await getDocs(q);
     onSnapshot(q, (querySnapshot) => {
@@ -59,6 +58,25 @@ const queryCollectionById = () => {
     });
   };
 
+  const loadCommentsCollection = async (tripId) => {
+    console.log("in comments collection, tripId is", tripId);
+    // console.log("db is ", db);
+    // let collectionRef = collection(db, collectionName)
+    const q = query(collection(db, "comments"), where("tripId", "==", tripId));
+
+    // const querySnapshot = await getDocs(q);
+    onSnapshot(q, (querySnapshot) => {
+      const tesComments = [];
+      comments.value = [];
+      querySnapshot.forEach((doc) => {
+        tesComments.push(doc.data().commentorName);
+        comments.value.push([doc.id, doc.data()]);
+      });
+      console.log("ALL COMMENTS: ", tesComments.join(", "));
+      console.log("DOC DATA HERE IS", comments.value);
+    });
+  };
+
   // querySnapshot.forEach((doc) => {
   //   // doc.data() is never undefined for query doc snapshots
   //   // console.log(doc.id, " => ", doc.data());
@@ -66,7 +84,14 @@ const queryCollectionById = () => {
   //   // console.log("documents in collection is,",documents)
   // });
 
-  return { documents, error, loadCollection, loadTripsCollection };
+  return {
+    documents,
+    error,
+    comments,
+    loadCollection,
+    loadTripsCollection,
+    loadCommentsCollection,
+  };
 };
 
 export default queryCollectionById;
