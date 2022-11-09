@@ -42,12 +42,12 @@ const useCollection = () => {
     }
   };
 
-  const updateDocument = async (tripId, value) => {
+  const updateDocument = async (tripId, value, text) => {
     console.log("reached update doc value received is", value);
     error.value = null;
     const docRef = doc(db, "trips", tripId);
     try {
-      await updateDoc(docRef, { shareStatus: value });
+      await updateDoc(docRef, { shareStatus: value, postInfo: text });
     } catch (err) {
       console.log(err.message);
       error.value = err.message;
