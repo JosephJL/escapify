@@ -27,25 +27,44 @@
               </svg>
               Remove Trip
             </button>
-            <button
-              v-if="!localStatus"
-              class="btn btn-info float-end me-2"
-              @click.prevent="shareItem"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-share"
-                viewBox="0 0 16 16"
+            <div class="dropdown float-end me-2" v-if="!localStatus">
+              <button
+                class="btn btn-info dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                <path
-                  d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
-                />
-              </svg>
-              Share
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-share"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
+                  />
+                </svg>
+                Share
+              </button>
+              <ul class="dropdown-menu p-3">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="floatingTextarea"
+                    v-model="postText"
+                  ></textarea>
+                  <label for="floatingTextarea"
+                    >Share more about your trip</label
+                  >
+                </div>
+                <button class="btn btn-info mt-3" @click.prevent="shareItem">
+                  Post
+                </button>
+              </ul>
+            </div>
             <button
               v-else
               class="btn btn-info float-end me-2"
@@ -185,13 +204,14 @@ export default {
     };
 
     const localStatus = ref(props.details[1].shareStatus);
+    const postText = ref("");
 
     const shareItem = () => {
       console.log("current value is", localStatus.value);
       let value = !localStatus.value;
 
       console.log("update to", value);
-      updateDocument(tripId.value, value);
+      updateDocument(tripId.value, value, postText.value);
       localStatus.value = !localStatus.value;
       if (collectionError) {
         console.log(collectionError);
@@ -199,6 +219,7 @@ export default {
     };
 
     return {
+      postText,
       localStatus,
       shareItem,
       imageLoading,
