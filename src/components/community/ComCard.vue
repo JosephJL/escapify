@@ -111,22 +111,22 @@
                     />
                     <button
                       @click="toggleComment"
-                      data-bs-dismiss="modal"
                       class="btn btn-outline-secondary"
                       type="button"
                       id="button-addon2"
                     >
                       Comment
                     </button>
-                    {{ currComment }}
                   </div>
                 </div>
-                <div v-for="(comment, index) of comments" :key="index">
+                <div v-for="(comment, index) of formattedComments" :key="index">
                   <div class="d-flex mt-2">
                     <span class="fs-5">{{ comment[1].commentorName }}</span>
                     <div class="border border-secondary px-2 mx-2 rounded-3">
                       <span class="float-start">{{ comment[1].comment }}</span>
+                      <!-- {{ formattedComments }} -->
                     </div>
+                    <span>{{ comment.createdAt }} ago</span>
                   </div>
                 </div>
               </div>
@@ -155,7 +155,7 @@ img {
 </style>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import getUser from "../../composables/getUser";
@@ -165,6 +165,8 @@ import DestinationList from "../destination/DestinationList.vue";
 import HotelList from "../profile/hotel/HotelList.vue";
 import getPlacePhotos from "../../composables/image/getPhotos";
 import useCollection from "../../composables/collection/useCollection";
+import { Timestamp } from "@firebase/firestore";
+import { formatDistanceToNow } from "date-fns";
 
 export default {
   components: { DestinationList, HotelList },
@@ -212,19 +214,32 @@ export default {
 
     loadCommentsCollection(props.details[0]);
 
+    const formattedComments = computed(() => {
+      if (comments) {
+        return comments.value.map((doc) => {
+          console.log("BEFORE ERROR", doc);
+          let time = formatDistanceToNow(doc[1].createdAt.toDate());
+          return { ...doc, createdAt: time };
+        });
+      }
+    });
+
     const currComment = ref("");
 
     const toggleComment = () => {
+      console.log("TIMESTAMP IS", Timestamp.now().toDate());
       let commentInfo = {
         comment: currComment.value,
         commentorId: user.value.uid,
         commentorName: user.value.displayName,
         tripId: props.details[0],
+        createdAt: Timestamp.now(),
       };
       addComment(commentInfo);
     };
 
     return {
+      formattedComments,
       currComment,
       toggleComment,
       comments,
