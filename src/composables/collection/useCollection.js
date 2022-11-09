@@ -1,4 +1,4 @@
-import { collection, addDoc,deleteDoc ,doc } from "firebase/firestore";
+import { collection, addDoc,deleteDoc ,doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { ref } from "vue";
 
@@ -26,7 +26,21 @@ const useCollection = () => {
     }
   }
 
-  return { addDocument, error ,delDocument };
+  const updateDocument = async(tripId,value) => {
+    console.log("reached update doc")
+    error.value = null;
+    const docRef = doc(db, "trips", tripId);
+    try {
+      await updateDoc(collection(db, "trips"), tripId,{shareStatus:false});
+    } catch (err) {
+      console.log(err.message);
+      error.value = err.message;
+    }
+  }
+
+  
+
+  return { addDocument, error ,delDocument,updateDocument };
 };
 
 export default useCollection;

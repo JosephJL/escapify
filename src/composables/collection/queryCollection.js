@@ -42,13 +42,12 @@ const queryCollectionById = () => {
   const loadTripsCollection = async () => {
     // console.log("in get collection");
     // console.log("db is ", db);
-
     // let collectionRef = collection(db, collectionName)
-
-    const q = query(collection(db, "trips"));
+    const q = query(collection(db, "trips"),
+    where("shareStatus", "==", true)
+    );
 
     // const querySnapshot = await getDocs(q);
-
     onSnapshot(q, (querySnapshot) => {
       const trips = [];
       documents.value = [];

@@ -1,7 +1,7 @@
 <template>
   <nav
     class="navbar navbar-expand sticky-top"
-    style="background-color: #DFE9F5"
+    style="background-color: #dfe9f5"
   >
     <!-- old color #e3f2fd  -->
     <div class="container-fluid">
@@ -179,6 +179,7 @@ export default {
       await logout();
       if (!error.value) {
         console.log("user logged out");
+        window.location.reload();
       }
     };
 

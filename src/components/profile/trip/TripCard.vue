@@ -1,15 +1,31 @@
 <template>
   <div v-if="destroy" class="card border-0 container-fluid">
-    <div class="card-body rounded-3" style="background-color: #094067;">
+    <div class="card-body rounded-3" style="background-color: #094067">
       <!-- Trip Name -->
       <div class="">
         <div class="card bg-transparent border-0">
-          <button
-            class="btn btn-danger align-self-end"
-            @click.prevent="removeItem"
-          >
-            Remove Trip
-          </button>
+          <div class="">
+            <button
+              class="btn btn-danger float-end"
+              @click.prevent="removeItem"
+            >
+              Remove Trip
+            </button>
+            <button
+              v-if="!details[1].shareStatus"
+              class="btn btn-success float-end me-2"
+              @click.prevent="shareItem"
+            >
+              Share Trip
+            </button>
+            <button
+              v-else
+              class="btn btn-success float-end me-2"
+              @click.prevent="shareItem"
+            >
+              unshare
+            </button>
+          </div>
 
           <div class="row">
             <div class="col-md-6 mt-2">
@@ -44,9 +60,7 @@
       <!-- Destination/Hotels Section -->
       <div class="row">
         <div class="text-light">
-          <p><strong class="fs-5">
-            Destinations Planned:
-          </strong></p>
+          <p><strong class="fs-5"> Destinations Planned: </strong></p>
           <DestinationList :list="documents" :id="tripId" />
         </div>
       </div>
@@ -114,7 +128,8 @@ export default {
     const { imageLoading, returnURl, load } = getPlacePhotos();
     load(props.details[1].name);
 
-    const { addDocument, collectionError, delDocument } = useCollection();
+    const { addDocument, collectionError, delDocument, updateDocument } =
+      useCollection();
 
     const destroy = ref(true);
 
@@ -129,7 +144,17 @@ export default {
       }
     };
 
+    const shareItem = () => {
+      let value = !props.details[1].shareStatus;
+      console.log("update to", value);
+      updateDocument(tripId.value, value);
+      if (collectionError) {
+        console.log(collectionError);
+      }
+    };
+
     return {
+      shareItem,
       imageLoading,
       returnURl,
       documents,
