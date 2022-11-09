@@ -8,7 +8,7 @@
       <p style="color: #00473e">Stay Connected</p>
     </div>
     <div>
-      <TripList :trips="documents" />
+      <ComList :trips="documents" />
     </div>
   </div>
 </template>
@@ -18,15 +18,13 @@ import { ref } from "vue";
 import getCollectionById from "../composables/collection/queryCollection";
 import getUser from "../composables/getUser";
 import getPlacePhoto from "../composables/image/getPhotos";
-import TripList from "../components/profile/trip/TripList.vue";
-import TripCard from "../components/profile/trip/TripCard.vue";
+import ComList from "../components/community/ComList.vue";
 
 export default {
-  components: { TripList, TripCard, getPlacePhoto },
+  components: { ComList, getPlacePhoto },
   setup(props) {
     const { user } = getUser();
-    console.log("user is ,", user.value.uid);
-    const userId = user.value.uid;
+    console.log("user is ,", user);
     const { documents, error, loadCollection, loadTripsCollection } =
       getCollectionById();
     loadTripsCollection();

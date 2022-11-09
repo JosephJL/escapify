@@ -196,6 +196,8 @@ export default {
         capital: capital.value,
         userId: user.value.uid,
         latlng: props.countryDetails.latlng,
+        userName: user.value.displayName,
+        shareStatus: false,
       });
       if (error.value == null) {
         alert(`You're one step closer to ${props.countryDetails.countryName}!`);

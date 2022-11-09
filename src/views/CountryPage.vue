@@ -277,6 +277,8 @@ export default {
         tripName: tripName.value,
         capital: countryDetails.value.capital,
         userId: user.value.uid,
+        userName: user.value.displayName,
+        shareStatus: false,
       });
       if (error.value == null) {
         alert(`You're one step closer to ${countryName.value}!`);

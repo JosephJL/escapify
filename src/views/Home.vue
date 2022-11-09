@@ -7,7 +7,7 @@
           Travel the World
         </h1>
       </div>
-      <div style="background-image: linear-gradient(#094067, darkturquoise);">
+      <div style="background-image: linear-gradient(#094067, darkturquoise)">
         <!-- Search bar -->
         <nav aria-label="Page navigation">
           <div
@@ -46,7 +46,7 @@
             <template v-for="continent in continents" :key="continent">
               <li class="page-item">
                 <a
-                  class="page-link rounded-4 me-1"
+                  class="page-link rounded-4 mx-2"
                   @click.prevent="selectContinent(continent)"
                   href="#"
                   >{{ continent }}</a
