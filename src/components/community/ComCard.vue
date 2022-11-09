@@ -101,16 +101,16 @@
               <div class="collapse" :id="'collapse-' + details[0]">
                 <div class="d-flex">
                   <span class="fs-5 mt-1">{{ details[1].userName }}</span>
-                  <div class="input-group">
+                  <div class="input-group mx-2">
                     <input
                       type="text"
                       class="form-control"
-                      v-model="tripName"
+                      v-model="currComment"
                       placeholder="Write a comment..."
                       aria-describedby="button-addon2"
                     />
                     <button
-                      @click="addComment"
+                      @click="toggleComment"
                       data-bs-dismiss="modal"
                       class="btn btn-outline-secondary"
                       type="button"
@@ -118,15 +118,14 @@
                     >
                       Comment
                     </button>
+                    {{ currComment }}
                   </div>
                 </div>
-                <div v-for="range of 10" :key="range">
+                <div v-for="(comment, index) of comments" :key="index">
                   <div class="d-flex mt-2">
-                    <span class="fs-5">{{ details[1].userName }}</span>
-                    <div class="card card-body">
-                      Some placeholder content for the collapse component. This
-                      panel is hidden by default but revealed when the user
-                      activates the relevant trigger.
+                    <span class="fs-5">{{ comment[1].commentorName }}</span>
+                    <div class="border border-secondary px-2 mx-2 rounded-3">
+                      <span class="float-start">{{ comment[1].comment }}</span>
                     </div>
                   </div>
                 </div>
@@ -161,7 +160,7 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 import getUser from "../../composables/getUser";
 import queryNestedCollection from "../../composables/collection/queryNestedCollection";
-import queryHotels from "../../composables/collection/queryHotels";
+import queryCollection from "../../composables/collection/queryCollection";
 import DestinationList from "../destination/DestinationList.vue";
 import HotelList from "../profile/hotel/HotelList.vue";
 import getPlacePhotos from "../../composables/image/getPhotos";
@@ -187,7 +186,8 @@ export default {
     const { imageLoading, returnURl, load } = getPlacePhotos();
     load(props.details[1].name);
 
-    const { addDocument, collectionError, delDocument } = useCollection();
+    const { addDocument, collectionError, delDocument, addComment } =
+      useCollection();
 
     const destroy = ref(true);
 
@@ -202,7 +202,32 @@ export default {
       }
     };
 
+    const {
+      comments,
+      commentError,
+      loadCollection,
+      loadTripsCollection,
+      loadCommentsCollection,
+    } = queryCollection();
+
+    loadCommentsCollection(props.details[0]);
+
+    const currComment = ref("");
+
+    const toggleComment = () => {
+      let commentInfo = {
+        comment: currComment.value,
+        commentorId: user.value.uid,
+        commentorName: user.value.displayName,
+        tripId: props.details[0],
+      };
+      addComment(commentInfo);
+    };
+
     return {
+      currComment,
+      toggleComment,
+      comments,
       imageLoading,
       returnURl,
       documents,

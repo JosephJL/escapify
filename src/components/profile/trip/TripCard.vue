@@ -9,21 +9,61 @@
               class="btn btn-danger float-end"
               @click.prevent="removeItem"
             >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                />
+              </svg>
               Remove Trip
             </button>
             <button
-              v-if="!details[1].shareStatus"
-              class="btn btn-success float-end me-2"
+              v-if="!localStatus"
+              class="btn btn-info float-end me-2"
               @click.prevent="shareItem"
             >
-              Share Trip
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-share"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
+                />
+              </svg>
+              Share
             </button>
             <button
               v-else
-              class="btn btn-success float-end me-2"
+              class="btn btn-info float-end me-2"
               @click.prevent="shareItem"
             >
-              unshare
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-share"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
+                />
+              </svg>
+              Unshare
             </button>
           </div>
 
@@ -139,21 +179,27 @@ export default {
       if (collectionError) {
         alert(collectionError);
       } else {
-        alert("deleted!");
+        // alert("deleted!");
         destroy.value = false;
       }
     };
 
+    const localStatus = ref(props.details[1].shareStatus);
+
     const shareItem = () => {
-      let value = !props.details[1].shareStatus;
+      console.log("current value is", localStatus.value);
+      let value = !localStatus.value;
+
       console.log("update to", value);
       updateDocument(tripId.value, value);
+      localStatus.value = !localStatus.value;
       if (collectionError) {
         console.log(collectionError);
       }
     };
 
     return {
+      localStatus,
       shareItem,
       imageLoading,
       returnURl,
