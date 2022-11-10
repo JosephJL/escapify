@@ -1,4 +1,10 @@
 <template>
+  <!-- <div v-if="loading">
+    <img
+      src="https://cdn.dribbble.com/users/722246/screenshots/4400319/media/370a520076a3d90eff6800ce9703b453.gif"
+      alt=""
+    />
+  </div> -->
   <div class="home">
     <div class="container-fluid px-0">
       <div id="scene-container"></div>
@@ -356,7 +362,10 @@ export default {
 
     console.log("document list is", documents.value);
 
+    const loading = ref(true);
+
     return {
+      loading,
       user,
       documents,
       totalPages,

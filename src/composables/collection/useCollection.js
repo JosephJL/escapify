@@ -1,4 +1,11 @@
-import { collection, addDoc,deleteDoc ,doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { ref } from "vue";
 
@@ -15,32 +22,58 @@ const useCollection = () => {
     }
   };
 
-  const delDocument = async (tripId) => {
-    console.log("reached del destination!, data received is ",tripId)
+  const addComment = async (commentInfo) => {
     error.value = null;
     try {
-      await deleteDoc(doc(db, "trips",tripId));
+      await addDoc(collection(db, "comments"), commentInfo);
     } catch (err) {
       console.log(err.message);
       error.value = err.message;
     }
-  }
+  };
 
-  const updateDocument = async(tripId,value) => {
-    console.log("reached update doc")
+  const setLike = async (likeInfo) => {
+    console.log("reached add like", likeInfo);
+    error.value = null;
+    try {
+      await setDoc(collection(db, "likes"), likeInfo);
+    } catch (err) {
+      console.log(err.message);
+      error.value = err.message;
+    }
+  };
+
+  const delDocument = async (tripId) => {
+    console.log("reached del destination!, data received is ", tripId);
+    error.value = null;
+    try {
+      await deleteDoc(doc(db, "trips", tripId));
+    } catch (err) {
+      console.log(err.message);
+      error.value = err.message;
+    }
+  };
+
+  const updateDocument = async (tripId, value, text) => {
+    console.log("reached update doc value received is", value);
     error.value = null;
     const docRef = doc(db, "trips", tripId);
     try {
-      await updateDoc(collection(db, "trips"), tripId,{shareStatus:false});
+      await updateDoc(docRef, { shareStatus: value, postInfo: text });
     } catch (err) {
       console.log(err.message);
       error.value = err.message;
     }
-  }
+  };
 
-  
-
-  return { addDocument, error ,delDocument,updateDocument };
+  return {
+    addDocument,
+    error,
+    delDocument,
+    updateDocument,
+    addComment,
+    setLike,
+  };
 };
 
 export default useCollection;
