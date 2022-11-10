@@ -3,9 +3,9 @@
     <div class="row">
       <div class="col-3 d-none d-md-block"></div>
 
-      <div class="card-body rounded-3 mb-3 col-6">
+      <div class="card-body mb-3 col-6">
         <!-- Trip Name -->
-        <div class="bg-light">
+        <div class="bg-light rounded-3" style="--bs-bg-opacity: 0.9">
           <div class="card bg-transparent border-0">
             <div class="align-middle ps-2 pe-2 pt-1">
               <!-- <button
@@ -33,7 +33,9 @@
                   </strong>
                 </span>
                 <span class="float-start align-middle"
-                  >Fellow Traveller heading to {{ details[1].name }}</span
+                  ><strong>Fellow Traveller</strong>
+                  <br>
+                  <strong>Country:</strong> {{ details[1].name }}</span
                 >
               </div>
             </div>

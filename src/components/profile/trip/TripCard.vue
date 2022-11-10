@@ -1,6 +1,14 @@
 <template>
-  <div v-if="destroy" class="card border-0 container-fluid">
-    <div class="card-body rounded-3" style="background-color: #094067">
+  <div v-if="destroy" class="card border-0 container-fluid p-0">
+    <div
+      class="card-body rounded-2"
+      :style="{ backgroundImage: `url(${returnURl})` }"
+      style="
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      "
+    >
       <!-- Trip Name -->
       <div class="">
         <div class="card bg-transparent border-0">
@@ -87,8 +95,8 @@
             </button>
           </div>
 
-          <div class="row">
-            <div class="col-md-6 mt-2">
+          <div class="row justify-content-center mb-3">
+            <!-- <div class="col-md-6 mt-2">
               <img
                 v-if="imageLoading"
                 :src="returnURl"
@@ -104,9 +112,12 @@
                   <span class="visually-hidden">Loading...</span>
                 </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="card-body text-light">
+            </div> -->
+            <div class="col-3">
+              <div
+                class="card-body text-light rounded-3 bg-dark"
+                style="--bs-bg-opacity: 0.6;"
+              >
                 <span><strong class="fs-3">Trip Name: </strong></span>
                 <p class="card-title fs-4">{{ details[1].tripName }}</p>
                 <span><strong class="fs-5">Location: </strong></span>
@@ -119,18 +130,22 @@
 
       <!-- Destination/Hotels Section -->
       <div class="row">
-        <div class="text-light">
-          <p><strong class="fs-5"> Destinations Planned: </strong></p>
-          <DestinationList :list="documents" :id="tripId" />
+        <div class="text-light bg-dark mb-2" style="--bs-bg-opacity: 0.5">
+          <p><strong class="fs-2"> Destinations Planned: </strong></p>
+          <DestinationList
+            style="opacity: 0.9"
+            :list="documents"
+            :id="tripId"
+          />
         </div>
       </div>
 
-      <div class="row">
-        <div class="text-light">
+      <div class="row mb-2">
+        <div class="text-light bg-dark" style="--bs-bg-opacity: 0.5">
           <p>
-            <strong class="fs-5">Hotels Planned: </strong>
+            <strong class="fs-2">Hotels Planned: </strong>
           </p>
-          <HotelList :list="hotels" :id="tripId" />
+          <HotelList style="opacity: 0.9" :list="hotels" :id="tripId" />
         </div>
       </div>
     </div>
