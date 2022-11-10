@@ -1,11 +1,11 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" style="background-color: #094067; background-image: linear-gradient(#094067, darkturquoise)">
     <!-- <div class="p-3">
         <p class="float-end bg-light">Welcome back {{ user.displayName }}</p>
       </div> -->
-    <div class="mt-4 p-5 rounded">
-      <h1 style="color: #00473e">Where people are travelling</h1>
-      <p style="color: #00473e">Stay Connected</p>
+    <div class="pt-5 pb-3 rounded">
+      <h1 style="color:whitesmoke;">Where People are Travelling</h1> <br>
+      <p style="color:whitesmoke;">Stay Connected</p>
     </div>
     <div>
       <ComList :trips="documents" />
