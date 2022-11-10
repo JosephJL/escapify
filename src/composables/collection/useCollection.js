@@ -4,6 +4,7 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  setDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { ref } from "vue";
@@ -25,6 +26,17 @@ const useCollection = () => {
     error.value = null;
     try {
       await addDoc(collection(db, "comments"), commentInfo);
+    } catch (err) {
+      console.log(err.message);
+      error.value = err.message;
+    }
+  };
+
+  const setLike = async (likeInfo) => {
+    console.log("reached add like", likeInfo);
+    error.value = null;
+    try {
+      await setDoc(collection(db, "likes"), likeInfo);
     } catch (err) {
       console.log(err.message);
       error.value = err.message;
@@ -54,7 +66,14 @@ const useCollection = () => {
     }
   };
 
-  return { addDocument, error, delDocument, updateDocument, addComment };
+  return {
+    addDocument,
+    error,
+    delDocument,
+    updateDocument,
+    addComment,
+    setLike,
+  };
 };
 
 export default useCollection;
