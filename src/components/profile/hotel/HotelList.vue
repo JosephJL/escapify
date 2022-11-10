@@ -11,7 +11,7 @@
   display: flex;
   overflow-y: auto;
   white-space: nowrap;
-  height: 100%;
+  /* height: 100%; */
 }
 </style>
 

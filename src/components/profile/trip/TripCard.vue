@@ -2,8 +2,12 @@
   <div v-if="destroy" class="card border-0 container-fluid">
     <div
       class="card-body rounded-3"
-      :style="{ backgroundImage: `url(${returnURl})`}"
-      style="background-repeat:no-repeat; background-size:cover; background-position: center;"
+      :style="{ backgroundImage: `url(${returnURl})` }"
+      style="
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      "
     >
       <!-- Trip Name -->
       <div class="">
@@ -50,8 +54,9 @@
               </div>
             </div> -->
             <div class="col-3">
-              <div class="card-body text-light bg-dark"
-              style="--bs-bg-opacity: .7"
+              <div
+                class="card-body text-light rounded-3 bg-dark"
+                style="--bs-bg-opacity: 0.6;"
               >
                 <span><strong class="fs-3">Trip Name: </strong></span>
                 <p class="card-title fs-4">{{ details[1].tripName }}</p>
@@ -65,7 +70,7 @@
 
       <!-- Destination/Hotels Section -->
       <div class="row">
-        <div class="text-light bg-dark" style="--bs-bg-opacity: .7">
+        <div class="text-light bg-dark mb-2" style="--bs-bg-opacity: 0.5">
           <p><strong class="fs-2"> Destinations Planned: </strong></p>
           <DestinationList
             style="opacity: 0.9"
@@ -75,8 +80,8 @@
         </div>
       </div>
 
-      <div class="row mt-5 mb-4">
-        <div class="text-light bg-dark" style="--bs-bg-opacity: .7">
+      <div class="row mb-2">
+        <div class="text-light bg-dark" style="--bs-bg-opacity: 0.5">
           <p>
             <strong class="fs-2">Hotels Planned: </strong>
           </p>
