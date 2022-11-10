@@ -8,10 +8,11 @@
       <p style="color: whitesmoke">Craft out your next adventure</p>
     </div>
     <div class="container-fluid">
+      <!-- background-color: #b8c1ec -->
       <div
         id="tripList"
-        style="background-color: #b8c1ec"
-        class="rounded-3 p-4 fw-bold"
+        style="--bs-bg-opacity: 0.6;"
+        class="rounded-3 p-4 fw-bold bg-dark"
         v-on:mousemove="mouseMoveHandler"
         v-on:mouseup="mouseUpHandler"
         v-on:mousedown="mouseDownHandler"

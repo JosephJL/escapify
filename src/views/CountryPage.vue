@@ -94,7 +94,7 @@
     <section class="destinations">
       <div class="row">
         <div class="col-md-4 order-md-first col-12 order-md-first">
-          <h2 class="mt-3">Destinations</h2>
+          <h2 class="mt-3 text-white">Destinations</h2>
           <DestinationList
             @selectedFromList="getSelection"
             @modalInfo="updateDestInfo"
@@ -105,7 +105,7 @@
         </div>
         <div class="col-md-8 col-12">
           <!-- {{ selectedInfo }} -->
-          <h2 class="mt-3">Hotels and Accomodation</h2>
+          <h2 class="mt-3 text-white">Hotels and Accomodation</h2>
           <span v-if="getAccom">
             <!-- {{getAccom}} -->
             <AccommodationList
