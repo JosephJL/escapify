@@ -7,6 +7,7 @@ import {
   where,
   onSnapshot,
   query,
+  orderBy,
 } from "firebase/firestore";
 
 console.log("in query firestore is ", db);
@@ -62,7 +63,12 @@ const queryCollectionById = () => {
     console.log("in comments collection, tripId is", tripId);
     // console.log("db is ", db);
     // let collectionRef = collection(db, collectionName)
-    const q = query(collection(db, "comments"), where("tripId", "==", tripId));
+    // const q = query(
+    //   collection(db, "comments"),
+    //   where("tripId", "==", tripId),
+    //   orderBy("createdAt")
+    // );
+    const q = query(collection(db, "comments"), orderBy("createdAt"));
 
     // const querySnapshot = await getDocs(q);
     onSnapshot(q, (querySnapshot) => {
@@ -75,6 +81,11 @@ const queryCollectionById = () => {
       console.log("ALL COMMENTS: ", tesComments.join(", "));
       console.log("DOC DATA HERE IS", comments.value);
     });
+    // const snapshot = await getCountFromServer(q);
+
+    // // const coll = collection(db, "cities");
+    // // const query_ = query(coll, where("state", "==", "CA"));
+    // console.log("COUNT OF COMMENTS IS: ", snapshot.data().count);
   };
 
   // querySnapshot.forEach((doc) => {
