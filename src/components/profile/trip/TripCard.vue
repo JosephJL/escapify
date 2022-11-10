@@ -150,26 +150,7 @@
       </div>
     </div>
   </div>
-  <div class="itinerary" style="height: 600px">
-    Planner is here
-    <drag-drop
-      :dropzones="dropGroups"
-      :dropzonesTitle="'XYZ Company Teams'"
-      :originalData="stories"
-      :originalTitle="'Tasks to be distributed'"
-      :inPlace="true"
-      :enableSave="true"
-      :enableCancel="true"
-      @dropInOriginalBucket="originalBucketDropEvent"
-      @dropInDestinationBucket="destinationBucketDropEvent"
-      @save="save"
-      @cancel="cancel"
-    >
-      <template #dd-card="{ cardData }">
-        <custom-card :data="cardData" @done="doneMarked" />
-      </template>
-    </drag-drop>
-  </div>
+  <div class="itinerary" style="height: 600px">Planner is here</div>
 </template>
 
 <style scoped>
