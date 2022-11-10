@@ -24,7 +24,7 @@
             How to Escapify
           </h3>
           <div class="row p-8">
-            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+            <div class="col-md-4 col-12 p-4 mt-4 mb-4">
               <div class="card pt-4 pb-4" style="width: 100%">
                 <div class="card-body">
                   <svg
@@ -50,7 +50,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+            <div class="col-md-4 col-12 p-4 mt-4 mb-4">
               <div class="card pt-4 pb-4" style="width: 100%">
                 <div class="card-body">
                   <svg
@@ -76,7 +76,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+            <div class="col-md-4 col-12 p-4 mt-4 mb-4">
               <div class="card pt-4 pb-4" style="width: 100%">
                 <div class="card-body">
                   <svg

@@ -116,7 +116,7 @@
             <div class="col-3">
               <div
                 class="card-body text-light rounded-3 bg-dark"
-                style="--bs-bg-opacity: 0.6;"
+                style="--bs-bg-opacity: 0.6"
               >
                 <span><strong class="fs-3">Trip Name: </strong></span>
                 <p class="card-title fs-4">{{ details[1].tripName }}</p>
@@ -150,6 +150,26 @@
       </div>
     </div>
   </div>
+  <div class="itinerary" style="height: 600px">
+    Planner is here
+    <drag-drop
+      :dropzones="dropGroups"
+      :dropzonesTitle="'XYZ Company Teams'"
+      :originalData="stories"
+      :originalTitle="'Tasks to be distributed'"
+      :inPlace="true"
+      :enableSave="true"
+      :enableCancel="true"
+      @dropInOriginalBucket="originalBucketDropEvent"
+      @dropInDestinationBucket="destinationBucketDropEvent"
+      @save="save"
+      @cancel="cancel"
+    >
+      <template #dd-card="{ cardData }">
+        <custom-card :data="cardData" @done="doneMarked" />
+      </template>
+    </drag-drop>
+  </div>
 </template>
 
 <style scoped>
@@ -178,9 +198,10 @@ import DestinationList from "../destination/DestinationList.vue";
 import HotelList from "../hotel/HotelList.vue";
 import getPlacePhotos from "../../../composables/image/getPhotos";
 import useCollection from "../../../composables/collection/useCollection";
+import DragDrop from "vue-drag-n-drop";
 
 export default {
-  components: { DestinationList, HotelList },
+  components: { DestinationList, HotelList, DragDrop },
   props: { details: Object },
   setup(props) {
     const tripId = ref(props.details[0]);
