@@ -1,17 +1,6 @@
-body{
-    margin:0;
-    padding:0;
-    background-color: #094067; background-image: linear-gradient(#094067, darkturquoise)
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #094067;
+  background-image: linear-gradient(#094067, darkturquoise);
 }
-
-::-webkit-scrollbar {
-    width: 9px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(155, 155, 155, 0.5);
-    border-radius: 20px;
-    border: transparent;
-  }

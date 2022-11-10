@@ -20,8 +20,8 @@
       </div>
     </div>
     <div class="card-body text-white">
-      <h5 class="card-title">Country : {{ countryName }}</h5>
-      <p class="card-text">Region : {{ details.region }}</p>
+      <h5 class="card-title">{{ countryName }}</h5>
+      <p class="card-text">{{ details.region }}</p>
     </div>
   </div>
 </template>
