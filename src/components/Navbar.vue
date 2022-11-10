@@ -5,8 +5,11 @@
   >
     <!-- old color #e3f2fd  -->
     <div class="container-fluid">
-      <a class="navbar-brand text-white" href="#" @click.prevent="goHome"
-        >Escape</a
+      <a class="navbar-brand text-white p-0" href="#" @click.prevent="goHome"
+        >
+        <img src="../assets/img/Escapify-logos/Escapify-white.png" alt=""
+        style="width: 150px">
+        </a
       >
       <!-- <button
         class="navbar-toggler"
