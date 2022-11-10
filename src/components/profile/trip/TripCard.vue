@@ -1,7 +1,7 @@
 <template>
-  <div v-if="destroy" class="card border-0 container-fluid">
+  <div v-if="destroy" class="card border-0 container-fluid p-0">
     <div
-      class="card-body rounded-3"
+      class="card-body rounded-2"
       :style="{ backgroundImage: `url(${returnURl})` }"
       style="
         background-repeat: no-repeat;

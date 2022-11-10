@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid">
     <div class="p-3">
-      <h5 class="float-end">Welcome Back {{ user.displayName }}!</h5>
+      <h3 class="float-end text-light">Welcome Back {{ user.displayName }}!</h3>
     </div>
     <div class="mt-4 p-5 rounded">
-      <h1 style="color: #00473e">Your Trips</h1>
-      <p style="color: #00473e">Craft out your next adventure</p>
+      <h1 style="color: whitesmoke">Your Trips</h1>
+      <p style="color: whitesmoke">Craft out your next adventure</p>
     </div>
     <div class="container-fluid">
       <div
