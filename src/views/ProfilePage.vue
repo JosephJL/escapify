@@ -7,12 +7,12 @@
       <h1 style="color: whitesmoke">Your Trips</h1>
       <p style="color: whitesmoke">Craft out your next adventure</p>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid bg-dark rounded-3" style="--bs-bg-opacity: 0.6">
       <!-- background-color: #b8c1ec -->
+      <p class="text-light">View your Trips Here</p>
       <div
         id="tripList"
-        style="--bs-bg-opacity: 0.6;"
-        class="rounded-3 p-4 fw-bold bg-dark"
+        class="p-4 fw-bold"
         v-on:mousemove="mouseMoveHandler"
         v-on:mouseup="mouseUpHandler"
         v-on:mousedown="mouseDownHandler"
