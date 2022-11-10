@@ -1,6 +1,6 @@
 <template>
   <div id="destinationList" class="container-fluid" style="">
-    <div v-for="document in list" :key="document">
+    <div v-for="document in list" :key="document" class="p-0">
       <DestinationCard :details="document" :id="id" />
     </div>
   </div>
@@ -11,7 +11,7 @@
   display: flex;
   overflow-y: auto;
   white-space: nowrap;
-  height: 100%;
+  /* height: 100%; */
 }
 </style>
 
