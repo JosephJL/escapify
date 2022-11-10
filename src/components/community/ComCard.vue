@@ -126,7 +126,6 @@
               </p>
               <div class="collapse" :id="'collapse-' + details[0]">
                 <div class="d-flex">
-                  <span class="fs-5 mt-1">{{ details[1].userName }}</span>
                   <div class="input-group mx-2">
                     <input
                       type="text"

@@ -10,12 +10,106 @@
       <div id="scene-container"></div>
       <div class="header d-flex" style="">
         <h1 class="text-white fs-1 fw-semibold mx-auto align-self-center">
-          Travel the World
+          Travel The World
         </h1>
       </div>
       <div style="background-image: linear-gradient(#094067, darkturquoise)">
+        <div
+          class="container-fluid rounded-3 bg-dark pt-4 pb-4 mb-4"
+          style="--bs-bg-opacity: 0.6"
+        >
+          <h3
+            class="text-white fs-3 fw-semibold mx-auto align-self-center mt-4"
+          >
+            How to Escapify
+          </h3>
+          <div class="row p-8">
+            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+              <div class="card pt-4 pb-4" style="width: 100%">
+                <div class="card-body">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    fill="currentColor"
+                    class="bi bi-search"
+                    viewBox="0 0 16 16"
+                    style="color: #094067"
+                  >
+                    <path
+                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                    />
+                  </svg>
+                  <h5 class="card-title mt-4" style="color: #094067">
+                    Discover
+                  </h5>
+                  <p class="card-text" style="color: #094067">
+                    Find places on every continent, across the globe. Our
+                    suggestions will delight you.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+              <div class="card pt-4 pb-4" style="width: 100%">
+                <div class="card-body">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    fill="currentColor"
+                    class="bi bi-calendar-check"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+                    />
+                    <path
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                    />
+                  </svg>
+                  <h5 class="card-title mt-4" style="color: #094067">Plan</h5>
+                  <p class="card-text" style="color: #094067">
+                    Create your trip and add your destinations with nearby
+                    accomodations to your trips
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+              <div class="card pt-4 pb-4" style="width: 100%">
+                <div class="card-body">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    fill="currentColor"
+                    class="bi bi-people-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"
+                    />
+                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                  </svg>
+                  <h5 class="card-title mt-4" style="color: #094067">
+                    Community
+                  </h5>
+                  <p class="card-text" style="color: #094067">
+                    Share your travel plans and view other travellers'
+                    experiences. Get inspired!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Search bar -->
-        <nav aria-label="Page navigation">
+        <nav aria-label="Page navigation" class="mb-4">
           <div
             class="container-fluid col-xxl-3 col-lg-4 col-md-5 col-sm-6 col-10 mb-1"
           >
@@ -23,7 +117,7 @@
               <input
                 class="form-control me-2 rounded-4"
                 type="search"
-                placeholder="Search"
+                placeholder="Find your country"
                 aria-label="Search"
                 v-model="filterText"
               />
@@ -42,9 +136,10 @@
           <ul class="pagination flex-wrap">
             <li class="page-item">
               <a
-                class="page-link rounded-4 me-1"
+                class="page-link rounded-4 me-1 text-black"
                 @click.prevent="getCountries"
                 href="#"
+                style="width: 6rem"
               >
                 All
               </a>
@@ -52,7 +147,8 @@
             <template v-for="continent in continents" :key="continent">
               <li class="page-item">
                 <a
-                  class="page-link rounded-4 mx-2"
+                  class="page-link rounded-4 me-1 text-black"
+                  style="width: 6rem"
                   @click.prevent="selectContinent(continent)"
                   href="#"
                   >{{ continent }}</a

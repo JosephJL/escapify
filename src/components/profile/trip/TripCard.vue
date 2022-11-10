@@ -56,13 +56,14 @@
                 </svg>
                 Share
               </button>
-              <ul class="dropdown-menu p-3">
+              <ul class="dropdown-menu p-3" style="width: 16rem; height: 16rem">
                 <div class="form-floating">
                   <textarea
                     class="form-control"
                     placeholder="Leave a comment here"
                     id="floatingTextarea"
                     v-model="postText"
+                    style="height: 11rem"
                   ></textarea>
                   <label for="floatingTextarea"
                     >Share more about your trip</label
