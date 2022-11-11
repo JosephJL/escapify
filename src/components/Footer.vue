@@ -5,7 +5,10 @@
     <MDBContainer class="p-4">
       <!--Grid row-->
       <MDBRow>
-        <!--Grid column-->
+        <!--Grid column to fill up some empty space-->
+        <MDBCol lg="1">
+        </MDBCol>
+        <!-- Grid column -->
         <MDBCol lg="6" md="12" class="mb-4 mb-md-0">
           <h5 class="text-uppercase">About Us</h5>
 
@@ -20,7 +23,7 @@
         <!--Grid column-->
 
         <!--Grid column-->
-        <MDBCol lg="6" md="12" class="mb-4 mb-md-0">
+        <MDBCol lg="5" md="12" class="mb-4 mb-md-0">
           <h5 class="text-uppercase">Stay in Touch</h5>
 
           <p>
