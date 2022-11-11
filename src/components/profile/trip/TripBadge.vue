@@ -18,7 +18,7 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
-    <div class="card-body text-center" style="white-space: initial">
+    <div class="card-body text-light" style="white-space: initial">
       {{ details[1].tripName }}
     </div>
   </div>

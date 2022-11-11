@@ -113,7 +113,7 @@
                 </div>
               </div>
             </div> -->
-            <div class="col-3">
+            <div class="col-lg-3 col-md-6">
               <div
                 class="card-body text-light rounded-3 bg-dark"
                 style="--bs-bg-opacity: 0.6"
