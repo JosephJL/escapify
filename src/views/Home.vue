@@ -381,6 +381,7 @@ export default {
   setup() {
     //Vue3 Code
     const router = useRouter();
+    window.scrollTo(0, 0);
 
     //User Auth
     const { user } = getUser();

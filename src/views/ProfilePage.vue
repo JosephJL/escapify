@@ -17,9 +17,19 @@
         v-on:mousedown="mouseDownHandler"
         ref="menu"
       >
-        <div v-for="(trip, index) of documents" :key="index">
-          <TripBadge :details="trip" @selectedTrip="displayTrip" />
-        </div>
+        <template v-if="documents.length">
+          <div v-for="(trip, index) of documents" :key="index">
+            <TripBadge :details="trip" @selectedTrip="displayTrip" />
+          </div>
+        </template>
+        <template v-else>
+          <div class="text-center" style="height: 8rem">
+            <h4 class="">
+              What are you waiting for? Click on Discover to create your next
+              trip!
+            </h4>
+          </div>
+        </template>
       </div>
     </div>
     <div v-if="selectedTrip">

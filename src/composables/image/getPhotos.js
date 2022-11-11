@@ -11,13 +11,14 @@ const getPlacePhoto = () => {
   const imageLoading = ref(false);
 
   const load = async (placeName) => {
+    console.log("I WANT TO UETHISSSSS", process.env.VUE_APP_GOOGLE_KEY)
     // console.log("inside getPlacePhoto composable with placename", placeName);
     const proxyUrl = "https://blooming-reaches-84388.herokuapp.com/";
     let config = {
       method: "get",
       url:
         proxyUrl +
-        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${placeName}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&inputtype=textquery&fields=name,photos,place_id`,
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${placeName}&key=${process.env.VUE_APP_GOOGLE_KEY}&inputtype=textquery&fields=name,photos,place_id`,
       headers: {},
     };
     await axios(config).then((response) => {

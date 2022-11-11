@@ -68,29 +68,6 @@
       </div>
     </div>
 
-    <!-- datepicker -->
-    <!-- <section>
-      <div>
-        Check-in Date:
-        <DatePicker
-          :readonly="true"
-          format="MMM/D/YYYY"
-          width="300px"
-          name="date"
-          value="help"
-        ></DatePicker>
-        Check-out Date:
-        <DatePicker
-          :readonly="true"
-          format="MMM/D/YYYY"
-          width="300px"
-          name="date"
-          value="me pls"
-        ></DatePicker>
-      </div>
-      <hr />
-    </section> -->
-
     <section class="destinations">
       <div class="row">
         <div class="col-md-6 order-md-first col-12 order-md-first">
@@ -106,21 +83,23 @@
         <div class="col-md-6 col-12">
           <!-- {{ selectedInfo }} -->
           <h2 class="mt-3">Hotels and Accomodation</h2>
-          <span v-if="getAccom">
-            <!-- {{getAccom}} -->
-            <AccommodationList
-              @modalInfo="updateAccomInfo"
-              :accomDetails="selectedInfo"
-              :countryDetails="countryPacket"
-            />
-          </span>
-          <span v-else>
-            <!-- {{ firstDestination }} -->
-            <AccommodationList
-              @modalInfo="updateAccomInfo"
-              :accomDetails="firstDestination"
-              :countryDetails="countryPacket"
-            />
+          <span v-if="getAccom || firstDestination">
+            <span v-if="getAccom">
+              <!-- {{getAccom}} -->
+              <AccommodationList
+                @modalInfo="updateAccomInfo"
+                :accomDetails="selectedInfo"
+                :countryDetails="countryPacket"
+              />
+            </span>
+            <span v-else>
+              <!-- {{ firstDestination }} -->
+              <AccommodationList
+                @modalInfo="updateAccomInfo"
+                :accomDetails="firstDestination"
+                :countryDetails="countryPacket"
+              />
+            </span>
           </span>
         </div>
       </div>
@@ -203,7 +182,6 @@ import getDestination from "../composables/destination/getDestination.js";
 import getPlacePhoto from "../composables/image/getPhotos.js";
 import { useRouter } from "vue-router";
 import TripModal from "../components/profile/trip/TripModal.vue";
-import DatePicker from "../components/datepicker/DatePicker.vue";
 
 // Current user
 import getUser from "../composables/getUser";
@@ -212,11 +190,12 @@ import getUser from "../composables/getUser";
 import useCollection from "../composables/collection/useCollection";
 
 export default {
-  components: { AccommodationList, DestinationList, TripModal, DatePicker },
+  components: { AccommodationList, DestinationList, TripModal },
   props: {
     details: String,
   },
   setup(props) {
+    window.scrollTo(0, 0);
     // get current user
     const { user } = getUser();
     console.log("countryPage user is", user);
@@ -289,7 +268,7 @@ export default {
 
     // selection stuff
     const selectedInfo = ref(null);
-    const getAccom = ref(false);
+    const getAccom = ref(null);
 
     const getSelection = (arg) => {
       getAccom.value = false;

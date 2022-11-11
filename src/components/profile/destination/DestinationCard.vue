@@ -2,6 +2,7 @@
   <div
     id="destinationCard"
     class="card card-body mx-2 bg-white border-0 container"
+    draggable="true"
   >
     <div class="row" style="width: 100%">
       <div class="col-6">

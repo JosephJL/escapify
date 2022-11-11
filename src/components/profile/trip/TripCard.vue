@@ -150,7 +150,8 @@
       </div>
     </div>
   </div>
-  <div class="itinerary" style="height: 600px">Planner is here</div>
+  <!-- <div class="itinerary" style="height: 600px">Planner is here</div> -->
+  <TripPlanner :destinations="documents" :hotels="hotels"/>
 </template>
 
 <style scoped>
@@ -179,10 +180,10 @@ import DestinationList from "../destination/DestinationList.vue";
 import HotelList from "../hotel/HotelList.vue";
 import getPlacePhotos from "../../../composables/image/getPhotos";
 import useCollection from "../../../composables/collection/useCollection";
-import DragDrop from "vue-drag-n-drop";
+import TripPlanner from "../../itinerary/TripPlanner.vue";
 
 export default {
-  components: { DestinationList, HotelList, DragDrop },
+  components: { DestinationList, HotelList, TripPlanner },
   props: { details: Object },
   setup(props) {
     const tripId = ref(props.details[0]);

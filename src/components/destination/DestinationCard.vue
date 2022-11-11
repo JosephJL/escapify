@@ -31,7 +31,10 @@
       <h5 class="card-title">
         <strong>Name: </strong>{{ details.properties.name }}
       </h5>
-      <p id="infoSection" v-if="info">{{ info }}</p>
+      <div class="collapse" :id="'collapse-' + details.id">
+        <p>{{ info }}</p>
+      </div>
+
       <!-- {{ details }} -->
       <div>
         <strong>Tags:</strong>
@@ -50,8 +53,21 @@
 
       <div class="">
         <button
+          id="infoSection"
+          v-if="info"
+          class="btn btn-info me-2"
           type="button"
-          class="btn btn-primary mx-2"
+          data-bs-toggle="collapse"
+          :data-bs-target="'#collapse-' + details.id"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          <span>More Info</span>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary me-2"
           @click.prevent="selectDestination"
         >
           Nearby Hotels
