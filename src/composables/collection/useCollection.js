@@ -32,11 +32,12 @@ const useCollection = () => {
     }
   };
 
-  const setLike = async (likeInfo) => {
+  const setLike = async (likeInfo , tripId, userId) => {
     console.log("reached add like", likeInfo);
+    const likesRef = doc(db, 'likes' ,tripId + userId)
     error.value = null;
     try {
-      await setDoc(collection(db, "likes"), likeInfo);
+      await setDoc(likesRef, likeInfo);
     } catch (err) {
       console.log(err.message);
       error.value = err.message;

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="destroy" class="border-0 container-fluid">
+  <div class="border-0 container-fluid">
     <div class="row">
       <div class="col-3 d-none d-md-block"></div>
 
@@ -34,7 +34,7 @@
                 </span>
                 <span class="float-start align-middle"
                   ><strong>Fellow Traveller</strong>
-                  <br>
+                  <br />
                   <strong>Country:</strong> {{ details[1].name }}</span
                 >
               </div>
@@ -68,14 +68,14 @@
               </span>
               <!-- <DestinationList :list="documents" :id="tripId" /> -->
               <div>
-                <template v-for="(document, index) of documents" :key="index">
+                <div v-for="(document, index) of documents" :key="index">
                   <span
                     class="badge badge-pill badge-warning m-1 fs-6 float-start"
-                    style="background-color: #fa5246"
+                    style="background-color: #fa5246; white-space: initial"
                   >
                     {{ document[1].name }}
                   </span>
-                </template>
+                </div>
               </div>
               <p class="pt-1">
                 <button
@@ -99,6 +99,7 @@
                       d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
                     />
                   </svg>
+                  <span class="ms-2">{{ formattedLikes.length }}</span>
                 </button>
                 <button
                   class="btn btn-primary float-start"
@@ -239,28 +240,37 @@ export default {
     };
 
     const {
+      likes,
       comments,
       commentError,
       loadCollection,
       loadTripsCollection,
       loadCommentsCollection,
+      loadLikesCollection,
     } = queryCollection();
 
     loadCommentsCollection(props.details[0]);
+    loadLikesCollection(tripId.value);
 
-    const formattedComments = computed(() => {
-      if (comments) {
-        return comments.value.map((doc) => {
-          console.log("BEFORE ERROR", doc);
-          let time = formatDistanceToNow(doc[1].createdAt.toDate());
-          return { ...doc, createdAt: time };
-        });
+    // const formattedLikes = computed(() => {
+    //   if (likes) {
+    //     return comments.value.map((doc) => {
+    //       console.log("BEFORE ERROR", doc);
+    //       let time = formatDistanceToNow(doc[1].createdAt.toDate());
+    //       return { ...doc, createdAt: time };
+    //     });
+    //   }
+    // });
+
+    const formattedLikes = computed(() => {
+      if (likes) {
+        return likes.value.filter((doc) => doc.likeValue == true);
       }
     });
 
     const finalComments = computed(() => {
       console.log("finalComments here");
-      if (formattedComments) {
+      if (comments) {
         return comments.value
           .reverse()
           .filter((doc) => doc[1].tripId == props.details[0]);
@@ -280,6 +290,7 @@ export default {
           createdAt: Timestamp.now(),
         };
         addComment(commentInfo);
+        currComment.value = "";
       } else {
         alert("Log in first to be part of the community");
       }
@@ -299,7 +310,7 @@ export default {
           tripId: props.details[0],
           likeValue: like.value,
         };
-        setLike(likeInfo);
+        setLike(likeInfo, tripId.value, user.value.uid);
       } else {
         alert("Log in first to be part of the community");
       }
@@ -309,7 +320,7 @@ export default {
       finalComments,
       toggleLike,
       like,
-      formattedComments,
+      formattedLikes,
       currComment,
       toggleComment,
       comments,
