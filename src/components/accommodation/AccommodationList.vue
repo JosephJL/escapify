@@ -17,7 +17,7 @@
       <div>
         <h4 class="mt-2">Selected Destination:</h4>
         <h5>{{ destinationName }}</h5>
-        <div style="z-index: 5">
+        <!-- <div style="z-index: 5">
           Check-in Date:
           <DatePicker
             :readonly="true"
@@ -34,7 +34,7 @@
             name="date"
             value="me pls"
           ></DatePicker>
-        </div>
+        </div> -->
       </div>
       <hr />
       <template v-for="hotel in hotels" :key="hotel">
@@ -90,8 +90,6 @@ export default {
     // const hotels = ref([]);
     // console.log(props)
     // let country = props.name
-    console.log("accomodations is set up", props.accomDetails);
-    const destinationName = ref(props.accomDetails.name);
     // console.log("HELLO NAME IS ", name)
     const lat = props.accomDetails.lat;
     const lon = props.accomDetails.lon;
@@ -105,6 +103,7 @@ export default {
     today = yyyy + "-" + mm + "-" + dd;
     // console.log(today)
 
+    const destinationName = ref(null);
     watch(
       () => props.accomDetails,
       () => {

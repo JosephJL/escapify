@@ -25,7 +25,7 @@ const getDestination = () => {
         rate: "3",
       },
       headers: {
-        "X-RapidAPI-Key": "16ee8e4bfbmsh5e491b63623df36p1a152fjsn83b106a1dc4b",
+        "X-RapidAPI-Key": process.env.VUE_APP_DESTINATION_KEY,
         "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
       },
     };

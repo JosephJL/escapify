@@ -116,7 +116,7 @@
             <div class="col-lg-3 col-md-6">
               <div
                 class="card-body text-light rounded-3 bg-dark"
-                style="--bs-bg-opacity: 0.6;"
+                style="--bs-bg-opacity: 0.6"
               >
                 <span><strong class="fs-3">Trip Name: </strong></span>
                 <p class="card-title fs-4">{{ details[1].tripName }}</p>
@@ -150,6 +150,8 @@
       </div>
     </div>
   </div>
+  <!-- <div class="itinerary" style="height: 600px">Planner is here</div> -->
+  <TripPlanner :destinations="documents" :hotels="hotels"/>
 </template>
 
 <style scoped>
@@ -178,9 +180,10 @@ import DestinationList from "../destination/DestinationList.vue";
 import HotelList from "../hotel/HotelList.vue";
 import getPlacePhotos from "../../../composables/image/getPhotos";
 import useCollection from "../../../composables/collection/useCollection";
+import TripPlanner from "../../itinerary/TripPlanner.vue";
 
 export default {
-  components: { DestinationList, HotelList },
+  components: { DestinationList, HotelList, TripPlanner },
   props: { details: Object },
   setup(props) {
     const tripId = ref(props.details[0]);
