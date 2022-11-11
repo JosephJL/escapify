@@ -9,15 +9,15 @@ import {
   query,
 } from "firebase/firestore";
 
-console.log("in query firestore is ",db)
+// console.log("in query firestore is ",db)
 
 const queryNestedCollectionById = () => {
   const error = ref(null);
   const documents = ref([]);
 
   const loadNestedCollection = async (collectionName, nestedCollectionName, tripId, userId) => {
-    console.log("in get collection");
-    console.log("db is ", db);
+    // console.log("in get collection");
+    // console.log("db is ", db);
 
     // let collectionRef = collection(db, collectionName)
     const q = query(
@@ -44,8 +44,8 @@ const queryNestedCollectionById = () => {
     // });
   };
   const loadNestedDestination = async (collectionName, nestedCollectionName, tripId) => {
-    console.log("in get collection");
-    console.log("db is ", db);
+    // console.log("in get collection");
+    // console.log("db is ", db);
 
     // let collectionRef = collection(db, collectionName)
     const q = query(

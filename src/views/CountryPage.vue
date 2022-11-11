@@ -1,5 +1,5 @@
 <template>
-  <div class="countrypage">
+  <div id="countrypage" class="countrypage">
     <div
       class="countryimage card card-body container-fluid border-0"
       :style="{ backgroundImage: 'url(' + returnURl + ')' }"
@@ -46,8 +46,8 @@
           <!-- {{ countryDetails }} -->
           <p>Capital: {{ countryDetails.capital }}</p>
           <hr />
-          <p>Population: {{ countryDetails.population }}</p>
-          <hr />
+          <!-- <p>Population: {{ countryDetails.population }}</p>
+          <hr /> -->
           <!-- {{ countryDetails }} -->
           <!-- <p>Translations: {{ countryDetails.translations }}</p> -->
           <!-- <hr />

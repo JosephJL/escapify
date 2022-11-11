@@ -10,7 +10,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 
-console.log("in query firestore is ", db);
+// console.log("in query firestore is ", db);
 
 const queryCollectionById = () => {
   const error = ref(null);
@@ -37,7 +37,7 @@ const queryCollectionById = () => {
         trips.push(doc.data().name);
         documents.value.push([doc.id, doc.data()]);
       });
-      console.log("Current trips: ", trips.join(", "));
+      // console.log("Current trips: ", trips.join(", "));
     });
   };
 
@@ -55,12 +55,12 @@ const queryCollectionById = () => {
         trips.push(doc.data().name);
         documents.value.push([doc.id, doc.data()]);
       });
-      console.log("ALL TRIPS: ", trips.join(", "));
+      // console.log("ALL TRIPS: ", trips.join(", "));
     });
   };
 
   const loadCommentsCollection = async (tripId) => {
-    console.log("in comments collection, tripId is", tripId);
+    // console.log("in comments collection, tripId is", tripId);
     // console.log("db is ", db);
     // let collectionRef = collection(db, collectionName)
     // const q = query(

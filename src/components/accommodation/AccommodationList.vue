@@ -117,8 +117,6 @@ export default {
 
     const { getHotelInfo, hotels } = getAccomodation();
 
-    getHotelInfo(destinationName, lat, lon);
-
     const getModalInfo = (arg) => {
       console.log("da modal info here!!", arg);
       context.emit("modalInfo", arg);

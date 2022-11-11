@@ -13,7 +13,7 @@ const getDestination = () => {
     if (area < 1600) {
       area = 4000;
     }
-    console.log("radius is", area);
+    // console.log("radius is", area);
     const options = {
       method: "GET",
       url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
