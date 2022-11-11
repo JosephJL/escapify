@@ -1,15 +1,28 @@
 <template>
   <Navbar />
   <div><router-view /></div>
+  <Footer></Footer>
 </template>
 
 <script>
 import { db } from "./firebase/config";
 import Navbar from "./components/Navbar.vue";
 import { onMounted } from "vue";
+import Footer from "./components/Footer.vue";
+// import {
+//     MDBFooter
+//   } from 'mdb-vue-ui-kit';
+import {
+    MDBFooter,
+    MDBContainer,
+    MDBRow,
+    MDBCol,
+    MDBBtn,
+    MDBICon
+} from 'mdb-vue-ui-kit';
 
 export default {
-  components: { Navbar },
+  components: { Navbar, Footer },
   setup() {
     onMounted(() => {
       const googleApiScript = document.createElement("script");

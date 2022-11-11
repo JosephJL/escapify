@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid p-5">
     <div class="p-3">
       <h3 class="float-end text-light">Welcome Back {{ user.displayName }}!</h3>
     </div>
