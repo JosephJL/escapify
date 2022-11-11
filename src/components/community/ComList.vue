@@ -2,7 +2,7 @@
   <div class="countryList">
     <div class="container-fluid mt-5">
       <!-- class horizontalScroll for horizontal -->
-      <div class="">
+      <div>
         <template v-for="trip in trips" :key="trip">
           <Comcard :details="trip" />
         </template>

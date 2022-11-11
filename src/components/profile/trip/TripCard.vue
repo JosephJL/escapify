@@ -7,6 +7,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        background-color: black;
       "
     >
       <!-- Trip Name -->
@@ -130,7 +131,11 @@
 
       <!-- Destination/Hotels Section -->
       <div class="row">
-        <div class="text-light bg-dark mb-2" style="--bs-bg-opacity: 0.5">
+        <div
+          class="text-light bg-dark mb-2"
+          style="--bs-bg-opacity: 0.5"
+          v-if="documents.length"
+        >
           <p><strong class="fs-2"> Destinations Planned: </strong></p>
           <DestinationList
             style="opacity: 0.9"
@@ -140,7 +145,7 @@
         </div>
       </div>
 
-      <div class="row mb-2">
+      <div class="row mb-2" v-if="hotels.length">
         <div class="text-light bg-dark" style="--bs-bg-opacity: 0.5">
           <p>
             <strong class="fs-2">Hotels Planned: </strong>
@@ -151,7 +156,7 @@
     </div>
   </div>
   <!-- <div class="itinerary" style="height: 600px">Planner is here</div> -->
-  <TripPlanner :destinations="documents" :hotels="hotels"/>
+  <TripPlanner :destinations="documents" :hotels="hotels" />
 </template>
 
 <style scoped>
