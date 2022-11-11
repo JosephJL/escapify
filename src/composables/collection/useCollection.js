@@ -44,7 +44,7 @@ const useCollection = () => {
   };
 
   const delDocument = async (tripId) => {
-    console.log("reached del destination!, data received is ", tripId);
+    // console.log("reached del destination!, data received is ", tripId);
     error.value = null;
     try {
       await deleteDoc(doc(db, "trips", tripId));
@@ -55,7 +55,7 @@ const useCollection = () => {
   };
 
   const updateDocument = async (tripId, value, text) => {
-    console.log("reached update doc value received is", value);
+    // console.log("reached update doc value received is", value);
     error.value = null;
     const docRef = doc(db, "trips", tripId);
     try {

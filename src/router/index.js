@@ -58,6 +58,12 @@ const routes = [
 ];
 
 const router = createRouter({
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    console.log("SCROLL BEHAVIOUR to is",to)
+    return { x:0,y:0
+     }
+  },
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });

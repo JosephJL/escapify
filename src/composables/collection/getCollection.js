@@ -9,8 +9,8 @@ import {
 } from "firebase/firestore";
 
 const getCollection = (collectionName) => {
-  console.log("in get collection");
-  console.log("db is ", db);
+  // console.log("in get collection");
+  // console.log("db is ", db);
   const error = ref(null);
   const documents = ref(null);
 
@@ -22,7 +22,7 @@ const getCollection = (collectionName) => {
       snap.docs.forEach((doc) => {
         results.push(doc.data());
       });
-      console.log("results is ", results);
+      // console.log("results is ", results);
       documents.value = results;
       error.value = null;
     },

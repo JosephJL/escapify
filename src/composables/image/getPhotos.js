@@ -11,7 +11,6 @@ const getPlacePhoto = () => {
   const imageLoading = ref(false);
 
   const load = async (placeName) => {
-    console.log("I WANT TO UETHISSSSS", process.env.VUE_APP_GOOGLE_KEY)
     // console.log("inside getPlacePhoto composable with placename", placeName);
     const proxyUrl = "https://blooming-reaches-84388.herokuapp.com/";
     let config = {
@@ -29,7 +28,7 @@ const getPlacePhoto = () => {
       // console.log("candidate photos are,", candidate.photos,"for placename ",placeName);
       if (candidates.length != 0){
         const candidate = candidates[0];
-        console.log("candidate is",candidate)
+        // console.log("candidate is",candidate)
         if ("photos" in candidate){
           photoRef.value = candidate.photos[0].photo_reference;
         }else{
@@ -46,7 +45,7 @@ const getPlacePhoto = () => {
 
     const photoUrl =
       proxyUrl +
-      `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef.value}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&maxwidth=1000&maxheight=1000`;
+      `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef.value}&key=${process.env.VUE_APP_GOOGLE_KEY}&maxwidth=1000&maxheight=1000`;
 
     if (photoRef.value != null){
       const imageURLQuery = await axios

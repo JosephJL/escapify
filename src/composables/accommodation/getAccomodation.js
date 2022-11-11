@@ -37,8 +37,8 @@ const getAccomodation = () => {
       await axios
         .request(options)
         .then(function (response) {
-          console.log(response.data);
-          console.log(name);
+          // console.log(response.data);
+          // console.log(name);
           let hotelsReturned = response.data.searchResults.results
           for (let hotel of hotelsReturned) {
             let hotelName = hotel.name
@@ -48,8 +48,8 @@ const getAccomodation = () => {
               hotelStars = hotel.guestReviews.rating
             }
             let thumbnail = hotel.optimizedThumbUrls.srpDesktop
-            console.log(hotelStars)
-            console.log(thumbnail)
+            // console.log(hotelStars)
+            // console.log(thumbnail)
             hotels.value.push([hotelName, hotelAddress, hotelStars, thumbnail])
           }
           // let apiData = response.data.sr;

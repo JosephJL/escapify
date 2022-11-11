@@ -6,7 +6,7 @@ const useNestedCollection = () => {
   const error = ref(null);
 
   const addDestination = async (tripId, destinationInfo) => {
-    console.log("reached add destination!, data received is ",tripId,destinationInfo)
+    // console.log("reached add destination!, data received is ",tripId,destinationInfo)
     error.value = null;
     try {
       await addDoc(collection(db, "trips",tripId,"destinations"), destinationInfo);
@@ -17,7 +17,7 @@ const useNestedCollection = () => {
   };
 
   const delHotel = async (tripId,hotelId) => {
-    console.log("reached del destination!, data received is ",tripId,hotelId)
+    // console.log("reached del destination!, data received is ",tripId,hotelId)
     error.value = null;
     try {
       await deleteDoc(doc(db, "trips",tripId,"hotels",hotelId));
@@ -38,7 +38,7 @@ const useNestedCollection = () => {
   };
 
   const delDestination = async (tripId,destId) => {
-    console.log("reached del destination!, data received is ",tripId,destId)
+    // console.log("reached del destination!, data received is ",tripId,destId)
     error.value = null;
     try {
       await deleteDoc(doc(db, "trips",tripId,"destinations",destId));
