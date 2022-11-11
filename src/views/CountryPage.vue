@@ -44,10 +44,20 @@
           <!-- <p>{{ countryDetails.latlng }}</p> -->
           <!-- <h3>Country Information</h3> -->
           <!-- {{ countryDetails }} -->
-          <p>Capital: {{ countryDetails.capital }}</p>
+          <span>Capital: {{ countryDetails.capital }}</span>
           <hr />
-          <!-- <p>Population: {{ countryDetails.population }}</p>
-          <hr /> -->
+          <span>
+            Languages:
+            <template v-for="kind of countryDetails.languages" :key="kind">
+              <span
+                class="badge badge-pill badge-info m-1"
+                style="background-color: #094067"
+              >
+                {{ kind.name }}
+              </span>
+            </template>
+          </span>
+          <hr />
           <!-- {{ countryDetails }} -->
           <!-- <p>Translations: {{ countryDetails.translations }}</p> -->
           <!-- <hr />
@@ -195,7 +205,10 @@ export default {
     details: String,
   },
   setup(props) {
-    window.scrollTo(0, 0);
+    onMounted(() => {
+      console.log("MOUNTED, SCROLLING NOW", window.scrollTo(0, 0));
+      document.body.scrollTop = 0;
+    });
     // get current user
     const { user } = getUser();
     console.log("countryPage user is", user);
