@@ -9,17 +9,7 @@ import { db } from "./firebase/config";
 import Navbar from "./components/Navbar.vue";
 import { onMounted } from "vue";
 import Footer from "./components/Footer.vue";
-// import {
-//     MDBFooter
-//   } from 'mdb-vue-ui-kit';
-import {
-    MDBFooter,
-    MDBContainer,
-    MDBRow,
-    MDBCol,
-    MDBBtn,
-    MDBICon
-} from 'mdb-vue-ui-kit';
+
 
 export default {
   components: { Navbar, Footer },
