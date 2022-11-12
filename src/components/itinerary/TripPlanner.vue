@@ -11,7 +11,7 @@
         <DatePicker
           :readonly="true"
           format="MMM/D/YYYY"
-          width="20rem"
+          width="100%"
           name="date"
           @selectedDate="toggleStart"
         />
@@ -22,7 +22,7 @@
         <DatePicker
           :readonly="true"
           format="MMM/D/YYYY"
-          width="20rem"
+          width="100%"
           name="date"
           @selectedDate="toggleEnd"
         />
