@@ -1,3 +1,27 @@
+<style>
+@media screen and (min-width: 401px) {
+  #logo {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #logo {
+    width: 90px;
+  }
+}
+
+@media screen and (min-width: 451px) {
+  #logo {
+    width: 150px;
+  }
+}
+
+#logo {
+  height: auto;
+}
+</style>
+
 <template>
   <nav
     class="navbar navbar-expand bg-dark sticky-top"
@@ -5,12 +29,13 @@
   >
     <!-- old color #e3f2fd  -->
     <div class="container-fluid">
-      <a class="navbar-brand text-white p-0" href="#" @click.prevent="goHome"
-        >
-        <img src="../assets/img/Escapify-logos/Escapify-white.png" alt=""
-        style="width: 150px">
-        </a
-      >
+      <a class="navbar-brand text-white p-0" href="#" @click.prevent="goHome">
+        <img
+          id="logo"
+          src="../assets/img/Escapify-logos/Escapify-white.png"
+          alt=""
+        />
+      </a>
       <!-- <button
         class="navbar-toggler"
         type="button"
@@ -234,4 +259,3 @@ export default {
   },
 };
 </script>
-<style></style>
