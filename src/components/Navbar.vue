@@ -51,13 +51,13 @@
       <ul class="navbar-nav ms-auto mb-0">
         <!-- dropdown when user is logged in -->
         <a class="navbar-brand text-white" href="#" @click.prevent="goHome"
-          ><span style="font-size: 16px">Discover</span></a
+          ><span style="font-size: 16px" class="wordLink">Discover</span></a
         >
         <a
           class="navbar-brand text-white"
           href="#"
           @click.prevent="openCommunityPage"
-          ><span style="font-size: 16px">Community</span></a
+          ><span style="font-size: 16px" class="wordLink">Community</span></a
         >
         <template v-if="user">
           <li class="nav-item text-white">

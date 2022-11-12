@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-transparent border-0" style="width: 10rem">
+  <div class="card bg-transparent border-0 badgecard" style="width: 10rem">
     <div class="d-flex" v-if="imageLoading">
       <img
         :src="returnURl"
@@ -23,6 +23,15 @@
     </div>
   </div>
 </template>
+
+<style>
+.badgecard{
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+}
+.badgecard:hover{
+  transform: scale(1.1);
+}
+</style>
 
 <script>
 import getPlacePhoto from "../../../composables/image/getPhotos";
