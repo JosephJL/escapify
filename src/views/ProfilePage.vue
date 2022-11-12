@@ -25,10 +25,10 @@
         </template>
         <template v-else>
           <div class="text-center" style="height: 8rem">
-            <h4 class="">
+            <!-- <h4 class="">
               What are you waiting for? Click on Discover to create your next
               trip!
-            </h4>
+            </h4> -->
           </div>
         </template>
       </div>

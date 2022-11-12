@@ -5,6 +5,7 @@ import {
   doc,
   updateDoc,
   setDoc,
+  Timestamp
 } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { ref } from "vue";
@@ -60,7 +61,7 @@ const useCollection = () => {
     error.value = null;
     const docRef = doc(db, "trips", tripId);
     try {
-      await updateDoc(docRef, { shareStatus: value, postInfo: text });
+      await updateDoc(docRef, { shareStatus: value, postInfo: text , createdAt:Timestamp.now().toDate() });
     } catch (err) {
       console.log(err.message);
       error.value = err.message;
