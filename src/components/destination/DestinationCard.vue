@@ -1,8 +1,8 @@
 <template>
   <div
     id="destinationCard"
-    class="card border-0"
-    style="height: 100%; background-color: #b8c1ec"
+    class="card border-0 text-white"
+    style="height: 100%; background-color: darkslategrey;"
   >
     <!-- :style="isClicked ? { 'background-color': '#e6e6e6' } : null" -->
 

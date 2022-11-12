@@ -60,6 +60,8 @@
                 :key="index"
               >
                 <span
+                  v-for="(kind, index) of countryDetails.languages"
+                  :key="index"
                   class="badge badge-pill badge-info m-1"
                   style="background-color: #094067"
                   v-if="kind.name"
@@ -76,14 +78,14 @@
               </template>
             </template>
             <template v-else>
-              <template v-for="kind of countryDetails.languages" :key="kind">
-                <span
+              <!-- <template> -->
+                <span v-for="kind of countryDetails.languages" :key="kind"
                   class="badge badge-pill badge-info m-1"
                   style="background-color: #094067"
                 >
                   {{ kind.name }}
                 </span>
-              </template>
+              <!-- </template> -->
             </template>
           </span>
           <hr />
