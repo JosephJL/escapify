@@ -112,7 +112,7 @@
         </div>
         <div class="col-md-6 col-12">
           <!-- {{ selectedInfo }} -->
-          <h2 class="mt-3">Hotels and Accomodation</h2>
+          <h2 class="mt-3 text-white">Hotels and Accomodation</h2>
           <span v-if="getAccom || firstDestination">
             <span v-if="getAccom">
               <!-- {{getAccom}} -->
