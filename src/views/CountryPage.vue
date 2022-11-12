@@ -44,10 +44,15 @@
           <!-- <p>{{ countryDetails.latlng }}</p> -->
           <!-- <h3>Country Information</h3> -->
           <!-- {{ countryDetails }} -->
-          <span>Capital: {{ countryDetails.capital[0] }}</span>
+          <span v-if="typeof countryDetails.capital == 'array'"
+            >Capital: {{ countryDetails.capital[0] }}</span
+          >
+          <span v-else>Capital: {{ countryDetails.capital }}</span>
+
           <hr />
           <span>
             Languages:
+            <!-- {{ typeof countryDetails.languages }} -->
             <template v-if="typeof countryDetails.languages == 'object'">
               <template
                 v-for="(kind, index) of countryDetails.languages"
@@ -57,7 +62,7 @@
                   class="badge badge-pill badge-info m-1"
                   style="background-color: #094067"
                 >
-                  {{ kind }}
+                  {{ kind.name }}
                 </span>
               </template>
             </template>
