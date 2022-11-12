@@ -11,7 +11,6 @@ const requireAuth = (to, from, next) => {
   let user = getAuth().currentUser;
   console.log("current user in auth guard: ", user);
   // if (!user && to.name != "Home") next({ name: "Home" });
-
   if (!user) next({ name: "Home" });
   else next();
 };
@@ -60,9 +59,8 @@ const routes = [
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top
-    console.log("SCROLL BEHAVIOUR to is",to)
-    return { x:0,y:0
-     }
+    console.log("SCROLL BEHAVIOUR to is", to);
+    return { x: 0, y: 0 };
   },
   history: createWebHistory(process.env.BASE_URL),
   routes,

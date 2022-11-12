@@ -100,6 +100,7 @@
   }
   #destinationCard {
     width: 20rem;
+    margin-right: 1rem;
   }
 }
 </style>
