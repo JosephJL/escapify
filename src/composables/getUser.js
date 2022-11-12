@@ -1,5 +1,10 @@
 import { ref } from "vue";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 
 const auth = getAuth();
 setPersistence(auth, browserSessionPersistence);
