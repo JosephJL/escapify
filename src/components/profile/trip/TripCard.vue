@@ -7,6 +7,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        background-color: black;
       "
     >
       <!-- Trip Name -->
@@ -116,7 +117,7 @@
             <div class="col-lg-3 col-md-6">
               <div
                 class="card-body text-light rounded-3 bg-dark"
-                style="--bs-bg-opacity: 0.6;"
+                style="--bs-bg-opacity: 0.6"
               >
                 <span><strong class="fs-3">Trip Name: </strong></span>
                 <p class="card-title fs-4">{{ details[1].tripName }}</p>
@@ -130,7 +131,11 @@
 
       <!-- Destination/Hotels Section -->
       <div class="row">
-        <div class="text-light bg-dark mb-2" style="--bs-bg-opacity: 0.5">
+        <div
+          class="text-light bg-dark mb-2"
+          style="--bs-bg-opacity: 0.5"
+          v-if="documents.length"
+        >
           <p><strong class="fs-2"> Destinations Planned: </strong></p>
           <DestinationList
             style="opacity: 0.9"
@@ -140,7 +145,7 @@
         </div>
       </div>
 
-      <div class="row mb-2">
+      <div class="row mb-2" v-if="hotels.length">
         <div class="text-light bg-dark" style="--bs-bg-opacity: 0.5">
           <p>
             <strong class="fs-2">Hotels Planned: </strong>
@@ -150,6 +155,8 @@
       </div>
     </div>
   </div>
+  <!-- <div class="itinerary" style="height: 600px">Planner is here</div> -->
+  <TripPlanner :destinations="documents" :hotels="hotels" />
 </template>
 
 <style scoped>
@@ -178,9 +185,10 @@ import DestinationList from "../destination/DestinationList.vue";
 import HotelList from "../hotel/HotelList.vue";
 import getPlacePhotos from "../../../composables/image/getPhotos";
 import useCollection from "../../../composables/collection/useCollection";
+import TripPlanner from "../../itinerary/TripPlanner.vue";
 
 export default {
-  components: { DestinationList, HotelList },
+  components: { DestinationList, HotelList, TripPlanner },
   props: { details: Object },
   setup(props) {
     const tripId = ref(props.details[0]);

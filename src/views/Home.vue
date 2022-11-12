@@ -24,7 +24,7 @@
             How to Escapify
           </h3>
           <div class="row p-8">
-            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+            <div class="col-md-4 col-12 p-4 mt-4 mb-4">
               <div class="card pt-4 pb-4" style="width: 100%">
                 <div class="card-body">
                   <svg
@@ -50,7 +50,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+            <div class="col-md-4 col-12 p-4 mt-4 mb-4">
               <div class="card pt-4 pb-4" style="width: 100%">
                 <div class="card-body">
                   <svg
@@ -76,7 +76,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-12 p-4 mt-4 mb-4">
+            <div class="col-md-4 col-12 p-4 mt-4 mb-4">
               <div class="card pt-4 pb-4" style="width: 100%">
                 <div class="card-body">
                   <svg
@@ -281,14 +281,14 @@ export default {
   methods: {
     init() {
       //threeJS Code
-      const container = document.querySelector("#scene-container");
+      this.container = document.querySelector("#scene-container");
       //create a Scene
       this.scene = new Scene();
       //set the background color
       this.scene.background = new Color("#094067");
       //create a camera
       const fov = 35;
-      var aspect = container.clientWidth / container.clientHeight;
+      var aspect = this.container.clientWidth / this.container.clientHeight;
       const near = 0.1;
       const far = 100;
       this.camera = new PerspectiveCamera(fov, aspect, near, far);
@@ -332,7 +332,10 @@ export default {
       this.renderer.physicallyCorrectLights = true;
 
       //set renderer to same size as our container element
-      this.renderer.setSize(container.clientWidth, container.clientHeight);
+      this.renderer.setSize(
+        this.container.clientWidth,
+        this.container.clientHeight
+      );
       window.addEventListener("resize", () => {
         // Set the size again if a resize occurs.
         // const width = window.innerWidth;
@@ -346,10 +349,14 @@ export default {
         // this.renderer.domElement.style.width = `${width}px`;
         // this.renderer.domElement.style.height = `${height}px`;
 
-        aspect = container.clientWidth / container.clientHeight;
-        this.camera.aspect = container.clientWidth / container.clientHeight;
+        aspect = this.container.clientWidth / this.container.clientHeight;
+        this.camera.aspect =
+          this.container.clientWidth / this.container.clientHeight;
         this.camera.updateProjectionMatrix();
-        this.renderer.setSize(container.clientWidth, container.clientHeight);
+        this.renderer.setSize(
+          this.container.clientWidth,
+          this.container.clientHeight
+        );
         this.renderer.setPixelRatio(window.devicePixelRatio);
       });
 
@@ -357,7 +364,7 @@ export default {
       this.renderer.setPixelRatio(window.devicePixelRatio);
 
       //add the canvas element to the page
-      container.append(this.renderer.domElement);
+      this.container.append(this.renderer.domElement);
 
       //start the loop
       this.renderer.setAnimationLoop(() => {
@@ -374,11 +381,20 @@ export default {
     // },
   },
 
+  beforeUnmount() {
+    console.log("DESTROYING");
+    this.container.remove(this.renderer);
+  },
+
   mounted() {
     this.init();
   },
 
   setup() {
+    onMounted(() => {
+      console.log("MOUNTED, SCROLLING NOW", window.scrollTo(0, 0));
+      document.body.scrollTop = 0;
+    });
     //Vue3 Code
     const router = useRouter();
 

@@ -1,18 +1,21 @@
-import {ref} from 'vue'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { ref } from "vue";
+import {
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 
+const auth = getAuth();
+setPersistence(auth, browserSessionPersistence);
 
-
-const auth = getAuth()
-const user = ref(auth.currentUser)
-
+const user = ref(auth.currentUser);
 onAuthStateChanged(auth, (_user) => {
-    console.log('User state change. Current user is: ',user)
-    user.value = _user
-})
-
+  // console.log('User state change. Current user is: ',user)
+  user.value = _user;
+});
 const getUser = () => {
-    return {user}
-}
+  return { user };
+};
 
-export default getUser
+export default getUser;

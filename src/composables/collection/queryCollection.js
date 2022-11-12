@@ -10,12 +10,13 @@ import {
   orderBy,
 } from "firebase/firestore";
 
-console.log("in query firestore is ", db);
+// console.log("in query firestore is ", db);
 
 const queryCollectionById = () => {
   const error = ref(null);
   const documents = ref([]);
   const comments = ref([]);
+  const likes = ref([])
 
   const loadCollection = async (collectionName, userId) => {
     // console.log("in get collection");
@@ -37,7 +38,7 @@ const queryCollectionById = () => {
         trips.push(doc.data().name);
         documents.value.push([doc.id, doc.data()]);
       });
-      console.log("Current trips: ", trips.join(", "));
+      // console.log("Current trips: ", trips.join(", "));
     });
   };
 
@@ -55,12 +56,12 @@ const queryCollectionById = () => {
         trips.push(doc.data().name);
         documents.value.push([doc.id, doc.data()]);
       });
-      console.log("ALL TRIPS: ", trips.join(", "));
+      // console.log("ALL TRIPS: ", trips.join(", "));
     });
   };
 
   const loadCommentsCollection = async (tripId) => {
-    console.log("in comments collection, tripId is", tripId);
+    // console.log("in comments collection, tripId is", tripId);
     // console.log("db is ", db);
     // let collectionRef = collection(db, collectionName)
     // const q = query(
@@ -94,14 +95,36 @@ const queryCollectionById = () => {
 
   //   // console.log("documents in collection is,",documents)
   // });
+  const loadLikesCollection = async (tripId) => {
+   
+    const q = query(collection(db, "likes"), where("tripId", "==", tripId));
+
+    // const querySnapshot = await getDocs(q);
+    onSnapshot(q, (querySnapshot) => {
+      const teslikes = [];
+      likes.value = [];
+      querySnapshot.forEach((doc) => {
+        teslikes.push(doc.data().likerName);
+        likes.value.push( doc.data());
+      });
+      console.log("ALL COMMENTS: ", teslikes.join(", "));
+      console.log("DOC DATA HERE IS", likes.value);
+    });
+    // const snapshot = await getCountFromServer(q);
+    // // const coll = collection(db, "cities");
+    // // const query_ = query(coll, where("state", "==", "CA"));
+    // console.log("COUNT OF COMMENTS IS: ", snapshot.data().count);
+  };
 
   return {
+    likes,
     documents,
     error,
     comments,
     loadCollection,
     loadTripsCollection,
     loadCommentsCollection,
+    loadLikesCollection,
   };
 };
 

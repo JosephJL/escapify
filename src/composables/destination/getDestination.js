@@ -13,7 +13,7 @@ const getDestination = () => {
     if (area < 1600) {
       area = 4000;
     }
-    console.log("radius is", area);
+    // console.log("radius is", area);
     const options = {
       method: "GET",
       url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
@@ -25,7 +25,7 @@ const getDestination = () => {
         rate: "3",
       },
       headers: {
-        "X-RapidAPI-Key": "16ee8e4bfbmsh5e491b63623df36p1a152fjsn83b106a1dc4b",
+        "X-RapidAPI-Key": process.env.VUE_APP_DESTINATION_KEY,
         "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
       },
     };

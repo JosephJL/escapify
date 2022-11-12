@@ -9,15 +9,15 @@ import {
   query,
 } from "firebase/firestore";
 
-console.log("in query firestore is ",db)
+// console.log("in query firestore is ",db)
 
 const queryHotels = () => {
   const hotelError = ref(null);
   const hotels = ref([]);
 
   const loadHotelsCollection = async(tripId, userId) => {
-    console.log("in get collection");
-    console.log("db is ", db);
+    // console.log("in get collection");
+    // console.log("db is ", db);
 
     // let collectionRef = collection(db, collectionName)
 

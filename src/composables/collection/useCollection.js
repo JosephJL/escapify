@@ -32,11 +32,12 @@ const useCollection = () => {
     }
   };
 
-  const setLike = async (likeInfo) => {
+  const setLike = async (likeInfo , tripId, userId) => {
     console.log("reached add like", likeInfo);
+    const likesRef = doc(db, 'likes' ,tripId + userId)
     error.value = null;
     try {
-      await setDoc(collection(db, "likes"), likeInfo);
+      await setDoc(likesRef, likeInfo);
     } catch (err) {
       console.log(err.message);
       error.value = err.message;
@@ -44,7 +45,7 @@ const useCollection = () => {
   };
 
   const delDocument = async (tripId) => {
-    console.log("reached del destination!, data received is ", tripId);
+    // console.log("reached del destination!, data received is ", tripId);
     error.value = null;
     try {
       await deleteDoc(doc(db, "trips", tripId));
@@ -55,7 +56,7 @@ const useCollection = () => {
   };
 
   const updateDocument = async (tripId, value, text) => {
-    console.log("reached update doc value received is", value);
+    // console.log("reached update doc value received is", value);
     error.value = null;
     const docRef = doc(db, "trips", tripId);
     try {

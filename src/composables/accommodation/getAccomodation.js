@@ -30,15 +30,15 @@ const getAccomodation = () => {
           locale: 'en_US'
         },
         headers: {
-          'X-RapidAPI-Key': 'ebb63e55dbmsh3ad80d937f149c5p1a8017jsn5f78631fdcc1',
+          'X-RapidAPI-Key': process.env.VUE_APP_HOTEL_KEY,
           'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
         }
       };
       await axios
         .request(options)
         .then(function (response) {
-          console.log(response.data);
-          console.log(name);
+          // console.log(response.data);
+          // console.log(name);
           let hotelsReturned = response.data.searchResults.results
           for (let hotel of hotelsReturned) {
             let hotelName = hotel.name
@@ -48,8 +48,8 @@ const getAccomodation = () => {
               hotelStars = hotel.guestReviews.rating
             }
             let thumbnail = hotel.optimizedThumbUrls.srpDesktop
-            console.log(hotelStars)
-            console.log(thumbnail)
+            // console.log(hotelStars)
+            // console.log(thumbnail)
             hotels.value.push([hotelName, hotelAddress, hotelStars, thumbnail])
           }
           // let apiData = response.data.sr;
