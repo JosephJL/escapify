@@ -17,6 +17,7 @@ const queryCollectionById = () => {
   const documents = ref([]);
   const comments = ref([]);
   const likes = ref([])
+  const loading = ref(false)
 
   const loadCollection = async (collectionName, userId) => {
     // console.log("in get collection");
@@ -43,10 +44,11 @@ const queryCollectionById = () => {
   };
 
   const loadTripsCollection = async () => {
+    loading.value = false
     // console.log("in get collection");
     // console.log("db is ", db);
     // let collectionRef = collection(db, collectionName)
-    const q = query(collection(db, "trips"), where("shareStatus", "==", true));
+    const q = query(collection(db, "trips"), orderBy("createdAt") );
 
     // const querySnapshot = await getDocs(q);
     onSnapshot(q, (querySnapshot) => {
@@ -57,6 +59,7 @@ const queryCollectionById = () => {
         documents.value.push([doc.id, doc.data()]);
       });
       // console.log("ALL TRIPS: ", trips.join(", "));
+      loading.value = true
     });
   };
 
@@ -125,6 +128,7 @@ const queryCollectionById = () => {
     loadTripsCollection,
     loadCommentsCollection,
     loadLikesCollection,
+    loading
   };
 };
 

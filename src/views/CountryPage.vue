@@ -52,19 +52,30 @@
           <hr />
           <span>
             Languages:
-            <!-- {{ typeof countryDetails.languages }} -->
-            <template v-if="typeof(countryDetails.languages) == 'object'">
-              <!-- <template
-              > -->
+            <!-- {{ countryDetails.languages }}
+            {{ typeof countryDetails.languages }} -->
+            <template v-if="typeof countryDetails.languages == 'object'">
+              <template
+                v-for="(kind, index) of countryDetails.languages"
+                :key="index"
+              >
                 <span
                   v-for="(kind, index) of countryDetails.languages"
                   :key="index"
                   class="badge badge-pill badge-info m-1"
                   style="background-color: #094067"
+                  v-if="kind.name"
                 >
                   {{ kind.name }}
                 </span>
-              <!-- </template> -->
+                <span
+                  class="badge badge-pill badge-info m-1"
+                  style="background-color: #094067"
+                  v-else
+                >
+                  {{ kind }}
+                </span>
+              </template>
             </template>
             <template v-else>
               <!-- <template> -->
@@ -173,6 +184,7 @@
     </div>
   </Teleport>
   <TripModal
+    v-if="user"
     :currDestination="modalInfo"
     :countryDetails="countryPacket"
     :type="typeLocation"
