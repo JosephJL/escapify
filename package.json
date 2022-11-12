@@ -15,6 +15,7 @@
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.2",
     "firebase": "^9.9.4",
+    "mdb-vue-ui-kit": "^3.1.0",
     "three": "^0.145.0",
     "vue": "^3.0.0",
     "vue-content-loader": "^2.0.1",
