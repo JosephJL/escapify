@@ -6,29 +6,49 @@
   >
     <div class="card-body">
       <h1><strong class="text-white p-2">Plan your trip here</strong></h1>
-      <div class="text-white p-2">
-        Select your start date:
-        <DatePicker
-          :readonly="true"
-          format="MMM/D/YYYY"
-          width="100%"
-          name="date"
-          @selectedDate="toggleStart"
-        />
+      <div class="row">
+        <div class="d-none d-md-block col-3"></div>
+        <div class="text-white p-2 col-md-6">
+          Select your start date:
+          <DatePicker
+            :readonly="true"
+            format="MMM/D/YYYY"
+            width="100%"
+            name="date"
+            @selectedDate="toggleStart"
+          />
+        </div>
+        <div class="d-none d-md-block col-3"></div>
       </div>
 
-      <div class="text-white p-2">
-        Select your end date:
-        <DatePicker
-          :readonly="true"
-          format="MMM/D/YYYY"
-          width="100%"
-          name="date"
-          @selectedDate="toggleEnd"
-        />
+      <div class="row">
+        <div class="d-none d-md-block col-3"></div>
+        <div class="text-white p-2 col-md-6">
+          Select your end date:
+          <DatePicker
+            :readonly="true"
+            format="MMM/D/YYYY"
+            width="100%"
+            name="date"
+            @selectedDate="toggleEnd"
+          />
+        </div>
+        <div class="d-none d-md-block col-3"></div>
       </div>
 
-      <button class="btn btn-warning mx-2" @click="forceRerender">Reset</button>
+      <div>
+        <button class="btn btn-warning mx-2" @click="forceRerender">
+          Reset
+        </button>
+      </div>
+      <div class="mt-3">
+        <span
+          ><strong class="text-white p-2 bg-info rounded-3"
+            >Drag and drop your your destinations and hotels into the
+            calendar</strong
+          ></span
+        >
+      </div>
     </div>
 
     <div>
