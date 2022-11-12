@@ -27,16 +27,24 @@
                 Remove Trip
               </button> -->
               <div class="d-flex flex-column float-start">
-                <span class="">
+                <span
+                  id="emailHelp"
+                  class="form-text"
+                  style="font-size: 12px"
+                  >{{ details[1].createdAt.toDate() }}</span
+                >
+                <span>
                   <strong class="fs-5 float-start"
                     >{{ details[1].userName }}
                   </strong>
                 </span>
-                <span class="float-start align-middle"
-                  ><strong>Fellow Traveller</strong>
-                  <br />
-                  <strong>Country:</strong> {{ details[1].name }}</span
-                >
+                <span>
+                  <strong class="float-start">Fellow Traveller</strong>
+                </span>
+                <span>
+                  <strong class="float-start">Country:</strong>
+                  <span class="float-start">{{ details[1].name }}</span>
+                </span>
               </div>
             </div>
             <div class="d-flex ps-2 pe-2 pt-4">
