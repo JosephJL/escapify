@@ -52,7 +52,8 @@
           <hr />
           <span>
             Languages:
-            <!-- {{ typeof countryDetails.languages }} -->
+            <!-- {{ countryDetails.languages }}
+            {{ typeof countryDetails.languages }} -->
             <template v-if="typeof countryDetails.languages == 'object'">
               <template
                 v-for="(kind, index) of countryDetails.languages"
@@ -61,8 +62,16 @@
                 <span
                   class="badge badge-pill badge-info m-1"
                   style="background-color: #094067"
+                  v-if="kind.name"
                 >
                   {{ kind.name }}
+                </span>
+                <span
+                  class="badge badge-pill badge-info m-1"
+                  style="background-color: #094067"
+                  v-else
+                >
+                  {{ kind }}
                 </span>
               </template>
             </template>
@@ -101,7 +110,7 @@
     <section class="destinations">
       <div class="row">
         <div class="col-md-6 order-md-first col-12 order-md-first">
-          <h2 class="mt-3">Destinations</h2>
+          <h2 class="mt-3 text-white">Destinations</h2>
           <DestinationList
             @selectedFromList="getSelection"
             @modalInfo="updateDestInfo"
@@ -112,7 +121,7 @@
         </div>
         <div class="col-md-6 col-12">
           <!-- {{ selectedInfo }} -->
-          <h2 class="mt-3">Hotels and Accomodation</h2>
+          <h2 class="mt-3 text-white">Hotels and Accomodation</h2>
           <span v-if="getAccom || firstDestination">
             <span v-if="getAccom">
               <!-- {{getAccom}} -->
@@ -173,6 +182,7 @@
     </div>
   </Teleport>
   <TripModal
+    v-if="user"
     :currDestination="modalInfo"
     :countryDetails="countryPacket"
     :type="typeLocation"
