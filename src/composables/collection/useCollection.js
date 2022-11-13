@@ -5,7 +5,7 @@ import {
   doc,
   updateDoc,
   setDoc,
-  Timestamp
+  Timestamp,
 } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { ref } from "vue";
@@ -33,9 +33,9 @@ const useCollection = () => {
     }
   };
 
-  const setLike = async (likeInfo , tripId, userId) => {
+  const setLike = async (likeInfo, tripId, userId) => {
     console.log("reached add like", likeInfo);
-    const likesRef = doc(db, 'likes' ,tripId + userId)
+    const likesRef = doc(db, "likes", tripId + userId);
     error.value = null;
     try {
       await setDoc(likesRef, likeInfo);
@@ -61,22 +61,28 @@ const useCollection = () => {
     error.value = null;
     const docRef = doc(db, "trips", tripId);
     try {
-      await updateDoc(docRef, { shareStatus: value, postInfo: text , createdAt:Timestamp.now().toDate() });
+      await updateDoc(docRef, {
+        shareStatus: value,
+        postInfo: text,
+        createdAt: Timestamp.now().toDate(),
+      });
     } catch (err) {
       console.log(err.message);
       error.value = err.message;
     }
   };
 
-  const addClick = async (countryInfo) => {
+  const addClick = async (countryInfo, name, userId) => {
+    console.log("reached add click", countryInfo);
+    const likesRef = doc(db, "clicks", name + userId);
     error.value = null;
     try {
-      await addDoc(collection(db, "clicks"), countryInfo);
+      await setDoc(likesRef, countryInfo);
     } catch (err) {
       console.log(err.message);
       error.value = err.message;
     }
-  }; 
+  };
 
   return {
     addClick,

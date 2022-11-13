@@ -6,14 +6,14 @@
     style="cursor: pointer"
   >
     <img
-      id="countryImage"
+      id="recentImage"
       v-if="imageLoading"
       :src="returnURl"
       class="card-img-top rounded"
       alt="image here"
       style="width: 100%"
     />
-    <div v-else id="countryImage" class="d-flex" style="width: 100%">
+    <div v-else id="recentImage" class="d-flex" style="width: 100%">
       <div
         class="spinner-grow text-light mx-auto align-self-center"
         role="status"
@@ -44,12 +44,12 @@ img {
 }
 
 @media (min-width: 767px) {
-  #countryImage {
-    height: 18rem;
+  #recentImage {
+    height: 14rem;
   }
 }
 @media (max-width: 767px) {
-  #countryImage {
+  #recentImage {
     height: 10rem;
   }
 }
@@ -58,10 +58,10 @@ img {
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import getPlacePhoto from "../composables/image/getPhotos.js";
+import getPlacePhoto from "../../composables/image/getPhotos.js";
 import { Timestamp } from "@firebase/firestore";
-import getUser from "../composables/getUser";
-import useCollection from "../composables/collection/useCollection";
+import getUser from "../../composables/getUser";
+import useCollection from "../../composables/collection/useCollection";
 
 export default {
   props: { details: Object },
