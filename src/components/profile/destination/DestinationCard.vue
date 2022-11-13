@@ -5,7 +5,7 @@
     draggable="true"
   >
     <div class="row" style="width: 100%">
-      <div class="col-6">
+      <div class="col-12 col-sm-6 p-0">
         <img
           v-if="imageLoading"
           :src="returnURl"
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div
-        class="col-6 text-black text-center align-self-center"
+        class="col-12 col-sm-6 text-black text-center align-self-center"
         style="white-space: initial"
       >
         <p class="card-title">{{ details[1].name }}</p>
