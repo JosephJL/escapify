@@ -13,16 +13,23 @@
     </div>
     <div v-else>
       <div v-for="item in 5" :key="item">
-        <div class="row">
-          <div class="col-3 d-none d-md-block"></div>
-          <div class="card-body mb-3 col-6">
-            <ContentLoader height="100%" width="100%">
-              <!-- <rect x="20%" y="82%" rx="4" ry="4" width="60%" height="10" />
-                <rect x="60%" y="87%" rx="3" ry="3" width="40%" height="10" /> -->
-              <rect x="0" y="" rx="10" ry="10" width="100%" height="100%" />
-            </ContentLoader>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-3 d-none d-md-block"></div>
+            <div class="card-body col-6">
+              <div class="mb-1" style="height: 35rem">
+                <ContentLoader height="100%" width="100%">
+                  <rect x="0" y="" rx="10" ry="10" width="100%" height="100%" />
+                </ContentLoader>
+              </div>
+              <div>
+                <ContentLoader height="100%" width="100%">
+                  <rect x="0" y="" rx="10" ry="10" width="100%" height="10%" />
+                </ContentLoader>
+              </div>
+            </div>
+            <div class="col-3 d-none d-md-block"></div>
           </div>
-          <div class="col-3 d-none d-md-block"></div>
         </div>
       </div>
     </div>

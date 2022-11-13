@@ -52,8 +52,8 @@
           <hr />
           <span>
             Languages:
-            {{ countryDetails.languages }}
-            {{ typeof countryDetails.languages }}
+            <!-- {{ countryDetails.languages }}
+            {{ typeof countryDetails.languages }} -->
             <template v-if="typeof countryDetails.languages.length > 1">
               <template
                 v-for="(kind, index) of countryDetails.languages"

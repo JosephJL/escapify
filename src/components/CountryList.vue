@@ -5,7 +5,7 @@
         <template v-for="index in 12" :key="index">
           <div
             class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-6"
-            style="height: 22rem"
+            id="countryImage"
           >
             <ContentLoader height="100%" width="100%">
               <rect x="20%" y="82%" rx="4" ry="4" width="60%" height="10" />
@@ -34,6 +34,17 @@
 .horizontalScroll {
   display: flex;
   overflow-x: auto;
+}
+
+@media (min-width: 767px) {
+  #countryImage {
+    height: 18rem;
+  }
+}
+@media (max-width: 767px) {
+  #countryImage {
+    height: 10rem;
+  }
 }
 </style>
 
