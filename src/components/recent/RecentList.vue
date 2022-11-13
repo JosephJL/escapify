@@ -2,9 +2,9 @@
   <div class="countryList">
     <div class="container-fluid text-center">
       <div v-if="!placeholderData" class="row">
-        <template v-for="index in 12" :key="index">
+        <!-- <template v-for="index in 12" :key="index">
           <div
-            class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-6"
+            class="col-xxl-1 col-xl-2 col-lg-3 col-md-4 col-6"
             style="height: 22rem"
           >
             <ContentLoader height="100%" width="100%">
@@ -13,12 +13,12 @@
               <rect x="0" y="" rx="10" ry="10" width="100%" height="80%" />
             </ContentLoader>
           </div>
-        </template>
+        </template> -->
       </div>
       <div class="row" v-else>
-        <template v-for="country in list[page]" :key="country">
+        <template v-for="country in list" :key="country">
           <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-6">
-            <CountryCard :details="country" />
+            <RecentCard :details="country[1]" />
           </div>
         </template>
       </div>
@@ -40,18 +40,16 @@
 <script>
 import axios from "axios";
 import { onBeforeMount, ref, onMounted, getCurrentScope, watch } from "vue";
-import CountryCard from "../components/CountryCard.vue";
+import RecentCard from "../../components/recent/RecentCard.vue";
 import { ContentLoader } from "vue-content-loader";
 
 export default {
-  components: { CountryCard, ContentLoader },
+  components: { ContentLoader, RecentCard },
   props: {
     list: Object,
-    page: Number,
   },
   setup(props) {
     console.log("props list is", props.list);
-    console.log("current page in country list is", props.page);
 
     const placeholderData = ref(null);
 
@@ -76,32 +74,6 @@ export default {
         placeholderAssemble();
       }
     );
-
-    // var photoRef = ref("");
-    // var image = ref("");
-
-    // const getPlacePhoto = async (countryName) => {
-    //   const proxyUrl = "http://blooming-reaches-84388.herokuapp.com/";
-    //   const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${countryName}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&inputtype=textquery&fields=name,photos`;
-    //   await axios.get(proxyUrl + url).then((response) => {
-    //     console.log(response.data);
-    //     const candidates = response.data.candidates;
-    //     const candidate = candidates[0];
-    //     photoRef.value = candidate.photos[0].photo_reference;
-    //   });
-    //   const photoUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef.value}&key=AIzaSyBv3FNyj-xBgcRGLDvyo_3u31XFROw13lY&maxwidth=400&maxheight=400`;
-    //   const imageURLQuery = await fetch(proxyUrl + photoUrl).then((response) =>
-    //     response.blob()
-    //   );
-    //   image.value = URL.createObjectURL(imageURLQuery);
-    //   console.log(image);
-    // };
-
-    // onBeforeMount(() => {
-    //   console.log("mounted!");
-    // });
-    // getPlacePhoto(props.list[0].name);
-
     return { placeholderData };
   },
 };

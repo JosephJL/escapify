@@ -6,6 +6,14 @@
   >
     <div class="card-body">
       <h1><strong class="text-white p-2">Plan your trip here</strong></h1>
+      <div class="mt-3">
+        <span class="d-flex justify-content-center"
+          ><strong
+            class="text-white p-2 rounded-3 flex-wrap justify-content-center"
+            >Select your travel dates to generate the calendar!</strong
+          ></span
+        >
+      </div>
       <div class="row">
         <div class="d-none d-md-block col-3"></div>
         <div class="text-white p-2 col-md-6">
@@ -42,8 +50,9 @@
         </button>
       </div>
       <div class="mt-3">
-        <span
-          ><strong class="text-white p-2 bg-info rounded-3"
+        <span class="d-flex justify-content-center"
+          ><strong
+            class="text-white p-2 bg-info rounded-3 flex-wrap justify-content-center"
             >Drag and drop your your destinations and hotels into the
             calendar</strong
           ></span
@@ -129,8 +138,6 @@
         <div class="col-12 col-xl-6 p-2">
           <strong v-if="duration.length" class="text-white p-2"
             >Here's your calendar</strong
-          ><strong v-else class="text-white p-2 fs-4"
-            >Select your travel dates to generate the calendar!</strong
           >
           <div class="row">
             <template v-for="(item, index) in duration" :key="index">

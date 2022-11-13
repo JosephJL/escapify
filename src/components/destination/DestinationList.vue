@@ -7,7 +7,7 @@
   <div id="dest3">Destination 3:</div> -->
   <div>
     <!-- <p>Destination is</p> -->
-    <div id="destinationList" class="overflow-auto mt-5 mb-5" style="">
+    <div id="destinationList" class="overflow-auto mt-3 mb-3" style="">
       <div class="mb-2" v-for="(destination, index) in list[page]" :key="index">
         <DestinationCard
           @selected="getSelection"

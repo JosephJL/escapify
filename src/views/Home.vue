@@ -108,6 +108,14 @@
             </div>
           </div>
         </div>
+        <div class="row p-8 mt-3 mb-3">
+          <div class="card-body text-white" v-if="user">
+            <h5 class="card-title float-start mx-5 mt-3 mb-3">
+              Your Recent Searches
+            </h5>
+          </div>
+          <RecentList :list="finalClicks" />
+        </div>
         <!-- Search bar -->
         <nav aria-label="Page navigation" class="mb-4">
           <div
@@ -132,11 +140,11 @@
         </nav>
 
         <!-- Select for different continents -->
-        <div class="container-fluid justify-content-center d-flex">
-          <ul class="pagination flex-wrap">
+        <div class="container-fluid justify-content-center margin-auto d-flex">
+          <ul class="pagination flex-wrap justify-content-center">
             <li class="page-item">
               <a
-                class="page-link rounded-4 me-1 text-black"
+                class="page-link rounded-4 me-1 text-black mb-1"
                 @click.prevent="getCountries"
                 href="#"
                 style="width: 6rem"
@@ -147,7 +155,7 @@
             <template v-for="continent in continents" :key="continent">
               <li class="page-item">
                 <a
-                  class="page-link rounded-4 me-1 text-black"
+                  class="page-link rounded-4 me-1 text-black mb-1"
                   style="width: 6rem"
                   @click.prevent="selectContinent(continent)"
                   href="#"
@@ -216,20 +224,22 @@
   height: 600px;
 }
 
-.card{
+.card {
   border-radius: 4px;
   background: #fff;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
 }
-.card:hover{
+.card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 </style>
 
 <script>
-import { watch, ref, onMounted } from "vue";
+import { watch, ref, onMounted, computed } from "vue";
 import {
   Camera,
   Group,
@@ -274,15 +284,18 @@ import Navbar from "../components/Navbar.vue";
 // Country Stuff
 import countries from "countries-list";
 import CountryList from "../components/CountryList.vue";
+import RecentList from "../components/recent/RecentList.vue";
+import RecentCard from "../components/recent/RecentCard.vue";
 
 // Firebase
 import getCollection from "../composables/collection/getCollection";
+import queryCollection from "../composables/collection/queryCollection";
 
 // Requests
 import axios from "axios";
 
 export default {
-  components: { Navbar, CountryList, LoginForm, SignUpForm, Modal },
+  components: { Navbar, CountryList, LoginForm, SignUpForm, Modal, RecentList },
   created() {
     window.addEventListener("wheel", this.handleScroll);
   },
@@ -483,11 +496,27 @@ export default {
         });
     };
 
+    const { clicks, loadClicksCollection } = queryCollection();
+
+    if (user.value) {
+      loadClicksCollection();
+    }
+
+    const finalClicks = computed(() => {
+      console.log("finalComments here");
+      if (clicks.value && user.value) {
+        return clicks.value
+          .reverse()
+          .filter((doc) => doc[1].userId == user.value.uid);
+      }
+    });
+
     console.log("document list is", documents.value);
 
     const loading = ref(true);
 
     return {
+      finalClicks,
       loading,
       user,
       documents,
