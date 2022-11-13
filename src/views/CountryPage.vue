@@ -54,7 +54,7 @@
             Languages:
             <!-- {{ countryDetails.languages }}
             {{ typeof countryDetails.languages }} -->
-            <template v-if="typeof countryDetails.languages == 'object'">
+            <template v-if="typeof countryDetails.languages.length > 1">
               <template
                 v-for="(kind, index) of countryDetails.languages"
                 :key="index"
@@ -79,12 +79,14 @@
             </template>
             <template v-else>
               <!-- <template> -->
-                <span v-for="kind of countryDetails.languages" :key="kind"
-                  class="badge badge-pill badge-info m-1"
-                  style="background-color: #094067"
-                >
-                  {{ kind.name }}
-                </span>
+              <span
+                v-for="kind of countryDetails.languages"
+                :key="kind"
+                class="badge badge-pill badge-info m-1"
+                style="background-color: #094067"
+              >
+                {{ kind.name }}
+              </span>
               <!-- </template> -->
             </template>
           </span>
@@ -305,7 +307,7 @@ export default {
         shareStatus: false,
       });
       if (error.value == null) {
-        alert(`You're one step closer to ${countryName.value}!`);
+        // alert(`You're one step closer to ${countryName.value}!`);
       } else alert(error.value);
     };
 

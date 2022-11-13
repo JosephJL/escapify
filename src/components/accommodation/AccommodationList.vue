@@ -52,7 +52,7 @@
 <style scoped>
 @media (min-width: 767px) {
   #accommodationList {
-    height: 600px;
+    height: 800px;
   }
   #accomBody {
     height: 800px;
