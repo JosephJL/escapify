@@ -109,10 +109,12 @@
           </div>
         </div>
         <div class="row p-8 mt-3 mb-3">
-          <!-- <div class="card-body text-white">
-            <h5 class="card-title">Recents</h5>
+          <div class="card-body text-white" v-if="user">
+            <h5 class="card-title float-start mx-5 mt-3 mb-3">
+              Your Recent Searches
+            </h5>
           </div>
-          <div>{{ finalClicks }}</div> -->
+          <RecentList :list="finalClicks" />
         </div>
         <!-- Search bar -->
         <nav aria-label="Page navigation" class="mb-4">
@@ -138,11 +140,11 @@
         </nav>
 
         <!-- Select for different continents -->
-        <div class="container-fluid justify-content-center d-flex">
-          <ul class="pagination flex-wrap">
+        <div class="container-fluid justify-content-center margin-auto d-flex">
+          <ul class="pagination flex-wrap justify-content-center">
             <li class="page-item">
               <a
-                class="page-link rounded-4 me-1 text-black"
+                class="page-link rounded-4 me-1 text-black mb-1"
                 @click.prevent="getCountries"
                 href="#"
                 style="width: 6rem"
@@ -153,7 +155,7 @@
             <template v-for="continent in continents" :key="continent">
               <li class="page-item">
                 <a
-                  class="page-link rounded-4 me-1 text-black"
+                  class="page-link rounded-4 me-1 text-black mb-1"
                   style="width: 6rem"
                   @click.prevent="selectContinent(continent)"
                   href="#"
@@ -282,6 +284,8 @@ import Navbar from "../components/Navbar.vue";
 // Country Stuff
 import countries from "countries-list";
 import CountryList from "../components/CountryList.vue";
+import RecentList from "../components/recent/RecentList.vue";
+import RecentCard from "../components/recent/RecentCard.vue";
 
 // Firebase
 import getCollection from "../composables/collection/getCollection";
@@ -291,7 +295,7 @@ import queryCollection from "../composables/collection/queryCollection";
 import axios from "axios";
 
 export default {
-  components: { Navbar, CountryList, LoginForm, SignUpForm, Modal },
+  components: { Navbar, CountryList, LoginForm, SignUpForm, Modal, RecentList },
   created() {
     window.addEventListener("wheel", this.handleScroll);
   },

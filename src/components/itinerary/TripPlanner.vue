@@ -42,8 +42,9 @@
         </button>
       </div>
       <div class="mt-3">
-        <span
-          ><strong class="text-white p-2 bg-info rounded-3"
+        <span class="d-flex justify-content-center"
+          ><strong
+            class="text-white p-2 bg-info rounded-3 flex-wrap justify-content-center"
             >Drag and drop your your destinations and hotels into the
             calendar</strong
           ></span
