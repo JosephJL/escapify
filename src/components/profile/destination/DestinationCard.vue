@@ -5,7 +5,7 @@
     draggable="true"
   >
     <div class="row" style="width: 100%">
-      <div class="col-6">
+      <div class="col-6 p-0">
         <img
           v-if="imageLoading"
           :src="returnURl"
@@ -24,7 +24,7 @@
       </div>
       <div
         class="col-6 text-black text-center align-self-center"
-        style="white-space: initial"
+        style="white-space: initial;"
       >
         <p class="card-title">{{ details[1].name }}</p>
         <button
@@ -66,12 +66,12 @@ export default {
       useNestedCollection();
 
     const removeItem = () => {
-      console.log("remove remove!");
+      // console.log("remove remove!");
       delDestination(props.id, props.details[0]);
       if (error) {
-        alert(error);
+        // alert(error);
       } else {
-        alert("deleted!");
+        // alert("deleted!");
       }
     };
 
