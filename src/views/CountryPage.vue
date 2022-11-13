@@ -307,7 +307,7 @@ export default {
         shareStatus: false,
       });
       if (error.value == null) {
-        alert(`You're one step closer to ${countryName.value}!`);
+        // alert(`You're one step closer to ${countryName.value}!`);
       } else alert(error.value);
     };
 

@@ -168,13 +168,13 @@ export default {
         console.log("entering add Destination");
         addDestination(trip[0], destinationInfo.value);
         if (nestedError == null) {
-          alert(`Destination added to trip name:${trip[1].tripName}`);
+          // alert(`Destination added to trip name:${trip[1].tripName}`);
         } else alert(nestedError);
       } else {
         console.log("entering add HOtel");
         addHotel(trip[0], destinationInfo.value);
         if (nestedError == null) {
-          alert(`Hotel added to trip name:${trip[1].tripName}`);
+          // alert(`Hotel added to trip name:${trip[1].tripName}`);
         } else alert(nestedError);
       }
     };
@@ -200,7 +200,7 @@ export default {
         shareStatus: false,
       });
       if (error.value == null) {
-        alert(`You're one step closer to ${props.countryDetails.countryName}!`);
+        // alert(`You're one step closer to ${props.countryDetails.countryName}!`);
         tripName.value = "";
       } else alert(error.value);
     };
