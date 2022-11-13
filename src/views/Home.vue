@@ -405,10 +405,10 @@ export default {
     // },
   },
 
-  beforeUnmount() {
-    console.log("DESTROYING");
-    this.container.remove(this.renderer);
-  },
+  // beforeUnmount() {
+  //   console.log("DESTROYING");
+  //   this.container.remove(this.renderer);
+  // },
 
   mounted() {
     this.init();
