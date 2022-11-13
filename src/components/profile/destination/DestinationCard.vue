@@ -66,12 +66,12 @@ export default {
       useNestedCollection();
 
     const removeItem = () => {
-      console.log("remove remove!");
+      // console.log("remove remove!");
       delDestination(props.id, props.details[0]);
       if (error) {
-        alert(error);
+        // alert(error);
       } else {
-        alert("deleted!");
+        // alert("deleted!");
       }
     };
 
