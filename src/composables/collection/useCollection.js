@@ -68,7 +68,18 @@ const useCollection = () => {
     }
   };
 
+  const addClick = async (countryInfo) => {
+    error.value = null;
+    try {
+      await addDoc(collection(db, "clicks"), countryInfo);
+    } catch (err) {
+      console.log(err.message);
+      error.value = err.message;
+    }
+  }; 
+
   return {
+    addClick,
     addDocument,
     error,
     delDocument,

@@ -195,10 +195,12 @@ img {
   white-space: nowrap;
   cursor: grab;
 }
-.badge{
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+.badge {
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
 }
-.badge:hover{
+.badge:hover {
   transform: scale(1.05);
 }
 </style>

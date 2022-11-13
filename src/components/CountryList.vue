@@ -25,7 +25,7 @@
       <div v-if="!placeholderData" class="row">
         <template v-for="index in 12" :key="index">
           <div
-            class="col-xxl-2 col-xl-3 col-lg-4 col-md-6"
+            class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-6"
             style="height: 22rem"
           >
             <ContentLoader height="100%" width="100%">
@@ -38,7 +38,7 @@
       </div>
       <div class="row" v-else>
         <template v-for="country in list[page]" :key="country">
-          <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+          <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-6">
             <CountryCard :details="country" />
           </div>
         </template>
