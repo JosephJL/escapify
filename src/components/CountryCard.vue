@@ -6,12 +6,14 @@
     style="cursor: pointer"
   >
     <img
+      id="countryImage"
       v-if="imageLoading"
       :src="returnURl"
       class="card-img-top rounded"
       alt="image here"
+      style="width: 100%"
     />
-    <div v-else class="d-flex" style="height: 18rem; width: 100%">
+    <div v-else id="countryImage" class="d-flex" style="width: 100%">
       <div
         class="spinner-grow text-light mx-auto align-self-center"
         role="status"
@@ -31,20 +33,35 @@ img {
   object-fit: cover;
   height: 18rem;
 }
-.card{
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+.card {
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
   margin-bottom: 10px;
 }
-.card:hover{
+.card:hover {
   transform: scale(1.05);
+}
+
+@media (min-width: 767px) {
+  #countryImage {
+    height: 18rem;
+  }
+}
+@media (max-width: 767px) {
+  #countryImage {
+    height: 10rem;
+  }
 }
 </style>
 
 <script>
 import { ref } from "vue";
-import axios from "axios";
 import { useRouter } from "vue-router";
 import getPlacePhoto from "../composables/image/getPhotos.js";
+import { Timestamp } from "@firebase/firestore";
+import getUser from "../composables/getUser";
+import useCollection from "../composables/collection/useCollection";
 
 export default {
   props: { details: Object },
@@ -73,7 +90,19 @@ export default {
 
     const router = useRouter();
 
+    const { user } = getUser();
+
+    const { addClick } = useCollection();
+
     const getCountry = () => {
+      console.log("Getting country", props.details);
+      var countryInfo = props.details;
+      countryInfo.createdAt = Timestamp.now().toDate();
+      if (user.value) {
+        countryInfo.userId = user.value.uid;
+        addClick(countryInfo);
+      }
+      console.log("CountryInfo is", countryInfo);
       router.push({
         name: "Country",
         params: {

@@ -108,6 +108,12 @@
             </div>
           </div>
         </div>
+        <div class="row p-8 mt-3 mb-3">
+          <!-- <div class="card-body text-white">
+            <h5 class="card-title">Recents</h5>
+          </div>
+          <div>{{ finalClicks }}</div> -->
+        </div>
         <!-- Search bar -->
         <nav aria-label="Page navigation" class="mb-4">
           <div
@@ -216,20 +222,22 @@
   height: 600px;
 }
 
-.card{
+.card {
   border-radius: 4px;
   background: #fff;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
 }
-.card:hover{
+.card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 </style>
 
 <script>
-import { watch, ref, onMounted } from "vue";
+import { watch, ref, onMounted, computed } from "vue";
 import {
   Camera,
   Group,
@@ -277,6 +285,7 @@ import CountryList from "../components/CountryList.vue";
 
 // Firebase
 import getCollection from "../composables/collection/getCollection";
+import queryCollection from "../composables/collection/queryCollection";
 
 // Requests
 import axios from "axios";
@@ -483,11 +492,27 @@ export default {
         });
     };
 
+    const { clicks, loadClicksCollection } = queryCollection();
+
+    if (user.value) {
+      loadClicksCollection();
+    }
+
+    const finalClicks = computed(() => {
+      console.log("finalComments here");
+      if (clicks.value && user.value) {
+        return clicks.value
+          .reverse()
+          .filter((doc) => doc[1].userId == user.value.uid);
+      }
+    });
+
     console.log("document list is", documents.value);
 
     const loading = ref(true);
 
     return {
+      finalClicks,
       loading,
       user,
       documents,

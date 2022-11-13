@@ -18,6 +18,7 @@ const queryCollectionById = () => {
   const comments = ref([]);
   const likes = ref([])
   const loading = ref(false)
+  const clicks = ref([])
 
   const loadCollection = async (collectionName, userId) => {
     // console.log("in get collection");
@@ -59,6 +60,26 @@ const queryCollectionById = () => {
         documents.value.push([doc.id, doc.data()]);
       });
       // console.log("ALL TRIPS: ", trips.join(", "));
+      loading.value = true
+    });
+  };
+
+  const loadClicksCollection = async () => {
+    loading.value = false
+    console.log("in get click collection");
+    // console.log("db is ", db);
+    // let collectionRef = collection(db, collectionName)
+    const q = query(collection(db, "clicks"), orderBy("createdAt") );
+
+    // const querySnapshot = await getDocs(q);
+    onSnapshot(q, (querySnapshot) => {
+      const tesClick = [];
+      clicks.value = [];
+      querySnapshot.forEach((doc) => {
+        tesClick.push(doc.data().name);
+        clicks.value.push([doc.id, doc.data()]);
+      });
+      console.log("ALL tesClick: ", tesClick.join(", "));
       loading.value = true
     });
   };
@@ -120,6 +141,8 @@ const queryCollectionById = () => {
   };
 
   return {
+    clicks,
+    loadClicksCollection,
     likes,
     documents,
     error,

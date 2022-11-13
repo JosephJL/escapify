@@ -1,7 +1,8 @@
 <template>
   <div
-    class="container text-center mt-5 rounded-2"
-    style="height: 800px; background-color: #094067"
+    id="accomBody"
+    class="container text-center mt-3 mb-3 rounded-2"
+    style="background-color: #094067"
   >
     <!-- class horizontalScroll for horizontal -->
     <!-- <div class="row">
@@ -12,7 +13,6 @@
     <div
       id="accommodationList"
       class="list-group d-flex overflow-auto text-light"
-      style=""
     >
       <div>
         <h4 class="mt-2">Selected Destination:</h4>
@@ -52,11 +52,17 @@
 <style scoped>
 @media (min-width: 767px) {
   #accommodationList {
+    height: 600px;
+  }
+  #accomBody {
     height: 800px;
   }
 }
 @media (max-width: 767px) {
   #accommodationList {
+    height: 400px;
+  }
+  #accomBody {
     height: 400px;
   }
 }
