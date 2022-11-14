@@ -37,14 +37,24 @@
         </div> -->
       </div>
       <hr />
-      <template v-for="hotel in hotels" :key="hotel">
-        <AccommodationCard
-          class="list-group-item"
-          :details="hotel"
-          :countryPacket="countryDetails"
-          @modalInfo="getModalInfo"
+      <div v-if="hotels.length">
+        <template v-for="hotel in hotels" :key="hotel">
+          <AccommodationCard
+            class="list-group-item"
+            :details="hotel"
+            :countryPacket="countryDetails"
+            @modalInfo="getModalInfo"
+          />
+        </template>
+      </div>
+      <div v-else>
+        <h4 class="mt-2">No Hotels Found</h4>
+        <img
+          src="../../assets/page-not-found-4.png"
+          alt=""
+          style="width: 50%"
         />
-      </template>
+      </div>
     </div>
   </div>
 </template>
