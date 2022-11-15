@@ -173,7 +173,7 @@
           <ul class="justify-content-center pagination flex-wrap">
             <li class="page-item">
               <a
-                class="page-link"
+                class="page-link text-black "
                 @click.prevent="pageNumber = pageNumber + 1"
                 href="#"
                 >Previous</a
@@ -182,7 +182,7 @@
             <template v-for="index in totalPages" :key="index">
               <li class="page-item">
                 <a
-                  class="page-link"
+                  class="page-link text-black"
                   @click.prevent="changePage(index)"
                   href="#"
                   >{{ index }}</a
@@ -191,7 +191,7 @@
             </template>
             <li class="page-item">
               <a
-                class="page-link"
+                class="page-link text-black "
                 @click.prevent="pageNumber = pageNumber + 1"
                 href="#"
                 >Next</a
