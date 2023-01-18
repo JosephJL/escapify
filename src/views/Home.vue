@@ -173,7 +173,7 @@
           <ul class="justify-content-center pagination flex-wrap">
             <li class="page-item">
               <a
-                class="page-link text-black "
+                class="page-link text-black"
                 @click.prevent="pageNumber = pageNumber + 1"
                 href="#"
                 >Previous</a
@@ -191,7 +191,7 @@
             </template>
             <li class="page-item">
               <a
-                class="page-link text-black "
+                class="page-link text-black"
                 @click.prevent="pageNumber = pageNumber + 1"
                 href="#"
                 >Next</a
@@ -296,12 +296,12 @@ import axios from "axios";
 
 export default {
   components: { Navbar, CountryList, LoginForm, SignUpForm, Modal, RecentList },
-  created() {
-    window.addEventListener("wheel", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("wheel", this.handleScroll);
-  },
+  // created() {
+  //   window.addEventListener("wheel", this.handleScroll);
+  // },
+  // destroyed() {
+  //   window.removeEventListener("wheel", this.handleScroll);
+  // },
   methods: {
     init() {
       //threeJS Code
