@@ -8,10 +8,10 @@
     <img
       id="countryImage"
       v-if="imageLoading"
-      :src="returnURl"
+      src="../assets/img/locations.png"
       class="card-img-top rounded"
       alt="image here"
-      style="width: 100%"
+      style="width: 100%; object-fit: scale-down"
     />
     <div v-else id="countryImage" class="d-flex" style="width: 100%">
       <div

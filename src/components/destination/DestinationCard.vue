@@ -2,18 +2,18 @@
   <div
     id="destinationCard"
     class="card border-0 text-white"
-    style="height: 100%; background-color: darkslategrey;"
+    style="height: 100%; background-color: darkslategrey"
   >
     <!-- :style="isClicked ? { 'background-color': '#e6e6e6' } : null" -->
 
     <div class="card-body" style="white-space: initial">
       <img
         v-if="imageLoading"
-        :src="returnURl"
+        src="../../assets/img/destination.png"
         id="destinationImage"
         class="card-img-top rounded"
         alt="image here"
-        style="height: 10rem; object-fit: cover"
+        style="height: 10rem; object-fit: scale-down"
       />
       <div v-else class="d-flex" style="height: 10rem; width: 100%">
         <div
