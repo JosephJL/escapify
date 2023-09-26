@@ -3,7 +3,7 @@
     @click="getCountry()"
     v-if="details"
     class="card bg-transparent border-0"
-    style="cursor: pointer"
+    style="cursor: pointer; align-items: center"
   >
     <img
       id="countryImage"
@@ -11,7 +11,7 @@
       src="../assets/img/locations.png"
       class="card-img-top rounded"
       alt="image here"
-      style="width: 100%; object-fit: scale-down"
+      style="width: 20%; object-fit: scale-down"
     />
     <div v-else id="countryImage" class="d-flex" style="width: 100%">
       <div

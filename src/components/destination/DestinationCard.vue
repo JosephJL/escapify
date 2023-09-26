@@ -13,7 +13,7 @@
         id="destinationImage"
         class="card-img-top rounded"
         alt="image here"
-        style="height: 10rem; object-fit: scale-down"
+        style="height: 10rem; width: 10%; object-fit: scale-down"
       />
       <div v-else class="d-flex" style="height: 10rem; width: 100%">
         <div

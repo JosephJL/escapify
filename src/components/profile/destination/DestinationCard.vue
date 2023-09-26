@@ -8,10 +8,10 @@
       <div class="col-6 p-0">
         <img
           v-if="imageLoading"
-          :src="returnURl"
+          src="../../../assets/img/destination.png"
           class="card-img-top rounded img-fluid"
           alt="image here"
-          style="object-fit: cover; width: 10rem; height: 10rem"
+          style="object-fit: scale-down; width: 30%; height: 10rem"
         />
         <div v-else class="d-flex" style="height: 10rem; width: 100%">
           <div

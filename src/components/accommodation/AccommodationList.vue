@@ -52,7 +52,7 @@
         <img
           src="../../assets/page-not-found-4.png"
           alt=""
-          style="width: 50%"
+          style="width: 30%"
         />
       </div>
     </div>

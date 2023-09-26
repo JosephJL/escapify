@@ -2,11 +2,16 @@
   <div class="card bg-transparent border-0 badgecard" style="width: 10rem">
     <div class="d-flex" v-if="imageLoading">
       <img
-        :src="returnURl"
+        src="../../../assets/img/locations.png"
         draggable="false"
         class="card-img-top rounded-circle img-fluid mx-auto"
         alt="image here"
-        style="object-fit: cover; width: 8rem; height: 8rem; cursor: pointer"
+        style="
+          object-fit: scale-down;
+          width: 30%;
+          height: 8rem;
+          cursor: pointer;
+        "
         @click="displayTrip"
       />
     </div>
@@ -25,10 +30,12 @@
 </template>
 
 <style>
-.badgecard{
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+.badgecard {
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
 }
-.badgecard:hover{
+.badgecard:hover {
   transform: scale(1.1);
 }
 </style>
